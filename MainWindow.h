@@ -43,7 +43,7 @@ class MainWindow : public QMainWindow
 	QAction* m_file_menu_new;
         QAction* m_file_menu_open;
         QAction* m_file_menu_save;
-        QAction* m_file_menu_save_us;
+	QAction* m_file_menu_save_as;
         QAction* m_file_menu_quit;
 	QStatusBar* m_statusbar;
         QPushButton* m_add_lesson;
@@ -65,5 +65,6 @@ class MainWindow : public QMainWindow
 	void open_file();
         void create_file();
 	void save_file();
+	void save_as_file();
 };
 #endif
