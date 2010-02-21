@@ -48,6 +48,7 @@ class XmlPlanning : public QObject
 		XmlPlanning(QString &filename);
 		SubjectData search_id(QString name);
 		void update_id_lesson(SubjectData id);
+		void add_empty_id(QString name);
 
 	private:
 		xmlerror verify_id();

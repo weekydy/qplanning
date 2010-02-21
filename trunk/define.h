@@ -19,4 +19,6 @@
 #define DEFINE_H
 //define some structure used to search files
 #define XSD_FILENAME "XmlSpec.xsd"
+//used to create an empty node
+#define DEFAULT_ID_NAME "default"
 #endif 

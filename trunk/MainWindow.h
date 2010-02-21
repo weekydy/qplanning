@@ -61,6 +61,7 @@ class MainWindow : public QMainWindow
 
 	signals:
 	void modify_subject(QString subject);
+	void add_subject();
 	void open_file();
         void create_file();
 };
