@@ -256,12 +256,18 @@ QDomElement XmlPlanning::add_empty_id()
 	id.appendChild(m_xml_document.createElement("color"));
 	id.appendChild(m_xml_document.createElement("background"));
 
+	//creating default node
+	id.firstChildElement("name").appendChild(m_xml_document.createTextNode(""));
+	id.firstChildElement("teacher").appendChild(m_xml_document.createTextNode(""));
+	id.firstChildElement("color").appendChild(m_xml_document.createTextNode("0.0.0"));
+	id.firstChildElement("background").appendChild(m_xml_document.createTextNode("0.0.0"));
+
 	//search free id
 	QDomNodeList ids = m_lesson_id_list.childNodes();
 	QVector<int> used_id;
 
 	//step one : collect all current id
-	for (int i = 0; i != ids.length(); i++)
+	for (unsigned int i = 0; i != ids.length(); i++)
 	{
 		int current_id = ids.item(i).firstChildElement("ident")
 				 .firstChild().toText().data().toInt();
@@ -281,6 +287,7 @@ QDomElement XmlPlanning::add_empty_id()
 			break;
 		}
 	}
+	qDebug("selected_id : %d", selected_id);
 
 	//append choice id and id tag
 	id.firstChildElement("ident")
@@ -330,4 +337,11 @@ void XmlPlanning::update_id_lesson(SubjectData data)
 	color = join_color(data.red_background, data.green_background, data.blue_background);
 	node_to_edit.firstChildElement("background").firstChild().toText().setData(color);
 	qDebug("done");
+}
+
+void XmlPlanning::add_empty_id(QString name)
+{
+	qDebug( Q_FUNC_INFO );
+	QDomElement element = add_empty_id();
+	element.firstChildElement("name").firstChild().toText().setData(name);
 }

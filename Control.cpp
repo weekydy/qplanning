@@ -30,6 +30,7 @@ Control::Control() : m_windows(), m_config_subject(&m_windows)
 	QObject::connect(&m_windows, SIGNAL(modify_subject(QString)),
 			this, SLOT(show_subject(QString)));
 	QObject::connect(&m_config_subject, SIGNAL(accepted()), this, SLOT(update_xml()));
+	QObject::connect(&m_windows, SIGNAL(add_subject()), this, SLOT(add_subject()));
 
 	m_windows.show();
 }
@@ -96,4 +97,12 @@ void Control::update_xml()
 	m_config.update_id_lesson(subject);
 	m_config.refresh_all_view();
 	m_is_modified = true;
+}
+
+void Control::add_subject()
+{
+	m_config.add_empty_id( DEFAULT_ID_NAME );
+	SubjectData data = m_config.search_id( DEFAULT_ID_NAME );
+	m_config_subject.set_contant(&data);
+	m_config_subject.show();
 }

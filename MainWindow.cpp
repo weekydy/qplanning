@@ -81,6 +81,7 @@ MainWindow::MainWindow()
 	QObject::connect(m_file_menu_open, SIGNAL(triggered()), this, SIGNAL(open_file()));
 	QObject::connect(m_file_menu_new, SIGNAL(triggered()), this, SIGNAL(create_file()));
 	QObject::connect(m_modify_lesson, SIGNAL(clicked()), this, SLOT(modify_subject_pressed()));
+	QObject::connect(m_add_lesson, SIGNAL(clicked()), this, SIGNAL(add_subject()));
 }
 
 void MainWindow::update_all_lessons(QStringList subjects)

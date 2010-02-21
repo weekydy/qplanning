@@ -25,6 +25,7 @@
 #include "MainWindow.h"
 #include "XmlPlanning.h"
 #include "SubjectDataWindow.h"
+#include "define.h"
 
 class Control : public QObject
 {
@@ -43,6 +44,7 @@ class Control : public QObject
 
 	public slots:
 	void show_subject(QString subject);
+	void add_subject();
 	void manage_open_file();
         void manage_create_file();
 	void update_xml();
