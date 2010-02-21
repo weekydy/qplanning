@@ -92,8 +92,6 @@
     <value type="QString">NXDIR=/usr/NX</value>
     <value type="QString">ORBIT_SOCKETDIR=/tmp/orbit-alexises</value>
     <value type="QString">PATH=/usr/lib/qt4/bin:/usr/lib/qt-3.3/bin:/usr/lib/ccache:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/NX/bin:/home/alexises/bin</value>
-    <value type="QString">PULSE_PROP_media.role=none</value>
-    <value type="QString">PULSE_PROP_phonon.streamid={bda40a79-bf37-4550-a115-261dea66cdf3}</value>
     <value type="QString">PWD=/home/alexises</value>
     <value type="QString">QTDIR=/usr/lib/qt4</value>
     <value type="QString">QTINC=/usr/lib/qt-3.3/include</value>
@@ -113,14 +111,14 @@
     <value type="QString">_=/usr/bin/gnome-session</value>
    </valuelist>
    <valuelist key="abstractProcess.arguments" type="QVariantList">
-    <value type="QString">/home/alexises/progc/QPlanning/QPlanning.pro</value>
+    <value type="QString">/home/alexises/progc/qplanning/QPlanning.pro</value>
     <value type="QString">-spec</value>
     <value type="QString">linux-g++</value>
     <value type="QString">-r</value>
    </valuelist>
    <value key="abstractProcess.command" type="QString">/usr/bin/qmake-qt4</value>
    <value key="abstractProcess.enabled" type="bool">false</value>
-   <value key="abstractProcess.workingDirectory" type="QString">/home/alexises/progc/QPlanning</value>
+   <value key="abstractProcess.workingDirectory" type="QString">/home/alexises/progc/qplanning</value>
    <valuelist key="qmakeArgs" type="QVariantList"/>
   </valuemap>
  </data>
@@ -154,8 +152,6 @@
     <value type="QString">NXDIR=/usr/NX</value>
     <value type="QString">ORBIT_SOCKETDIR=/tmp/orbit-alexises</value>
     <value type="QString">PATH=/usr/lib/qt4/bin:/usr/lib/qt-3.3/bin:/usr/lib/ccache:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/NX/bin:/home/alexises/bin</value>
-    <value type="QString">PULSE_PROP_media.role=none</value>
-    <value type="QString">PULSE_PROP_phonon.streamid={bda40a79-bf37-4550-a115-261dea66cdf3}</value>
     <value type="QString">PWD=/home/alexises</value>
     <value type="QString">QTDIR=/usr/lib/qt4</value>
     <value type="QString">QTINC=/usr/lib/qt-3.3/include</value>
@@ -180,7 +176,7 @@
    </valuelist>
    <value key="abstractProcess.command" type="QString">/usr/bin/make</value>
    <value key="abstractProcess.enabled" type="bool">true</value>
-   <value key="abstractProcess.workingDirectory" type="QString">/home/alexises/progc/QPlanning</value>
+   <value key="abstractProcess.workingDirectory" type="QString">/home/alexises/progc/qplanning</value>
   </valuemap>
  </data>
  <data>

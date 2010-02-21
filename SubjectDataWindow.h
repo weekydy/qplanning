@@ -38,6 +38,7 @@ class SubjectDataWindow : public QDialog, private Ui::DataWindowModel
 		void update_text_prevew();
 		void update_background_prevew();
 		void select_text_color();
+		void select_background_color();
 };
 
 #endif // SUBJECTDATAWINDOW_H

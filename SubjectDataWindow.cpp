@@ -29,6 +29,7 @@ SubjectDataWindow::SubjectDataWindow(QWidget *parent) : QDialog(parent)
 	QObject::connect(green_background_color, SIGNAL(valueChanged(int)), this, SLOT(update_background_prevew()));
 	QObject::connect(blue_background_color, SIGNAL(valueChanged(int)), this, SLOT(update_background_prevew()));
 	QObject::connect(text_color_edit, SIGNAL(pressed()), this, SLOT(select_text_color()));
+	QObject::connect(background_color_edit, SIGNAL(pressed()), this, SLOT(select_background_color()));
 }
 
 void SubjectDataWindow::set_contant(SubjectData *data)
@@ -103,4 +104,19 @@ void SubjectDataWindow::select_text_color()
 	red_text_color->setValue(r);
 	green_text_color->setValue(g);
 	blue_text_color->setValue(b);
+}
+
+void SubjectDataWindow::select_background_color()
+{
+	QColor color(red_background_color->value(),
+		     green_background_color->value(),
+		     blue_background_color->value());
+	QColor new_color = QColorDialog::getColor(color, this);
+	int r, g, b;
+	new_color.getRgb(&r, &g, &b);
+
+	red_background_color->setValue(r);
+	green_background_color->setValue(g);
+	blue_background_color->setValue(b);
+
 }
