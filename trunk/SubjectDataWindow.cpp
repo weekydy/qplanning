@@ -32,6 +32,33 @@ SubjectDataWindow::SubjectDataWindow(QWidget *parent) : QDialog(parent)
 	QObject::connect(background_color_edit, SIGNAL(pressed()), this, SLOT(select_background_color()));
 }
 
+SubjectData SubjectDataWindow::get_contant()
+{
+	SubjectData content;
+	content.name = name_edit->text();
+	content.teacher = teacher_edit->text();
+
+	content.red_text = red_text_color->value();
+	content.green_text = green_text_color->value();
+	content.blue_text = blue_text_color->value();
+
+
+	content.red_background = red_background_color->value();
+	content.green_background = green_background_color->value();
+	content.blue_background = blue_background_color->value();
+
+	content.id = m_id;
+	if (m_id != -1)
+	{
+		content.is_exist = true;
+	}
+	else
+	{
+		content.is_exist = false;
+	}
+	return content;
+}
+
 void SubjectDataWindow::set_contant(SubjectData *data)
 {
 	if (data == 0)

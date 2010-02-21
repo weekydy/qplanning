@@ -45,5 +45,6 @@ class Control : public QObject
 	void show_subject(QString subject);
 	void manage_open_file();
         void manage_create_file();
+	void update_xml();
 };
 #endif

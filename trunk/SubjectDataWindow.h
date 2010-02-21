@@ -29,6 +29,7 @@ class SubjectDataWindow : public QDialog, private Ui::DataWindowModel
 	public:
 		SubjectDataWindow(QWidget *parent = 0);
 		void set_contant(SubjectData *data = 0);
+		SubjectData get_contant();
 
 	private:
 		QString create_text_label(int red, int green, int blue);

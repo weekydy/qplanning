@@ -236,3 +236,98 @@ void XmlPlanning::separe_color(QString &src, int &red, int &green, int &blue)
 	green = src.section('.', 1, 1).toInt();
 	blue = src.section('.', 2, 2).toInt();
 }
+
+QString XmlPlanning::join_color(int red, int green, int blue)
+{
+	return QString(QString::number(red) + "." +
+		       QString::number(green) + "." +
+		       QString::number(blue));
+}
+
+QDomElement XmlPlanning::add_empty_id()
+{
+	qDebug( Q_FUNC_INFO );
+
+	//creating tree
+	QDomElement id = m_xml_document.createElement("id");
+	id.appendChild(m_xml_document.createElement("ident"));
+	id.appendChild(m_xml_document.createElement("name"));
+	id.appendChild(m_xml_document.createElement("teacher"));
+	id.appendChild(m_xml_document.createElement("color"));
+	id.appendChild(m_xml_document.createElement("background"));
+
+	//search free id
+	QDomNodeList ids = m_lesson_id_list.childNodes();
+	QVector<int> used_id;
+
+	//step one : collect all current id
+	for (int i = 0; i != ids.length(); i++)
+	{
+		int current_id = ids.item(i).firstChildElement("ident")
+				 .firstChild().toText().data().toInt();
+		used_id.push_back(current_id);
+	}
+
+	//step 2 : sorting list
+	qSort(used_id);
+
+	//step 3 : get the first id
+	int selected_id = 0;
+	for (int i = 0; i != used_id.size(); i++)
+	{
+		if (used_id[i] != selected_id)
+		{
+			selected_id = i;
+			break;
+		}
+	}
+
+	//append choice id and id tag
+	id.firstChildElement("ident")
+	  .appendChild(m_xml_document.createTextNode(QString::number(selected_id)));
+	m_lesson_id_list.appendChild(id);
+	return id;
+}
+
+void XmlPlanning::update_id_lesson(SubjectData data)
+{
+	qDebug( Q_FUNC_INFO );
+	qDebug("begin");
+
+	QDomElement node_to_edit;
+	//select node
+	if (!data.is_exist)
+	{
+		node_to_edit = add_empty_id();
+	}
+	else
+	{
+		QDomNodeList list = m_lesson_id_list.childNodes();
+		bool is_found = false;
+		for (int i = 0; i != list.count(); i++)
+		{
+			int current_id = list.item(i).firstChildElement("ident")
+					 .firstChild().toText().data().toInt();
+			if (current_id == data.id)
+			{
+				node_to_edit = list.item(i).toElement();
+				is_found = true;
+				qDebug("node found");
+				break;
+			}
+		}
+		if (!is_found)
+		{
+			node_to_edit = add_empty_id();
+		}
+	}
+
+	QString color;
+	node_to_edit.firstChildElement("name").firstChild().toText().setData(data.name);
+	node_to_edit.firstChildElement("teacher").firstChild().toText().setData(data.teacher);
+	color = join_color(data.red_text, data.green_text, data.blue_text);
+	node_to_edit.firstChildElement("color").firstChild().toText().setData(color);
+	color = join_color(data.red_background, data.green_background, data.blue_background);
+	node_to_edit.firstChildElement("background").firstChild().toText().setData(color);
+	qDebug("done");
+}

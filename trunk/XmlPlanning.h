@@ -30,6 +30,7 @@
 #include <QCoreApplication>
 #include <QtDebug>
 #include <QStringList>
+#include <QVector>
 #include "SubjectData.h"
 
 enum xmlerror
@@ -46,11 +47,14 @@ class XmlPlanning : public QObject
 		XmlPlanning();
 		XmlPlanning(QString &filename);
 		SubjectData search_id(QString name);
+		void update_id_lesson(SubjectData id);
 
 	private:
 		xmlerror verify_id();
 		xmlerror verify_xsd();
+		QDomElement add_empty_id();
 		void separe_color(QString &src, int &red, int &green, int &blue);
+		QString join_color(int red, int green, int blue);
 
 	private:
                 QFile m_data_file;
