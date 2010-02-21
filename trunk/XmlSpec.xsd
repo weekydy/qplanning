@@ -1,0 +1,81 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:annotation>
+		<xsd:documentation xml:lang="en">
+		./XmlSpec.xsd
+		Copyright (C) 2010 Lameire Alexis
+
+		This program is free software: you can redistribute it and/or modify it under
+		the terms of the GNU General Public License as published by the Free Software
+		Foundation, either version 3 of the License, or (at your option) any later
+		version.
+
+		This program is distributed in the hope that it will be useful, but WITHOUT
+		ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+		FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+		details.
+
+		You should have received a copy of the GNU General Public License along with
+		this program. If not, see <http://www.gnu.org/licenses/>.
+      		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:element name="qplanning" type="XmlType"/>
+	<xsd:complexType name="XmlType">
+		<xsd:all>
+			<xsd:element name="version" type="xsd:decimal"/>
+			<xsd:element name="lesson-list" type="lesson-listType"/>
+			<xsd:element name="lesson-id-list" type="lesson-id-listType"/> 
+		</xsd:all>
+	</xsd:complexType>
+	
+	<xsd:complexType name="lesson-listType" >
+		<xsd:sequence>
+			<xsd:element name="lesson" type="lessonType" minOccurs="1" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="lesson-id-listType">
+		<xsd:sequence>
+			<xsd:element name="id" type="idType" minOccurs="1" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="lessonType">
+		<xsd:all>
+			<xsd:element name="hour" type="hourType"/>
+			<xsd:element name="id-lesson" type="xsd:unsignedInt"/>
+			<xsd:element name="class" type="xsd:token"/>
+			<xsd:element name="group" type="xsd:token" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="week" type="weekType" minOccurs="0" maxOccurs="1"/>
+		</xsd:all>
+	</xsd:complexType>
+	
+	<xsd:complexType name="idType">
+		<xsd:all>
+			<xsd:element name="ident" type="xsd:unsignedInt"/>
+			<xsd:element name="name" type="xsd:token"/>
+			<xsd:element name="teacher" type="xsd:token"/>
+			<xsd:element name="color" type="colorType"/>
+			<xsd:element name="background" type="colorType"/>
+		</xsd:all>
+	</xsd:complexType>
+	
+	<xsd:simpleType name="weekType">
+		<xsd:restriction base="xsd:unsignedInt">
+			<xsd:minInclusive value="1"/>
+			<xsd:maxInclusive value="2"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="colorType">
+			<xsd:restriction base="xsd:token">
+				<xsd:pattern value="((([1-9]?[0-9])|(1[0-9][0-9])|(2[0-4][0-9])|(25[0-5]))\.){2}(([1-9]?[0-9])|(1[0-9][0-9])|(2[0-4][0-9])|(25[0-5]))"/>
+			</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="hourType">
+			<xsd:restriction base="xsd:token">
+				<xsd:pattern value="(M(([0-3](\.[05])?)|4))\-(M(([0-3](\.[05])?)|4))|(A(([0-3](\.[05])?)|4))\-(A(([0-3](\.[05])?)|4))"/>
+			</xsd:restriction>
+	</xsd:simpleType>
+</xsd:schema>

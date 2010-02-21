@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<qplanning>
+	<version>1</version>
+	<lesson-list>
+		<lesson>
+			<hour>A1-A2.5</hour>
+			<id-lesson>1</id-lesson>
+			<class>E4</class>
+			<group>1</group>
+			<week>1</week>
+		</lesson>
+	</lesson-list>
+	<lesson-id-list>
+		<id>
+			<ident>1</ident>
+			<name>math</name>
+			<teacher>tartanpion</teacher>
+			<color>0.100.200</color>
+			<background>10.20.30</background>
+		</id>
+	</lesson-id-list>
+</qplanning>
