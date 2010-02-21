@@ -24,6 +24,7 @@ Control::Control() : m_windows(), m_config_subject(&m_windows)
 	
 	QObject::connect(&m_windows, SIGNAL(open_file()), this, SLOT(manage_open_file()));
 	QObject::connect(&m_windows, SIGNAL(create_file()), this, SLOT(manage_create_file()));
+	QObject::connect(&m_windows, SIGNAL(save_file()), this, SLOT(manage_save_file()));
 	QObject::connect(
 			&m_config, SIGNAL(new_lessons_avalables(QStringList)),
 			&m_windows, SLOT(update_all_lessons(QStringList)));
@@ -105,4 +106,10 @@ void Control::add_subject()
 	SubjectData data = m_config.search_id( DEFAULT_ID_NAME );
 	m_config_subject.set_contant(&data);
 	m_config_subject.show();
+}
+
+void Control::manage_save_file()
+{
+	m_config.save();
+	m_is_modified = false;
 }

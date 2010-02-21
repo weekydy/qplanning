@@ -64,5 +64,6 @@ class MainWindow : public QMainWindow
 	void add_subject();
 	void open_file();
         void create_file();
+	void save_file();
 };
 #endif

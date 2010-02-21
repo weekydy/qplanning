@@ -69,6 +69,8 @@ class XmlPlanning : public QObject
 
 	public slots:
 		void open(QString filename);
+		void save();
+		void save(QString filename);
 		void new_file();
 		void refresh_all_view();
 
