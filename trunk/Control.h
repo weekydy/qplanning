@@ -48,6 +48,7 @@ class Control : public QObject
 	void manage_open_file();
         void manage_create_file();
 	void manage_save_file();
+	void manage_save_as_file();
 	void update_xml();
 };
 #endif
