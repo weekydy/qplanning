@@ -75,6 +75,7 @@ void XmlPlanning::open(QString filename)
 		qDebug("bad id");
 		throw;
 	}
+	m_data_file.close();
 	qDebug() << Q_FUNC_INFO << " done";
 }
 
@@ -344,4 +345,29 @@ void XmlPlanning::add_empty_id(QString name)
 	qDebug( Q_FUNC_INFO );
 	QDomElement element = add_empty_id();
 	element.firstChildElement("name").firstChild().toText().setData(name);
+}
+
+void XmlPlanning::save(QString filename)
+{
+	m_data_file.setFileName(filename);
+	save();
+}
+
+void XmlPlanning::save()
+{
+	qDebug( Q_FUNC_INFO );
+	if (!m_data_file.open(QIODevice::WriteOnly))
+	{
+		qDebug("can't open file to sae");
+		throw;
+	}
+	QByteArray xml = m_xml_document.toByteArray(8);
+	qint64 error = m_data_file.write(xml);
+
+	if (error == -1)
+	{
+		qDebug("an error occure when wrtie file");
+		throw;
+	}
+	m_data_file.close();
 }
