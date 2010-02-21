@@ -24,12 +24,15 @@ HEADERS += Control.h \
     MainWindow.h \
     XmlPlanning.h \
     SubjectDataWindow.h \
-    SubjectData.h
+    SubjectData.h \
+    TimeTableWindow.h
 SOURCES += main.cpp \
     Control.cpp \
     MainWindow.cpp \
     XmlPlanning.cpp \
-    SubjectDataWindow.cpp
-FORMS += SubjectDataWindow.ui
+    SubjectDataWindow.cpp \
+    TimeTableWindow.cpp
+FORMS += SubjectDataWindow.ui \
+    TimeTableWindow.ui
 OTHER_FILES += XmlSpec.xsd \
     COPYING.txt
