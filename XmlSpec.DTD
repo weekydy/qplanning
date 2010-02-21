@@ -1,0 +1,16 @@
+<!ELEMENT xml (version, lesson_list, lesson_id_list)>
+	<!ELEMENT version (#PCDATA)>
+	<!ELEMENT lesson_list (lesson+)>
+		<!ELEMENT lesson (hour, id_lesson, class, group?, week?>
+			<!ELEMENT hour (#PCDATA)>
+			<!ELEMENT id_lesson (#PCDATA)>
+			<!ELEMENT class (#PCDATA)>
+			<!ELEMENT group (#PCDATA)>
+			<!ELEMENT week (#PCDATA)>
+	<!ELEMENT lesson_id_list (id+)>
+		<!ELEMENY id (ident, name, teacher, color)
+			<!ELEMENT ident (#PCDATA)>
+			<!ELEMENT name (#PCDATA)>
+			<!ELEMENT teacher (#PCDATA)>
+			<!ELEMENT color (#PCDATA)>
+	

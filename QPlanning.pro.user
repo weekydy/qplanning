@@ -1,0 +1,295 @@
+<!DOCTYPE QtCreatorProject>
+<qtcreator>
+ <data>
+  <variable>RunConfiguration0-BaseEnvironmentBase</variable>
+  <value type="int">2</value>
+ </data>
+ <data>
+  <variable>RunConfiguration0-CommandLineArguments</variable>
+  <valuelist type="QVariantList"/>
+ </data>
+ <data>
+  <variable>RunConfiguration0-ProFile</variable>
+  <value type="QString">QPlanning.pro</value>
+ </data>
+ <data>
+  <variable>RunConfiguration0-RunConfiguration.name</variable>
+  <value type="QString">QPlanning</value>
+ </data>
+ <data>
+  <variable>RunConfiguration0-UseDyldImageSuffix</variable>
+  <value type="bool">false</value>
+ </data>
+ <data>
+  <variable>RunConfiguration0-UseTerminal</variable>
+  <value type="bool">false</value>
+ </data>
+ <data>
+  <variable>RunConfiguration0-UserEnvironmentChanges</variable>
+  <valuelist type="QVariantList"/>
+ </data>
+ <data>
+  <variable>RunConfiguration0-UserSetName</variable>
+  <value type="bool">false</value>
+ </data>
+ <data>
+  <variable>RunConfiguration0-UserSetWorkingDirectory</variable>
+  <value type="bool">false</value>
+ </data>
+ <data>
+  <variable>RunConfiguration0-UserWorkingDirectory</variable>
+  <value type="QString"></value>
+ </data>
+ <data>
+  <variable>RunConfiguration0-type</variable>
+  <value type="QString">Qt4ProjectManager.Qt4RunConfiguration</value>
+ </data>
+ <data>
+  <variable>activeRunConfiguration</variable>
+  <value type="int">0</value>
+ </data>
+ <data>
+  <variable>activebuildconfiguration</variable>
+  <value type="QString">Release</value>
+ </data>
+ <data>
+  <variable>buildConfiguration-Release</variable>
+  <valuemap type="QVariantMap">
+   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString">Release</value>
+   <value key="QtVersionId" type="int">2</value>
+   <value key="ToolChain" type="int">0</value>
+   <value key="addQDumper" type=""></value>
+   <value key="buildConfiguration" type="int">0</value>
+  </valuemap>
+ </data>
+ <data>
+  <variable>buildconfiguration-Release-buildstep0</variable>
+  <valuemap type="QVariantMap">
+   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString">Release</value>
+   <valuelist key="abstractProcess.Environment" type="QVariantList">
+    <value type="QString">CVS_RSH=ssh</value>
+    <value type="QString">DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-n5GBGHVRpS,guid=8004b35587c9feb5c766c4b84b7e0886</value>
+    <value type="QString">DESKTOP_SESSION=gnome</value>
+    <value type="QString">DISPLAY=:0.0</value>
+    <value type="QString">GDMSESSION=gnome</value>
+    <value type="QString">GDM_KEYBOARD_LAYOUT=fr</value>
+    <value type="QString">GDM_LANG=fr_FR.UTF-8</value>
+    <value type="QString">GNOME_DESKTOP_SESSION_ID=this-is-deprecated</value>
+    <value type="QString">GNOME_KEYRING_PID=1494</value>
+    <value type="QString">GNOME_KEYRING_SOCKET=/tmp/keyring-ljcCPL/socket</value>
+    <value type="QString">GTK_RC_FILES=/etc/gtk/gtkrc:/home/alexises/.gtkrc-1.2-gnome2</value>
+    <value type="QString">G_BROKEN_FILENAMES=1</value>
+    <value type="QString">HISTCONTROL=ignoreboth</value>
+    <value type="QString">HISTSIZE=1000</value>
+    <value type="QString">HOME=/home/alexises</value>
+    <value type="QString">HOSTNAME=alexises</value>
+    <value type="QString">IMSETTINGS_INTEGRATE_DESKTOP=yes</value>
+    <value type="QString">IMSETTINGS_MODULE=none</value>
+    <value type="QString">LANG=fr_FR.UTF-8</value>
+    <value type="QString">LESSOPEN=|/usr/bin/lesspipe.sh %s</value>
+    <value type="QString">LOGNAME=alexises</value>
+    <value type="QString">MAIL=/var/spool/mail/alexises</value>
+    <value type="QString">NXDIR=/usr/NX</value>
+    <value type="QString">ORBIT_SOCKETDIR=/tmp/orbit-alexises</value>
+    <value type="QString">PATH=/usr/lib/qt4/bin:/usr/lib/qt-3.3/bin:/usr/lib/ccache:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/NX/bin:/home/alexises/bin</value>
+    <value type="QString">PULSE_PROP_media.role=none</value>
+    <value type="QString">PULSE_PROP_phonon.streamid={bda40a79-bf37-4550-a115-261dea66cdf3}</value>
+    <value type="QString">PWD=/home/alexises</value>
+    <value type="QString">QTDIR=/usr/lib/qt4</value>
+    <value type="QString">QTINC=/usr/lib/qt-3.3/include</value>
+    <value type="QString">QTLIB=/usr/lib/qt-3.3/lib</value>
+    <value type="QString">QT_IM_MODULE=xim</value>
+    <value type="QString">SESSION_MANAGER=local/unix:@/tmp/.ICE-unix/1501,unix/unix:/tmp/.ICE-unix/1501</value>
+    <value type="QString">SHELL=/bin/bash</value>
+    <value type="QString">SHLVL=1</value>
+    <value type="QString">SSH_ASKPASS=/usr/libexec/openssh/gnome-ssh-askpass</value>
+    <value type="QString">SSH_AUTH_SOCK=/tmp/keyring-ljcCPL/socket.ssh</value>
+    <value type="QString">TERM=dumb</value>
+    <value type="QString">USER=alexises</value>
+    <value type="QString">USERNAME=alexises</value>
+    <value type="QString">XAUTHORITY=/var/run/gdm/auth-for-alexises-uLKW7u/database</value>
+    <value type="QString">XDG_SESSION_COOKIE=eade1cf93dc5cbef44600a524b34e77a-1266550917.891672-1188128899</value>
+    <value type="QString">XMODIFIERS=@im=none</value>
+    <value type="QString">_=/usr/bin/gnome-session</value>
+   </valuelist>
+   <valuelist key="abstractProcess.arguments" type="QVariantList">
+    <value type="QString">/home/alexises/progc/QPlanning/QPlanning.pro</value>
+    <value type="QString">-spec</value>
+    <value type="QString">linux-g++</value>
+    <value type="QString">-r</value>
+   </valuelist>
+   <value key="abstractProcess.command" type="QString">/usr/bin/qmake-qt4</value>
+   <value key="abstractProcess.enabled" type="bool">false</value>
+   <value key="abstractProcess.workingDirectory" type="QString">/home/alexises/progc/QPlanning</value>
+   <valuelist key="qmakeArgs" type="QVariantList"/>
+  </valuemap>
+ </data>
+ <data>
+  <variable>buildconfiguration-Release-buildstep1</variable>
+  <valuemap type="QVariantMap">
+   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString">Release</value>
+   <valuelist key="abstractProcess.Environment" type="QVariantList">
+    <value type="QString">CVS_RSH=ssh</value>
+    <value type="QString">DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-n5GBGHVRpS,guid=8004b35587c9feb5c766c4b84b7e0886</value>
+    <value type="QString">DESKTOP_SESSION=gnome</value>
+    <value type="QString">DISPLAY=:0.0</value>
+    <value type="QString">GDMSESSION=gnome</value>
+    <value type="QString">GDM_KEYBOARD_LAYOUT=fr</value>
+    <value type="QString">GDM_LANG=fr_FR.UTF-8</value>
+    <value type="QString">GNOME_DESKTOP_SESSION_ID=this-is-deprecated</value>
+    <value type="QString">GNOME_KEYRING_PID=1494</value>
+    <value type="QString">GNOME_KEYRING_SOCKET=/tmp/keyring-ljcCPL/socket</value>
+    <value type="QString">GTK_RC_FILES=/etc/gtk/gtkrc:/home/alexises/.gtkrc-1.2-gnome2</value>
+    <value type="QString">G_BROKEN_FILENAMES=1</value>
+    <value type="QString">HISTCONTROL=ignoreboth</value>
+    <value type="QString">HISTSIZE=1000</value>
+    <value type="QString">HOME=/home/alexises</value>
+    <value type="QString">HOSTNAME=alexises</value>
+    <value type="QString">IMSETTINGS_INTEGRATE_DESKTOP=yes</value>
+    <value type="QString">IMSETTINGS_MODULE=none</value>
+    <value type="QString">LANG=fr_FR.UTF-8</value>
+    <value type="QString">LESSOPEN=|/usr/bin/lesspipe.sh %s</value>
+    <value type="QString">LOGNAME=alexises</value>
+    <value type="QString">MAIL=/var/spool/mail/alexises</value>
+    <value type="QString">NXDIR=/usr/NX</value>
+    <value type="QString">ORBIT_SOCKETDIR=/tmp/orbit-alexises</value>
+    <value type="QString">PATH=/usr/lib/qt4/bin:/usr/lib/qt-3.3/bin:/usr/lib/ccache:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/NX/bin:/home/alexises/bin</value>
+    <value type="QString">PULSE_PROP_media.role=none</value>
+    <value type="QString">PULSE_PROP_phonon.streamid={bda40a79-bf37-4550-a115-261dea66cdf3}</value>
+    <value type="QString">PWD=/home/alexises</value>
+    <value type="QString">QTDIR=/usr/lib/qt4</value>
+    <value type="QString">QTINC=/usr/lib/qt-3.3/include</value>
+    <value type="QString">QTLIB=/usr/lib/qt-3.3/lib</value>
+    <value type="QString">QT_IM_MODULE=xim</value>
+    <value type="QString">SESSION_MANAGER=local/unix:@/tmp/.ICE-unix/1501,unix/unix:/tmp/.ICE-unix/1501</value>
+    <value type="QString">SHELL=/bin/bash</value>
+    <value type="QString">SHLVL=1</value>
+    <value type="QString">SSH_ASKPASS=/usr/libexec/openssh/gnome-ssh-askpass</value>
+    <value type="QString">SSH_AUTH_SOCK=/tmp/keyring-ljcCPL/socket.ssh</value>
+    <value type="QString">TERM=dumb</value>
+    <value type="QString">USER=alexises</value>
+    <value type="QString">USERNAME=alexises</value>
+    <value type="QString">XAUTHORITY=/var/run/gdm/auth-for-alexises-uLKW7u/database</value>
+    <value type="QString">XDG_SESSION_COOKIE=eade1cf93dc5cbef44600a524b34e77a-1266550917.891672-1188128899</value>
+    <value type="QString">XMODIFIERS=@im=none</value>
+    <value type="QString">_=/usr/bin/gnome-session</value>
+   </valuelist>
+   <value key="abstractProcess.IgnoreReturnValue" type="bool">false</value>
+   <valuelist key="abstractProcess.arguments" type="QVariantList">
+    <value type="QString">-w</value>
+   </valuelist>
+   <value key="abstractProcess.command" type="QString">/usr/bin/make</value>
+   <value key="abstractProcess.enabled" type="bool">true</value>
+   <value key="abstractProcess.workingDirectory" type="QString">/home/alexises/progc/QPlanning</value>
+  </valuemap>
+ </data>
+ <data>
+  <variable>buildconfiguration-Release-cleanstep0</variable>
+  <valuemap type="QVariantMap">
+   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString">Release</value>
+   <valuelist key="abstractProcess.Environment" type="QVariantList">
+    <value type="QString">CVS_RSH=ssh</value>
+    <value type="QString">DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-nQ82j9nRrO,guid=0246db86797ab09db68997bc4b76a598</value>
+    <value type="QString">DESKTOP_SESSION=gnome</value>
+    <value type="QString">DISPLAY=:0.0</value>
+    <value type="QString">GDMSESSION=gnome</value>
+    <value type="QString">GDM_KEYBOARD_LAYOUT=fr</value>
+    <value type="QString">GDM_LANG=fr_FR.UTF-8</value>
+    <value type="QString">GNOME_DESKTOP_SESSION_ID=this-is-deprecated</value>
+    <value type="QString">GNOME_KEYRING_PID=1539</value>
+    <value type="QString">GNOME_KEYRING_SOCKET=/tmp/keyring-Xa0Rhm/socket</value>
+    <value type="QString">GTK_RC_FILES=/etc/gtk/gtkrc:/home/alexises/.gtkrc-1.2-gnome2</value>
+    <value type="QString">G_BROKEN_FILENAMES=1</value>
+    <value type="QString">HISTCONTROL=ignoreboth</value>
+    <value type="QString">HISTSIZE=1000</value>
+    <value type="QString">HOME=/home/alexises</value>
+    <value type="QString">HOSTNAME=alexises</value>
+    <value type="QString">IMSETTINGS_INTEGRATE_DESKTOP=yes</value>
+    <value type="QString">IMSETTINGS_MODULE=none</value>
+    <value type="QString">LANG=fr_FR.UTF-8</value>
+    <value type="QString">LESSOPEN=|/usr/bin/lesspipe.sh %s</value>
+    <value type="QString">LOGNAME=alexises</value>
+    <value type="QString">MAIL=/var/spool/mail/alexises</value>
+    <value type="QString">NXDIR=/usr/NX</value>
+    <value type="QString">ORBIT_SOCKETDIR=/tmp/orbit-alexises</value>
+    <value type="QString">PATH=/usr/lib/qt4/bin:/usr/lib/qt-3.3/bin:/usr/lib/ccache:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/NX/bin:/home/alexises/bin</value>
+    <value type="QString">PWD=/home/alexises</value>
+    <value type="QString">QTDIR=/usr/lib/qt4</value>
+    <value type="QString">QTINC=/usr/lib/qt-3.3/include</value>
+    <value type="QString">QTLIB=/usr/lib/qt-3.3/lib</value>
+    <value type="QString">QT_IM_MODULE=xim</value>
+    <value type="QString">SESSION_MANAGER=local/unix:@/tmp/.ICE-unix/1546,unix/unix:/tmp/.ICE-unix/1546</value>
+    <value type="QString">SHELL=/bin/bash</value>
+    <value type="QString">SHLVL=1</value>
+    <value type="QString">SSH_ASKPASS=/usr/libexec/openssh/gnome-ssh-askpass</value>
+    <value type="QString">SSH_AUTH_SOCK=/tmp/keyring-Xa0Rhm/socket.ssh</value>
+    <value type="QString">TERM=dumb</value>
+    <value type="QString">USER=alexises</value>
+    <value type="QString">USERNAME=alexises</value>
+    <value type="QString">XAUTHORITY=/var/run/gdm/auth-for-alexises-nLV8aw/database</value>
+    <value type="QString">XDG_SESSION_COOKIE=eade1cf93dc5cbef44600a524b34e77a-1266066840.474034-740415568</value>
+    <value type="QString">XMODIFIERS=@im=none</value>
+    <value type="QString">_=/usr/bin/gnome-session</value>
+   </valuelist>
+   <value key="abstractProcess.IgnoreReturnValue" type="bool">true</value>
+   <valuelist key="abstractProcess.arguments" type="QVariantList">
+    <value type="QString">clean</value>
+    <value type="QString">-w</value>
+   </valuelist>
+   <value key="abstractProcess.command" type="QString">/usr/bin/make</value>
+   <value key="abstractProcess.enabled" type="bool">true</value>
+   <value key="abstractProcess.workingDirectory" type="QString">/home/alexises/progc/QPlanning</value>
+   <value key="cleanConfig" type="bool">true</value>
+   <valuelist key="makeargs" type="QVariantList">
+    <value type="QString">clean</value>
+   </valuelist>
+  </valuemap>
+ </data>
+ <data>
+  <variable>buildconfigurations</variable>
+  <valuelist type="QVariantList">
+   <value type="QString">Release</value>
+  </valuelist>
+ </data>
+ <data>
+  <variable>buildstep0</variable>
+  <valuemap type="QVariantMap">
+   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString"></value>
+   <value key="mkspec" type="QString"></value>
+  </valuemap>
+ </data>
+ <data>
+  <variable>buildstep1</variable>
+  <valuemap type="QVariantMap">
+   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString"></value>
+  </valuemap>
+ </data>
+ <data>
+  <variable>buildsteps</variable>
+  <valuelist type="QVariantList">
+   <value type="QString">trolltech.qt4projectmanager.qmake</value>
+   <value type="QString">trolltech.qt4projectmanager.make</value>
+  </valuelist>
+ </data>
+ <data>
+  <variable>cleanstep0</variable>
+  <valuemap type="QVariantMap">
+   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString"></value>
+   <value key="clean" type="bool">true</value>
+  </valuemap>
+ </data>
+ <data>
+  <variable>cleansteps</variable>
+  <valuelist type="QVariantList">
+   <value type="QString">trolltech.qt4projectmanager.make</value>
+  </valuelist>
+ </data>
+ <data>
+  <variable>defaultFileEncoding</variable>
+  <value type="QByteArray">System</value>
+ </data>
+ <data>
+  <variable>project</variable>
+  <valuemap type="QVariantMap"/>
+ </data>
+</qtcreator>
