@@ -25,5 +25,12 @@
                         <color>0.0.0</color>
                         <background>0.0.0</background>
                 </id>
+                <id>
+                        <ident>3</ident>
+                        <name>jjj</name>
+                        <teacher>jjjohilhihi</teacher>
+                        <color>0.0.0</color>
+                        <background>0.0.0</background>
+                </id>
         </lesson-id-list>
 </qplanning>

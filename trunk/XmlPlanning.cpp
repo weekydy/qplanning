@@ -169,22 +169,30 @@ void XmlPlanning::refresh_all_view()
 	qDebug( Q_FUNC_INFO );
 
 	QDomNodeList lesson_id_list = m_lesson_id_list.childNodes();
-	QStringList list;
+	QVector<KeyValue> list;
 
 	for (int i = 0; i != lesson_id_list.count(); i++)
 	{
-		QString element = lesson_id_list.item(i)
+		QString lessen = lesson_id_list.item(i)
 				  .firstChildElement("name")
 				  .firstChild().toText().data();
+		int id = lesson_id_list.item(i)
+			 .firstChildElement("ident")
+			 .firstChild().toText().data().toInt();
 		qDebug() << "begin";
-		qDebug(qPrintable(element));
+		qDebug(qPrintable(lessen));
+		qDebug("%d", id);
 		qDebug() << "done";
-		list << element;
+
+		KeyValue current_item;
+		current_item.key = id;
+		current_item.value = lessen;
+		list.push_back(current_item);
 	}
 	emit new_lessons_avalables(list);
 }
 
-SubjectData XmlPlanning::search_id(QString name)
+SubjectData XmlPlanning::search_id(KeyValue id)
 {
 	qDebug( Q_FUNC_INFO );
 	QDomNodeList lesson_id_list = m_lesson_id_list.childNodes();
@@ -192,12 +200,15 @@ SubjectData XmlPlanning::search_id(QString name)
 
 	for (int i = 0; i != lesson_id_list.count(); i++)
 	{
-		QString current_name = lesson_id_list.item(i)
-			       .firstChildElement("name")
-			       .firstChild().toText().data();
-		if (current_name == name)
+		int current_id = lesson_id_list.item(i)
+			       .firstChildElement("ident")
+			       .firstChild().toText().data().toInt();
+		if (current_id == id.key)
 		{
-			return_value.name = current_name;
+			return_value.id = current_id;
+			return_value.name = lesson_id_list.item(i)
+					    .firstChildElement("name")
+					    .firstChild().toText().data();
 			return_value.teacher = lesson_id_list.item(i)
 					       .firstChildElement("teacher")
 					       .firstChild().toText().data();
@@ -279,14 +290,19 @@ QDomElement XmlPlanning::add_empty_id()
 	qSort(used_id);
 
 	//step 3 : get the first id
-	int selected_id = 0;
-	for (int i = 0; i != used_id.size(); i++)
+	int selected_id = -1;
+	int i;
+	for (i = 0; i != used_id.size(); i++)
 	{
-		if (used_id[i] != selected_id)
+		if (used_id[i] != i)
 		{
 			selected_id = i;
 			break;
 		}
+	}
+	if (selected_id == -1)
+	{
+		selected_id = i + 1;
 	}
 	qDebug("selected_id : %d", selected_id);
 
@@ -340,11 +356,12 @@ void XmlPlanning::update_id_lesson(SubjectData data)
 	qDebug("done");
 }
 
-void XmlPlanning::add_empty_id(QString name)
+int XmlPlanning::add_empty_id(QString name)
 {
 	qDebug( Q_FUNC_INFO );
 	QDomElement element = add_empty_id();
 	element.firstChildElement("name").firstChild().toText().setData(name);
+	return element.firstChildElement("ident").firstChild().toText().data().toInt();
 }
 
 void XmlPlanning::save(QString filename)

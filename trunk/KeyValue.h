@@ -15,40 +15,14 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef CONTROL_H
-#define CONTROL_H
-
-#include <QObject>
+#ifndef KEYVALUE_H
+#define KEYVALUE_H
 #include <QString>
-#include <QFileDialog>
-#include <QMessageBox>
-#include "MainWindow.h"
-#include "XmlPlanning.h"
-#include "SubjectDataWindow.h"
-#include "define.h"
 
-class Control : public QObject
+struct KeyValue
 {
-	Q_OBJECT
-        public:
-        Control();
-
-	private:
-	void save_before_changing();
-
-        private:
-	bool m_is_modified;
-	MainWindow m_windows;
-	SubjectDataWindow m_config_subject;
-	XmlPlanning m_config;
-
-	public slots:
-	void show_subject(KeyValue subject);
-	void add_subject();
-	void manage_open_file();
-        void manage_create_file();
-	void manage_save_file();
-	void manage_save_as_file();
-	void update_xml();
+	int key;
+	QString value;
 };
-#endif
+
+#endif // KEYVALUE_H

@@ -29,6 +29,8 @@
 #include <QListWidget>
 #include <QString>
 #include <QStringList>
+#include <QVector>
+#include "KeyValue.h"
 
 class MainWindow : public QMainWindow
 {
@@ -54,13 +56,14 @@ class MainWindow : public QMainWindow
 	QTableView* m_layout_1_1;
 	QHBoxLayout* m_layout_1_2_1;
 	QListWidget* m_widget_1_2_2;
+	QVector<KeyValue> m_subject_items;
 
 	public slots:
-	void update_all_lessons(QStringList subjects);
+	void update_all_lessons(QVector<KeyValue> subjects);
 	void modify_subject_pressed();
 
 	signals:
-	void modify_subject(QString subject);
+	void modify_subject(KeyValue subject);
 	void add_subject();
 	void open_file();
         void create_file();

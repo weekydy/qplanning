@@ -32,6 +32,7 @@
 #include <QStringList>
 #include <QVector>
 #include "SubjectData.h"
+#include "KeyValue.h"
 
 enum xmlerror
 {
@@ -46,9 +47,9 @@ class XmlPlanning : public QObject
 	public:
 		XmlPlanning();
 		XmlPlanning(QString &filename);
-		SubjectData search_id(QString name);
+		SubjectData search_id(KeyValue id);
 		void update_id_lesson(SubjectData id);
-		void add_empty_id(QString name);
+		int add_empty_id(QString name);
 
 	private:
 		xmlerror verify_id();
@@ -75,6 +76,6 @@ class XmlPlanning : public QObject
 		void refresh_all_view();
 
 	signals:
-		void new_lessons_avalables(QStringList lessons);
+		void new_lessons_avalables(QVector<KeyValue> lessons);
 };
 #endif
