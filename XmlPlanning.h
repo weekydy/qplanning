@@ -77,5 +77,6 @@ class XmlPlanning : public QObject
 
 	signals:
 		void new_lessons_avalables(QVector<KeyValue> lessons);
+		void new_timetable_avalable(QVector<KeyValue> timetable);
 };
 #endif

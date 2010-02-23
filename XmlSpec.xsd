@@ -44,6 +44,7 @@
 		<xsd:all>
 			<xsd:element name="hour" type="hourType"/>
 			<xsd:element name="id-lesson" type="xsd:unsignedInt"/>
+			<xsd:element name="ident" type="xsd:unsignedInt"/>
 			<xsd:element name="class" type="xsd:token"/>
 			<xsd:element name="group" type="xsd:token" minOccurs="0" maxOccurs="1"/>
 			<xsd:element name="week" type="weekType" minOccurs="0" maxOccurs="1"/>

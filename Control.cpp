@@ -26,9 +26,10 @@ Control::Control() : m_windows(), m_config_subject(&m_windows)
 	QObject::connect(&m_windows, SIGNAL(create_file()), this, SLOT(manage_create_file()));
 	QObject::connect(&m_windows, SIGNAL(save_file()), this, SLOT(manage_save_file()));
 	QObject::connect(&m_windows, SIGNAL(save_as_file()), this, SLOT(manage_save_as_file()));
-	QObject::connect(
-			&m_config, SIGNAL(new_lessons_avalables(QVector<KeyValue>)),
+	QObject::connect(&m_config, SIGNAL(new_lessons_avalables(QVector<KeyValue>)),
 			&m_windows, SLOT(update_all_lessons(QVector<KeyValue>)));
+	QObject::connect(&m_config, SIGNAL(new_timetable_avalable(QVector<KeyValue>)),
+			 &m_windows, SLOT(update_all_timetable(QVector<KeyValue>)));
 	QObject::connect(&m_windows, SIGNAL(modify_subject(KeyValue)),
 			this, SLOT(show_subject(KeyValue)));
 	QObject::connect(&m_config_subject, SIGNAL(accepted()), this, SLOT(update_xml()));
