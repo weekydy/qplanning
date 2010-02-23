@@ -169,7 +169,9 @@ void XmlPlanning::refresh_all_view()
 	qDebug( Q_FUNC_INFO );
 
 	QDomNodeList lesson_id_list = m_lesson_id_list.childNodes();
-	QVector<KeyValue> list;
+	QDomNodeList timetable_id_list = m_lesson_list.childNodes();
+	QVector<KeyValue> lesson_list;
+	QVector<KeyValue> timetable_list;
 
 	for (int i = 0; i != lesson_id_list.count(); i++)
 	{
@@ -187,9 +189,30 @@ void XmlPlanning::refresh_all_view()
 		KeyValue current_item;
 		current_item.key = id;
 		current_item.value = lessen;
-		list.push_back(current_item);
+		lesson_list.push_back(current_item);
 	}
-	emit new_lessons_avalables(list);
+	for (int i = 0; i != timetable_id_list.count(); i++)
+	{
+		QString timetable = timetable_id_list.item(i)
+				    .firstChildElement("hour")
+				    .firstChild().toText().data();
+		int id = timetable_id_list.item(i)
+			 .firstChildElement("ident")
+			 .firstChild().toText().data().toInt();
+
+		qDebug() << "begin 2";
+		qDebug(qPrintable(timetable));
+		qDebug("%d", id);
+		qDebug() << "end 2";
+
+		KeyValue current_item;
+		current_item.key = id;
+		current_item.value = timetable;
+		timetable_list.push_back(current_item);
+	}
+
+	emit new_lessons_avalables(lesson_list);
+	emit new_timetable_avalable(timetable_list);
 }
 
 SubjectData XmlPlanning::search_id(KeyValue id)

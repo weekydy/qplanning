@@ -36,4 +36,5 @@ SOURCES += main.cpp \
 FORMS += SubjectDataWindow.ui \
     TimeTableWindow.ui
 OTHER_FILES += XmlSpec.xsd \
-    COPYING.txt
+    COPYING.txt \
+    test.xml

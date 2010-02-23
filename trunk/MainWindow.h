@@ -26,6 +26,7 @@
 #include <QToolBar>
 #include <QMenuBar>
 #include <QTableView>
+#include <QTabWidget>
 #include <QListWidget>
 #include <QString>
 #include <QStringList>
@@ -55,12 +56,18 @@ class MainWindow : public QMainWindow
 	QVBoxLayout* m_layout_1_2;
 	QTableView* m_layout_1_1;
 	QHBoxLayout* m_layout_1_2_1;
-	QListWidget* m_widget_1_2_2;
+	QListWidget* m_subjects;
+	int m_subjects_id;
+	QListWidget* m_timetable;
+	int m_timetable_id;
+	QTabWidget* m_layout_1_2_2;
 	QVector<KeyValue> m_subject_items;
+	QVector<KeyValue> m_timetable_items;
 
 	public slots:
 	void update_all_lessons(QVector<KeyValue> subjects);
-	void modify_subject_pressed();
+	void update_all_timetable(QVector<KeyValue> timetable);
+	void modify_subject();
 
 	signals:
 	void modify_subject(KeyValue subject);
