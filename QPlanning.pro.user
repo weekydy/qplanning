@@ -92,6 +92,8 @@
     <value type="QString">NXDIR=/usr/NX</value>
     <value type="QString">ORBIT_SOCKETDIR=/tmp/orbit-alexises</value>
     <value type="QString">PATH=/usr/lib/qt4/bin:/usr/lib/qt-3.3/bin:/usr/lib/ccache:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/NX/bin:/home/alexises/bin</value>
+    <value type="QString">PULSE_PROP_media.role=none</value>
+    <value type="QString">PULSE_PROP_phonon.streamid={9d84f354-4e7b-4564-88a8-9635473c20b7}</value>
     <value type="QString">PWD=/home/alexises</value>
     <value type="QString">QTDIR=/usr/lib/qt4</value>
     <value type="QString">QTINC=/usr/lib/qt-3.3/include</value>
@@ -152,6 +154,8 @@
     <value type="QString">NXDIR=/usr/NX</value>
     <value type="QString">ORBIT_SOCKETDIR=/tmp/orbit-alexises</value>
     <value type="QString">PATH=/usr/lib/qt4/bin:/usr/lib/qt-3.3/bin:/usr/lib/ccache:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/NX/bin:/home/alexises/bin</value>
+    <value type="QString">PULSE_PROP_media.role=none</value>
+    <value type="QString">PULSE_PROP_phonon.streamid={9d84f354-4e7b-4564-88a8-9635473c20b7}</value>
     <value type="QString">PWD=/home/alexises</value>
     <value type="QString">QTDIR=/usr/lib/qt4</value>
     <value type="QString">QTINC=/usr/lib/qt-3.3/include</value>

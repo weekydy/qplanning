@@ -86,18 +86,27 @@ MainWindow::MainWindow()
 	QObject::connect(m_add_lesson, SIGNAL(clicked()), this, SIGNAL(add_subject()));
 }
 
-void MainWindow::update_all_lessons(QStringList subjects)
+void MainWindow::update_all_lessons(QVector<KeyValue> subjects)
 {
 	m_widget_1_2_2->clear();
-	m_widget_1_2_2->addItems(subjects);
+	m_subject_items = subjects;
+	for (int i = 0; i != subjects.size(); i++)
+	{
+		m_widget_1_2_2->addItem(subjects[i].value);
+	}
 }
 
 void MainWindow::modify_subject_pressed()
 {
 	QString current_selected = "";
+	int id;
 	if (m_widget_1_2_2->currentItem() != NULL)
 	{
 		current_selected = m_widget_1_2_2->currentItem()->text();
+		id = m_subject_items[m_widget_1_2_2->currentRow()].key;
 	}
-	emit modify_subject(current_selected);
+	KeyValue value_to_return;
+	value_to_return.key = id;
+	value_to_return.value = current_selected;
+	emit modify_subject(value_to_return);
 }

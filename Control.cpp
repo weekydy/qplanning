@@ -27,10 +27,10 @@ Control::Control() : m_windows(), m_config_subject(&m_windows)
 	QObject::connect(&m_windows, SIGNAL(save_file()), this, SLOT(manage_save_file()));
 	QObject::connect(&m_windows, SIGNAL(save_as_file()), this, SLOT(manage_save_as_file()));
 	QObject::connect(
-			&m_config, SIGNAL(new_lessons_avalables(QStringList)),
-			&m_windows, SLOT(update_all_lessons(QStringList)));
-	QObject::connect(&m_windows, SIGNAL(modify_subject(QString)),
-			this, SLOT(show_subject(QString)));
+			&m_config, SIGNAL(new_lessons_avalables(QVector<KeyValue>)),
+			&m_windows, SLOT(update_all_lessons(QVector<KeyValue>)));
+	QObject::connect(&m_windows, SIGNAL(modify_subject(KeyValue)),
+			this, SLOT(show_subject(KeyValue)));
 	QObject::connect(&m_config_subject, SIGNAL(accepted()), this, SLOT(update_xml()));
 	QObject::connect(&m_windows, SIGNAL(add_subject()), this, SLOT(add_subject()));
 
@@ -79,10 +79,10 @@ void Control::manage_create_file()
 	m_config.new_file();
 }
 
-void Control::show_subject(QString subject)
+void Control::show_subject(KeyValue subject)
 {
 	qDebug( Q_FUNC_INFO );
-	if (!subject.isNull())
+	if (subject.key != -1)
 	{
 		SubjectData info = m_config.search_id(subject);
 		qDebug() << "begin info list";
@@ -106,8 +106,11 @@ void Control::update_xml()
 
 void Control::add_subject()
 {
-	m_config.add_empty_id( DEFAULT_ID_NAME );
-	SubjectData data = m_config.search_id( DEFAULT_ID_NAME );
+	int id = m_config.add_empty_id( DEFAULT_ID_NAME );
+	KeyValue id_to_store;
+	id_to_store.key = id;
+	id_to_store.value = DEFAULT_ID_NAME;
+	SubjectData data = m_config.search_id(id_to_store);
 	m_config_subject.set_contant(&data);
 	m_config_subject.show();
 }

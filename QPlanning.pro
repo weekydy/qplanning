@@ -25,7 +25,8 @@ HEADERS += Control.h \
     XmlPlanning.h \
     SubjectDataWindow.h \
     SubjectData.h \
-    TimeTableWindow.h
+    TimeTableWindow.h \
+    KeyValue.h
 SOURCES += main.cpp \
     Control.cpp \
     MainWindow.cpp \
