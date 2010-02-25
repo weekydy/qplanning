@@ -32,6 +32,8 @@ Control::Control() : m_windows(), m_config_subject(&m_windows)
 			 &m_windows, SLOT(update_all_timetable(QVector<KeyValue>)));
 	QObject::connect(&m_windows, SIGNAL(modify_subject(KeyValue)),
 			this, SLOT(show_subject(KeyValue)));
+	QObject::connect(&m_windows, SIGNAL(modify_timetable(KeyValue)),
+			 this, SLOT(show_timetable(KeyValue)));
 	QObject::connect(&m_config_subject, SIGNAL(accepted()), this, SLOT(update_xml()));
 	QObject::connect(&m_windows, SIGNAL(add_subject()), this, SLOT(add_subject()));
 
@@ -83,18 +85,20 @@ void Control::manage_create_file()
 void Control::show_subject(KeyValue subject)
 {
 	qDebug( Q_FUNC_INFO );
-	if (subject.key != -1)
-	{
-		SubjectData info = m_config.search_id(subject);
-		qDebug() << "begin info list";
-		qDebug() << qPrintable(info.name);
-		qDebug() << qPrintable(info.teacher);
-		qDebug("%d.%d.%d", info.red_text, info.green_text, info.blue_text);
-		qDebug("%d.%d.%d", info.red_background, info.green_background, info.blue_background);
-		qDebug() << "end info list";
-		m_config_subject.set_contant(&info);
-	}
+	SubjectData info = m_config.search_id(subject);
+	qDebug() << "begin info list";
+	qDebug() << qPrintable(info.name);
+	qDebug() << qPrintable(info.teacher);
+	qDebug("%d.%d.%d", info.red_text, info.green_text, info.blue_text);
+	qDebug("%d.%d.%d", info.red_background, info.green_background, info.blue_background);
+	qDebug() << "end info list";
+	m_config_subject.set_contant(&info);
 	m_config_subject.show();
+}
+
+void Control::show_timetable(KeyValue timetable)
+{
+	m_config_timetable.show();
 }
 
 void Control::update_xml()
