@@ -25,6 +25,7 @@
 #include "MainWindow.h"
 #include "XmlPlanning.h"
 #include "SubjectDataWindow.h"
+#include "TimeTableWindow.h"
 #include "define.h"
 
 class Control : public QObject
@@ -40,10 +41,12 @@ class Control : public QObject
 	bool m_is_modified;
 	MainWindow m_windows;
 	SubjectDataWindow m_config_subject;
+	TimeTableWindow m_config_timetable;
 	XmlPlanning m_config;
 
 	public slots:
 	void show_subject(KeyValue subject);
+	void show_timetable(KeyValue timetable);
 	void add_subject();
 	void manage_open_file();
         void manage_create_file();

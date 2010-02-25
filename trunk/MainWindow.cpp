@@ -87,7 +87,7 @@ MainWindow::MainWindow()
 	QObject::connect(m_file_menu_new, SIGNAL(triggered()), this, SIGNAL(create_file()));
 	QObject::connect(m_file_menu_save, SIGNAL(triggered()), this, SIGNAL(save_file()));
 	QObject::connect(m_file_menu_save_as, SIGNAL(triggered()), this, SIGNAL(save_as_file()));
-	QObject::connect(m_modify_lesson, SIGNAL(clicked()), this, SLOT(modify_subject()));
+	QObject::connect(m_modify_lesson, SIGNAL(clicked()), this, SLOT(modify_pressed()));
 	QObject::connect(m_add_lesson, SIGNAL(clicked()), this, SIGNAL(add_subject()));
 }
 
@@ -113,21 +113,28 @@ void MainWindow::update_all_timetable(QVector<KeyValue> timetable)
 	}
 }
 
-void MainWindow::modify_subject()
+void MainWindow::modify_pressed()
 {
 	qDebug( Q_FUNC_INFO );
-	switch (m_layout_1_2_2->currentIndex() == m_subjects_id)
+	KeyValue value_to_return;
+	if (m_layout_1_2_2->currentIndex() == m_subjects_id)
 	{
-		QString current_selected = "";
-		int id = -1;
 		if (m_subjects->currentItem() != NULL)
 		{
-			current_selected = m_subjects->currentItem()->text();
-			id = m_subject_items[m_subjects->currentRow()].key;
+			value_to_return.value = m_subjects->currentItem()->text();
+			value_to_return.key =
+					m_subject_items[m_subjects->currentRow()].key;
+			emit modify_subject(value_to_return);
 		}
-		KeyValue value_to_return;
-		value_to_return.key = id;
-		value_to_return.value = current_selected;
-		emit modify_subject(value_to_return);
+	}
+	else if (m_layout_1_2_2->currentIndex() == m_timetable_id)
+	{
+		if (m_timetable->currentItem() != NULL)
+		{
+			value_to_return.value = m_timetable->currentItem()->text();
+			value_to_return.key =
+					m_timetable_items[m_timetable->currentRow()].key;
+			emit modify_timetable(value_to_return);
+		}
 	}
 }
