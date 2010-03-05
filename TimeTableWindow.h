@@ -19,6 +19,8 @@
 #define TIMETABLEWINDOW_H
 
 #include <QDialog>
+#include <QVector>
+#include <KeyValue.h>
 #include "ui_TimeTableWindow.h"
 #include "TimeTable.h"
 
@@ -27,7 +29,10 @@ class TimeTableWindow : public QDialog, private Ui::TimeTableWindow
 	Q_OBJECT
 	public:
 		TimeTableWindow(QWidget *parent = 0);
-		void set_content(Timetable &data);
+                void set_content(Timetable &data, QVector<KeyValue> lessons_list);
+
+        private:
+                QVector<KeyValue> m_lessons_list;
 };
 
 #endif // TIMETABLEWINDOW_H

@@ -21,6 +21,7 @@
 #include <QObject>
 #include <QFile>
 #include <QString>
+#include <QTextStream>
 #include <QUrl>
 #include <QXmlSchema>
 #include <QXmlSchemaValidator>
@@ -54,6 +55,7 @@ class XmlPlanning : public QObject
 
 		void update_id_lesson(SubjectData id);
 		int add_empty_id(QString name);
+                QVector<KeyValue> get_lessons();
 
 	private:
 		xmlerror verify_id();
