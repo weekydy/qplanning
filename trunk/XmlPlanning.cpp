@@ -168,29 +168,9 @@ void XmlPlanning::refresh_all_view()
 {
 	qDebug( Q_FUNC_INFO );
 
-	QDomNodeList lesson_id_list = m_lesson_id_list.childNodes();
 	QDomNodeList timetable_id_list = m_lesson_list.childNodes();
-	QVector<KeyValue> lesson_list;
 	QVector<KeyValue> timetable_list;
 
-	for (int i = 0; i != lesson_id_list.count(); i++)
-	{
-		QString lessen = lesson_id_list.item(i)
-				  .firstChildElement("name")
-				  .firstChild().toText().data();
-		int id = lesson_id_list.item(i)
-			 .firstChildElement("ident")
-			 .firstChild().toText().data().toInt();
-		qDebug() << "begin";
-		qDebug(qPrintable(lessen));
-		qDebug("%d", id);
-		qDebug() << "done";
-
-		KeyValue current_item;
-		current_item.key = id;
-		current_item.value = lessen;
-		lesson_list.push_back(current_item);
-	}
 	for (int i = 0; i != timetable_id_list.count(); i++)
 	{
 		QString timetable = timetable_id_list.item(i)
@@ -211,7 +191,7 @@ void XmlPlanning::refresh_all_view()
 		timetable_list.push_back(current_item);
 	}
 
-	emit new_lessons_avalables(lesson_list);
+        emit new_lessons_avalables(get_lessons());
 	emit new_timetable_avalable(timetable_list);
 }
 
@@ -336,16 +316,10 @@ Timetable XmlPlanning::search_id_lesson(KeyValue id)
 				}
 			}
 
-			char half_day;
-			//bug here
-			const char* test = return_value.unparsed_date.toStdString().c_str();
-			qDebug(test);
-			qDebug() << return_value.unparsed_date.toStdString().c_str();
-			sscanf(test,
-			       "%c%f-%*c%f",
-			       &(half_day),
-			       &(return_value.begin_interval),
-			       &(return_value.end_interval));
+                        char half_day;
+                        QTextStream stream(return_value.unparsed_date.toAscii());
+                        stream >> half_day >> return_value.begin_interval >> return_value.end_interval;
+                        //bug here
 
 			if (half_day == 'M')
 			{
@@ -507,4 +481,30 @@ void XmlPlanning::save()
 		throw;
 	}
 	m_data_file.close();
+}
+
+QVector<KeyValue> XmlPlanning::get_lessons()
+{
+        QDomNodeList lesson_id_list = m_lesson_id_list.childNodes();
+        QVector<KeyValue> lesson_list;
+
+        for (int i = 0; i != lesson_id_list.count(); i++)
+        {
+                QString lessen = lesson_id_list.item(i)
+                                  .firstChildElement("name")
+                                  .firstChild().toText().data();
+                int id = lesson_id_list.item(i)
+                         .firstChildElement("ident")
+                         .firstChild().toText().data().toInt();
+                qDebug() << "begin";
+                qDebug(qPrintable(lessen));
+                qDebug("%d", id);
+                qDebug() << "done";
+
+                KeyValue current_item;
+                current_item.key = id;
+                current_item.value = lessen;
+                lesson_list.push_back(current_item);
+        }
+        return lesson_list;
 }

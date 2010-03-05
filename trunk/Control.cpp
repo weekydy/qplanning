@@ -105,6 +105,7 @@ void Control::show_timetable(KeyValue timetable)
 	qDebug() << "end timetable info list";
 
 	Timetable info = m_config.search_id_lesson(timetable);
+        QVector<KeyValue> lesson_list = m_config.get_lessons();
 
 	qDebug() << "begin info list";
 	qDebug() << qPrintable(info.unparsed_date);
@@ -114,7 +115,8 @@ void Control::show_timetable(KeyValue timetable)
 	qDebug("%f", info.begin_interval);
 	qDebug("%f", info.end_interval);
 	qDebug() << "end info list";
-	m_config_timetable.set_content(info);
+
+        m_config_timetable.set_content(info, lesson_list);
 	m_config_timetable.show();
 }
 

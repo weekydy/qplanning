@@ -22,13 +22,31 @@ TimeTableWindow::TimeTableWindow(QWidget *parent) : QDialog(parent)
 	setupUi(this);
 }
 
-void TimeTableWindow::set_content(Timetable &data)
+void TimeTableWindow::set_content(Timetable &data, QVector<KeyValue> lessons_list)
 {
 	class_edit->setText(data.classroom);
 	week_edit->setCurrentIndex(data.week);
 	group_edit->setCurrentIndex(data.group);
 	begin_edit->setCurrentIndex(data.begin_interval * 2);
 	end_edit->setCurrentIndex(data.end_interval * 2);
-	part_day_edit->setCurrentIndex(data.half_day);
+        switch (data.half_day)
+        {
+            case MORNING:
+                part_day_edit->setCurrentIndex(0);
+                break;
+            case AFTERNOON:
+                part_day_edit->setCurrentIndex(1);
+                break;
+        }
+
+        for (int i = 0; i != lessons_list.size(); i++)
+        {
+            subject_edit->addItem(lessons_list[i].value);
+            if (lessons_list[i].key == data.id_lesson)
+            {
+                subject_edit->setCurrentIndex(i);
+            }
+        }
+        m_lessons_list = lessons_list;
 }
 
