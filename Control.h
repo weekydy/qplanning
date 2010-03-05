@@ -26,6 +26,7 @@
 #include "XmlPlanning.h"
 #include "SubjectDataWindow.h"
 #include "TimeTableWindow.h"
+#include "TimeTable.h"
 #include "define.h"
 
 class Control : public QObject

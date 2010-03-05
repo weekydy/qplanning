@@ -3,8 +3,8 @@
         <version>1</version>
         <lesson-list>
                 <lesson>
-			<ident>0</ident>
-                        <hour>A1-A2.5</hour>
+			<ident>2</ident>
+			<hour>A1.5-A2.5</hour>
                         <id-lesson>1</id-lesson>
                         <class>E4</class>
                         <group>1</group>

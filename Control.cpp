@@ -17,7 +17,7 @@
  */
 #include "Control.h"
 
-Control::Control() : m_windows(), m_config_subject(&m_windows)
+Control::Control() : m_windows(), m_config_subject(&m_windows), m_config_timetable(&m_windows)
 {
 	qDebug( Q_FUNC_INFO );
 	m_is_modified = false;
@@ -98,6 +98,23 @@ void Control::show_subject(KeyValue subject)
 
 void Control::show_timetable(KeyValue timetable)
 {
+	qDebug( Q_FUNC_INFO );
+	qDebug() << "timetable info list";
+	qDebug() << timetable.key;
+	qDebug() << qPrintable(timetable.value);
+	qDebug() << "end timetable info list";
+
+	Timetable info = m_config.search_id_lesson(timetable);
+
+	qDebug() << "begin info list";
+	qDebug() << qPrintable(info.unparsed_date);
+	qDebug() << qPrintable(info.classroom);
+	qDebug() << info.ident;
+	qDebug() << info.id_lesson; //
+	qDebug("%f", info.begin_interval);
+	qDebug("%f", info.end_interval);
+	qDebug() << "end info list";
+	m_config_timetable.set_content(info);
 	m_config_timetable.show();
 }
 

@@ -21,3 +21,14 @@ TimeTableWindow::TimeTableWindow(QWidget *parent) : QDialog(parent)
 {
 	setupUi(this);
 }
+
+void TimeTableWindow::set_content(Timetable &data)
+{
+	class_edit->setText(data.classroom);
+	week_edit->setCurrentIndex(data.week);
+	group_edit->setCurrentIndex(data.group);
+	begin_edit->setCurrentIndex(data.begin_interval * 2);
+	end_edit->setCurrentIndex(data.end_interval * 2);
+	part_day_edit->setCurrentIndex(data.half_day);
+}
+

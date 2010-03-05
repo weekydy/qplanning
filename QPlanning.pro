@@ -26,7 +26,8 @@ HEADERS += Control.h \
     SubjectDataWindow.h \
     SubjectData.h \
     TimeTableWindow.h \
-    KeyValue.h
+    KeyValue.h \
+    TimeTable.h
 SOURCES += main.cpp \
     Control.cpp \
     MainWindow.cpp \
