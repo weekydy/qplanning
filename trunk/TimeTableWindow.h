@@ -20,13 +20,14 @@
 
 #include <QDialog>
 #include "ui_TimeTableWindow.h"
-
+#include "TimeTable.h"
 
 class TimeTableWindow : public QDialog, private Ui::TimeTableWindow
 {
 	Q_OBJECT
 	public:
 		TimeTableWindow(QWidget *parent = 0);
+		void set_content(Timetable &data);
 };
 
 #endif // TIMETABLEWINDOW_H

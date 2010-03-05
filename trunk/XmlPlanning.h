@@ -31,7 +31,9 @@
 #include <QtDebug>
 #include <QStringList>
 #include <QVector>
+#include <cstdio>
 #include "SubjectData.h"
+#include "TimeTable.h"
 #include "KeyValue.h"
 
 enum xmlerror
@@ -48,6 +50,8 @@ class XmlPlanning : public QObject
 		XmlPlanning();
 		XmlPlanning(QString &filename);
 		SubjectData search_id(KeyValue id);
+		Timetable search_id_lesson(KeyValue id);
+
 		void update_id_lesson(SubjectData id);
 		int add_empty_id(QString name);
 

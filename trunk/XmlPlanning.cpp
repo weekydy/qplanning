@@ -265,6 +265,103 @@ SubjectData XmlPlanning::search_id(KeyValue id)
 	return return_value;
 }
 
+Timetable XmlPlanning::search_id_lesson(KeyValue id)
+{
+	qDebug( Q_FUNC_INFO );
+	QDomNodeList lesson_list = m_lesson_list.childNodes();
+	Timetable return_value;
+	int i;
+	for (int i = 0; i != lesson_list.size(); i++)
+	{
+		int id_tested = lesson_list.item(i).firstChildElement("ident").firstChild()
+				.toText().data().toInt();
+		qDebug("id_tested = %d", id_tested);
+		if (id_tested == id.key)
+		{
+			qDebug("id found");
+			if (lesson_list.item(i).isNull())
+			{
+				qDebug("error");
+			}
+
+			return_value.ident = id.key;
+			return_value.classroom = lesson_list.item(i).firstChildElement("class")
+						 .firstChild().toText().data();
+			return_value.unparsed_date = lesson_list.item(i)
+						     .firstChildElement("hour").firstChild()
+						     .toText().data();
+			return_value.id_lesson = lesson_list.item(i).firstChildElement("id-lesson")
+						 .firstChild().toText().data().toInt();
+			if (lesson_list.item(i).firstChildElement("group").isNull())
+			{
+				return_value.group = ALL_GROUP;
+			}
+			else
+			{
+				int group = lesson_list.item(i).firstChildElement("group")
+					    .firstChild().toText().data().toInt();
+				switch (group)
+				{
+					case ALL_GROUP:
+						return_value.group = ALL_GROUP;
+						break;
+					case ONE:
+						return_value.group = ONE;
+						break;
+					case TWO:
+						return_value.group = TWO;
+						break;
+				}
+			}
+
+			if (lesson_list.item(i).firstChildElement("week").isNull())
+			{
+				return_value.week = ALL_WEEK;
+			}
+			else
+			{
+				int week = lesson_list.item(i).firstChildElement("week")
+					   .firstChild().toText().data().toInt();
+				switch (week)
+				{
+					case ALL_WEEK:
+						return_value.week = ALL_WEEK;
+						break;
+					case PEER:
+						return_value.week = PEER;
+						break;
+					case UNPEER:
+						return_value.week = UNPEER;
+						break;
+				}
+			}
+
+			char half_day;
+			//bug here
+			const char* test = return_value.unparsed_date.toStdString().c_str();
+			qDebug(test);
+			qDebug() << return_value.unparsed_date.toStdString().c_str();
+			sscanf(test,
+			       "%c%f-%*c%f",
+			       &(half_day),
+			       &(return_value.begin_interval),
+			       &(return_value.end_interval));
+
+			if (half_day == 'M')
+			{
+				return_value.half_day = MORNING;
+			}
+			else
+			{
+				return_value.half_day = AFTERNOON;
+			}
+			return return_value;
+		}
+	}
+	Q_ASSERT(i != lesson_list.size());
+	return return_value; //never used only to disable warning
+}
+
 void XmlPlanning::separe_color(QString &src, int &red, int &green, int &blue)
 {
 	red = src.section('.', 0, 0).toInt();
