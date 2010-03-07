@@ -19,23 +19,24 @@ QT += xml
 QT += xmlpatterns
 
 # Input
-HEADERS += Control.h \
-    define.h \
-    MainWindow.h \
-    XmlPlanning.h \
-    SubjectDataWindow.h \
-    SubjectData.h \
-    TimeTableWindow.h \
-    KeyValue.h \
-    TimeTable.h
-SOURCES += main.cpp \
-    Control.cpp \
-    MainWindow.cpp \
-    XmlPlanning.cpp \
-    SubjectDataWindow.cpp \
-    TimeTableWindow.cpp
-FORMS += SubjectDataWindow.ui \
-    TimeTableWindow.ui
+HEADERS += src/ontrol.h \
+    src/define.h \
+    src/MainWindow.h \
+    src/XmlPlanning.h \
+    src/SubjectDataWindow.h \
+    src/SubjectData.h \
+    src/TimeTableWindow.h \
+    src/KeyValue.h \
+    src/TimeTable.h
+SOURCES += src/main.cpp \
+    src/Control.cpp \
+    src/MainWindow.cpp \
+    src/XmlPlanning.cpp \
+    src/SubjectDataWindow.cpp \
+    src/TimeTableWindow.cpp
+FORMS += src/SubjectDataWindow.ui \
+    src/TimeTableWindow.ui
 OTHER_FILES += XmlSpec.xsd \
     COPYING.txt \
-    test.xml
+    test.xml \
+    CMakeList.txt
