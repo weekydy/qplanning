@@ -49,6 +49,7 @@ class Control : public QObject
 	void show_subject(KeyValue subject);
 	void show_timetable(KeyValue timetable);
 	void add_subject();
+	void add_timetable();
 	void manage_open_file();
         void manage_create_file();
 	void manage_save_file();

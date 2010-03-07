@@ -30,7 +30,7 @@ struct SubjectData
 	int red_text;
 	int green_text;
 	int blue_text;
-	int id;
+	unsigned int id;
 	bool is_exist;
 };
 

@@ -21,7 +21,7 @@
 
 struct KeyValue
 {
-	int key;
+	unsigned int key;
 	QString value;
 };
 

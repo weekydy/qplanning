@@ -120,12 +120,12 @@ xmlerror XmlPlanning::verify_id()
 	{
 		bool is_Existant = false;
 		QDomElement current_lesson = lesson_list.item(i).toElement();
-		int lesson_associated_id = current_lesson.firstChildElement("id-lesson").text().toInt();
+		unsigned int lesson_associated_id = current_lesson.firstChildElement("id-lesson").text().toUInt();
 
 		for (int j = 0; j != lesson_id_list.size(); i++)
 		{
 			QDomElement current_id_lesson = lesson_id_list.item(j).toElement();
-			int lesson_current_id = current_id_lesson.firstChildElement("ident").text().toInt();
+			unsigned int lesson_current_id = current_id_lesson.firstChildElement("ident").text().toUInt();
 			
 			if (lesson_current_id == lesson_associated_id)
 			{
@@ -176,9 +176,9 @@ void XmlPlanning::refresh_all_view()
 		QString timetable = timetable_id_list.item(i)
 				    .firstChildElement("hour")
 				    .firstChild().toText().data();
-		int id = timetable_id_list.item(i)
-			 .firstChildElement("ident")
-			 .firstChild().toText().data().toInt();
+		unsigned int id = timetable_id_list.item(i)
+				  .firstChildElement("ident")
+				  .firstChild().toText().data().toUInt();
 
 		qDebug() << "begin 2";
 		qDebug(qPrintable(timetable));
@@ -203,9 +203,9 @@ SubjectData XmlPlanning::search_id(KeyValue id)
 
 	for (int i = 0; i != lesson_id_list.count(); i++)
 	{
-		int current_id = lesson_id_list.item(i)
-			       .firstChildElement("ident")
-			       .firstChild().toText().data().toInt();
+		unsigned int current_id = lesson_id_list.item(i)
+					  .firstChildElement("ident")
+					  .firstChild().toText().data().toUInt();
 		if (current_id == id.key)
 		{
 			return_value.id = current_id;
@@ -217,7 +217,7 @@ SubjectData XmlPlanning::search_id(KeyValue id)
 					       .firstChild().toText().data();
 			return_value.id = lesson_id_list.item(i)
 					  .firstChildElement("ident")
-					  .firstChild().toText().data().toInt();
+					  .firstChild().toText().data().toUInt();
 			QString color = lesson_id_list.item(i)
 					.firstChildElement("color")
 					.firstChild().toText().data();
@@ -251,10 +251,10 @@ Timetable XmlPlanning::search_id_lesson(KeyValue id)
 	QDomNodeList lesson_list = m_lesson_list.childNodes();
 	Timetable return_value;
 	int i;
-	for (int i = 0; i != lesson_list.size(); i++)
+	for (i = 0; i != lesson_list.size(); i++)
 	{
-		int id_tested = lesson_list.item(i).firstChildElement("ident").firstChild()
-				.toText().data().toInt();
+		unsigned int id_tested = lesson_list.item(i).firstChildElement("ident").firstChild()
+					.toText().data().toUInt();
 		qDebug("id_tested = %d", id_tested);
 		if (id_tested == id.key)
 		{
@@ -271,7 +271,7 @@ Timetable XmlPlanning::search_id_lesson(KeyValue id)
 						     .firstChildElement("hour").firstChild()
 						     .toText().data();
 			return_value.id_lesson = lesson_list.item(i).firstChildElement("id-lesson")
-						 .firstChild().toText().data().toInt();
+						 .firstChild().toText().data().toUInt();
 			if (lesson_list.item(i).firstChildElement("group").isNull())
 			{
 				return_value.group = ALL_GROUP;
@@ -350,7 +350,46 @@ QString XmlPlanning::join_color(int red, int green, int blue)
 		       QString::number(blue));
 }
 
-QDomElement XmlPlanning::add_empty_id()
+unsigned int XmlPlanning::_get_empty_id(QVector<unsigned int> ids)
+{
+	qDebug( Q_FUNC_INFO );
+	unsigned int selected_id = UINT_MAX;
+	unsigned int i;
+	for (i = 0; i != (unsigned int) ids.size(); i++)
+	{
+		if (ids[i] != i)
+		{
+			selected_id = i;
+			break;
+		}
+	}
+	if (selected_id == UINT_MAX)
+	{
+		selected_id = i + 1;
+	}
+	qDebug("selected_id : %d", selected_id);
+
+	return selected_id;
+}
+
+QVector<unsigned int> XmlPlanning::_all_ident_lesson()
+{
+	qDebug( Q_FUNC_INFO );
+	QDomNodeList idents = m_lesson_list.childNodes();
+	QVector<unsigned int> ident_list;
+
+	for (unsigned int i = 0; i != idents.length(); i++)
+	{
+		unsigned int current_ident = idents.item(i).firstChildElement("ident")
+				    .firstChild().toText().data().toUInt();
+		ident_list.push_back(current_ident);
+	}
+	qSort(ident_list);
+
+	return ident_list;
+}
+
+QDomElement XmlPlanning::_add_empty_id()
 {
 	qDebug( Q_FUNC_INFO );
 
@@ -370,13 +409,13 @@ QDomElement XmlPlanning::add_empty_id()
 
 	//search free id
 	QDomNodeList ids = m_lesson_id_list.childNodes();
-	QVector<int> used_id;
+	QVector<unsigned int> used_id;
 
 	//step one : collect all current id
 	for (unsigned int i = 0; i != ids.length(); i++)
 	{
-		int current_id = ids.item(i).firstChildElement("ident")
-				 .firstChild().toText().data().toInt();
+		unsigned int current_id = ids.item(i).firstChildElement("ident")
+				 .firstChild().toText().data().toUInt();
 		used_id.push_back(current_id);
 	}
 
@@ -384,26 +423,45 @@ QDomElement XmlPlanning::add_empty_id()
 	qSort(used_id);
 
 	//step 3 : get the first id
-	int selected_id = -1;
-	int i;
-	for (i = 0; i != used_id.size(); i++)
-	{
-		if (used_id[i] != i)
-		{
-			selected_id = i;
-			break;
-		}
-	}
-	if (selected_id == -1)
-	{
-		selected_id = i + 1;
-	}
-	qDebug("selected_id : %d", selected_id);
+	unsigned int selected_id = _get_empty_id(used_id);
 
 	//append choice id and id tag
 	id.firstChildElement("ident")
 	  .appendChild(m_xml_document.createTextNode(QString::number(selected_id)));
 	m_lesson_id_list.appendChild(id);
+	return id;
+}
+
+QDomElement XmlPlanning::_add_empty_lesson()
+{
+	qDebug( Q_FUNC_INFO );
+
+	//first create basic tree
+	QDomElement id = m_xml_document.createElement("lesson");
+	id.appendChild(m_xml_document.createElement("ident"));
+	id.appendChild(m_xml_document.createElement("hour"));
+	id.appendChild(m_xml_document.createElement("class"));
+	id.appendChild(m_xml_document.createElement("id-lesson"));
+	id.appendChild(m_xml_document.createElement("group"));
+	id.appendChild(m_xml_document.createElement("week"));
+
+	//creating default node
+	id.firstChildElement("class").appendChild(m_xml_document.createTextNode(""));
+	id.firstChildElement("id-lesson").appendChild(m_xml_document.createTextNode(QString::number( UINT_MAX )));
+	id.firstChildElement("group").appendChild(m_xml_document.createTextNode("3"));
+	id.firstChildElement("week").appendChild(m_xml_document.createTextNode("3"));
+	id.firstChildElement("hour").appendChild(m_xml_document.createTextNode("undefined"));
+
+	//get all nodes
+	QVector<unsigned int> idents = _all_ident_lesson();
+
+	//search an empty id
+	unsigned int selected_id = _get_empty_id(idents);
+
+	id.firstChildElement("ident").appendChild(m_xml_document.createTextNode(QString::number(selected_id)));
+
+	//append new lesson
+	m_lesson_list.appendChild(id);
 	return id;
 }
 
@@ -416,7 +474,7 @@ void XmlPlanning::update_id_lesson(SubjectData data)
 	//select node
 	if (!data.is_exist)
 	{
-		node_to_edit = add_empty_id();
+		node_to_edit = _add_empty_id();
 	}
 	else
 	{
@@ -424,8 +482,8 @@ void XmlPlanning::update_id_lesson(SubjectData data)
 		bool is_found = false;
 		for (int i = 0; i != list.count(); i++)
 		{
-			int current_id = list.item(i).firstChildElement("ident")
-					 .firstChild().toText().data().toInt();
+			unsigned int current_id = list.item(i).firstChildElement("ident")
+						 .firstChild().toText().data().toUInt();
 			if (current_id == data.id)
 			{
 				node_to_edit = list.item(i).toElement();
@@ -436,7 +494,7 @@ void XmlPlanning::update_id_lesson(SubjectData data)
 		}
 		if (!is_found)
 		{
-			node_to_edit = add_empty_id();
+			node_to_edit = _add_empty_id();
 		}
 	}
 
@@ -450,12 +508,19 @@ void XmlPlanning::update_id_lesson(SubjectData data)
 	qDebug("done");
 }
 
-int XmlPlanning::add_empty_id(QString name)
+unsigned int XmlPlanning::add_empty_id(QString name)
 {
 	qDebug( Q_FUNC_INFO );
-	QDomElement element = add_empty_id();
+	QDomElement element = _add_empty_id();
 	element.firstChildElement("name").firstChild().toText().setData(name);
-	return element.firstChildElement("ident").firstChild().toText().data().toInt();
+	return element.firstChildElement("ident").firstChild().toText().data().toUInt();
+}
+
+unsigned int XmlPlanning::add_empty_lesson()
+{
+	qDebug( Q_FUNC_INFO );
+	QDomElement element = _add_empty_lesson();
+	return element.firstChildElement("ident").firstChild().toText().data().toUInt();
 }
 
 void XmlPlanning::save(QString filename)
@@ -491,11 +556,11 @@ QVector<KeyValue> XmlPlanning::get_lessons()
         for (int i = 0; i != lesson_id_list.count(); i++)
         {
                 QString lessen = lesson_id_list.item(i)
-                                  .firstChildElement("name")
-                                  .firstChild().toText().data();
-                int id = lesson_id_list.item(i)
-                         .firstChildElement("ident")
-                         .firstChild().toText().data().toInt();
+				 .firstChildElement("name")
+				 .firstChild().toText().data();
+		unsigned int id = lesson_id_list.item(i)
+				  .firstChildElement("ident")
+				  .firstChild().toText().data().toUInt();
                 qDebug() << "begin";
                 qDebug(qPrintable(lessen));
                 qDebug("%d", id);

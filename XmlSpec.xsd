@@ -64,7 +64,7 @@
 	<xsd:simpleType name="weekType">
 		<xsd:restriction base="xsd:unsignedInt">
 			<xsd:minInclusive value="1"/>
-			<xsd:maxInclusive value="2"/>
+			<xsd:maxInclusive value="3"/>
 		</xsd:restriction>
 	</xsd:simpleType>
 	

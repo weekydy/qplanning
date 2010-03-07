@@ -32,7 +32,7 @@
 #include <QtDebug>
 #include <QStringList>
 #include <QVector>
-#include <cstdio>
+#include <climits>
 #include "SubjectData.h"
 #include "TimeTable.h"
 #include "KeyValue.h"
@@ -54,13 +54,17 @@ class XmlPlanning : public QObject
 		Timetable search_id_lesson(KeyValue id);
 
 		void update_id_lesson(SubjectData id);
-		int add_empty_id(QString name);
+		unsigned int add_empty_id(QString name);
+		unsigned int add_empty_lesson();
                 QVector<KeyValue> get_lessons();
 
 	private:
 		xmlerror verify_id();
 		xmlerror verify_xsd();
-		QDomElement add_empty_id();
+		QDomElement _add_empty_id();
+		QDomElement _add_empty_lesson();
+		QVector<unsigned int> _all_ident_lesson();
+		unsigned int _get_empty_id(QVector<unsigned int> ids);
 		void separe_color(QString &src, int &red, int &green, int &blue);
 		QString join_color(int red, int green, int blue);
 

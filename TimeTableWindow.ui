@@ -217,17 +217,17 @@ p, li { white-space: pre-wrap; }
      <widget class="QComboBox" name="week_edit">
       <item>
        <property name="text">
-        <string>all</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
         <string>1</string>
        </property>
       </item>
       <item>
        <property name="text">
         <string>2</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>all</string>
        </property>
       </item>
      </widget>
@@ -243,17 +243,17 @@ p, li { white-space: pre-wrap; }
      <widget class="QComboBox" name="group_edit">
       <item>
        <property name="text">
-        <string>all</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
         <string>1</string>
        </property>
       </item>
       <item>
        <property name="text">
         <string>2</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>all</string>
        </property>
       </item>
      </widget>

@@ -48,7 +48,7 @@ SubjectData SubjectDataWindow::get_contant()
 	content.blue_background = blue_background_color->value();
 
 	content.id = m_id;
-	if (m_id != -1)
+	if (m_id != UINT_MAX)
 	{
 		content.is_exist = true;
 	}
@@ -73,7 +73,7 @@ void SubjectDataWindow::set_contant(SubjectData *data)
 		red_background_color->clear();
 		green_background_color->clear();
 		blue_background_color->clear();
-		m_id = -1;
+		m_id = UINT_MAX;
 	}
 	else
 	{

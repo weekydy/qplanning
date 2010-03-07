@@ -24,29 +24,39 @@ TimeTableWindow::TimeTableWindow(QWidget *parent) : QDialog(parent)
 
 void TimeTableWindow::set_content(Timetable &data, QVector<KeyValue> lessons_list)
 {
+	qDebug( Q_FUNC_INFO );
+	qDebug("%u", data.id_lesson);
+
 	class_edit->setText(data.classroom);
-	week_edit->setCurrentIndex(data.week);
-	group_edit->setCurrentIndex(data.group);
+	week_edit->setCurrentIndex(data.week - 1);
+	group_edit->setCurrentIndex(data.group - 1);
 	begin_edit->setCurrentIndex(data.begin_interval * 2);
 	end_edit->setCurrentIndex(data.end_interval * 2);
         switch (data.half_day)
         {
-            case MORNING:
-                part_day_edit->setCurrentIndex(0);
-                break;
-            case AFTERNOON:
-                part_day_edit->setCurrentIndex(1);
-                break;
+		case MORNING:
+			part_day_edit->setCurrentIndex(0);
+			break;
+		case AFTERNOON:
+			part_day_edit->setCurrentIndex(1);
+			break;
         }
 
         for (int i = 0; i != lessons_list.size(); i++)
-        {
-            subject_edit->addItem(lessons_list[i].value);
-            if (lessons_list[i].key == data.id_lesson)
-            {
-                subject_edit->setCurrentIndex(i);
-            }
+	{
+		subject_edit->addItem(lessons_list[i].value);
+		if (lessons_list[i].key == data.id_lesson)
+		{
+			qDebug("id found");
+			subject_edit->setCurrentIndex(i);
+		}
         }
+	if (data.id_lesson == UINT_MAX)
+	{
+		subject_edit->setCurrentIndex(-1);
+	}
+
+
         m_lessons_list = lessons_list;
 }
 
