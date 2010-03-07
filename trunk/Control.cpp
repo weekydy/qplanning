@@ -36,6 +36,7 @@ Control::Control() : m_windows(), m_config_subject(&m_windows), m_config_timetab
 			 this, SLOT(show_timetable(KeyValue)));
 	QObject::connect(&m_config_subject, SIGNAL(accepted()), this, SLOT(update_xml()));
 	QObject::connect(&m_windows, SIGNAL(add_subject()), this, SLOT(add_subject()));
+	QObject::connect(&m_windows, SIGNAL(add_timetable()), this, SLOT(add_timetable()));
 
 	m_windows.show();
 }
@@ -130,13 +131,36 @@ void Control::update_xml()
 
 void Control::add_subject()
 {
-	int id = m_config.add_empty_id( DEFAULT_ID_NAME );
+	unsigned int id = m_config.add_empty_id( DEFAULT_ID_NAME );
 	KeyValue id_to_store;
 	id_to_store.key = id;
 	id_to_store.value = DEFAULT_ID_NAME;
 	SubjectData data = m_config.search_id(id_to_store);
 	m_config_subject.set_contant(&data);
 	m_config_subject.show();
+}
+
+void Control::add_timetable()
+{
+	qDebug( Q_FUNC_INFO );
+
+	unsigned int id = m_config.add_empty_lesson();
+	QVector<KeyValue> lesson_list = m_config.get_lessons();
+
+	KeyValue id_to_edit;
+	id_to_edit.key = id;
+	Timetable data = m_config.search_id_lesson(id_to_edit);
+
+	qDebug("begin info");
+	qDebug() << id;
+	qDebug() << data.unparsed_date;
+	qDebug() << data.group;
+	qDebug() << data.week;
+	qDebug() << data.id_lesson;
+	qDebug("end info");
+
+	m_config_timetable.set_content(data, lesson_list);
+	m_config_timetable.show();
 }
 
 void Control::manage_save_file()

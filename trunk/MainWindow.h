@@ -68,11 +68,13 @@ class MainWindow : public QMainWindow
 	void update_all_lessons(QVector<KeyValue> subjects);
 	void update_all_timetable(QVector<KeyValue> timetable);
 	void modify_pressed();
+	void add_pressed();
 
 	signals:
 	void modify_subject(KeyValue subject);
 	void modify_timetable(KeyValue timetable);
 	void add_subject();
+	void add_timetable();
 	void open_file();
         void create_file();
 	void save_file();

@@ -33,7 +33,7 @@ class SubjectDataWindow : public QDialog, private Ui::DataWindowModel
 
 	private:
 		QString create_text_label(int red, int green, int blue);
-		int m_id;
+		unsigned int m_id;
 
 	public slots:
 		void update_text_prevew();

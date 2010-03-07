@@ -88,7 +88,7 @@ MainWindow::MainWindow()
 	QObject::connect(m_file_menu_save, SIGNAL(triggered()), this, SIGNAL(save_file()));
 	QObject::connect(m_file_menu_save_as, SIGNAL(triggered()), this, SIGNAL(save_as_file()));
 	QObject::connect(m_modify_lesson, SIGNAL(clicked()), this, SLOT(modify_pressed()));
-	QObject::connect(m_add_lesson, SIGNAL(clicked()), this, SIGNAL(add_subject()));
+	QObject::connect(m_add_lesson, SIGNAL(clicked()), this, SLOT(add_pressed()));
 }
 
 void MainWindow::update_all_lessons(QVector<KeyValue> subjects)
@@ -136,5 +136,17 @@ void MainWindow::modify_pressed()
 					m_timetable_items[m_timetable->currentRow()].key;
 			emit modify_timetable(value_to_return);
 		}
+	}
+}
+
+void MainWindow::add_pressed()
+{
+	if (m_layout_1_2_2->currentIndex() == m_subjects_id)
+	{
+		emit add_subject();
+	}
+	else
+	{
+		emit add_timetable();
 	}
 }

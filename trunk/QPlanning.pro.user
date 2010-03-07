@@ -68,15 +68,15 @@
    <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString">Release</value>
    <valuelist key="abstractProcess.Environment" type="QVariantList">
     <value type="QString">CVS_RSH=ssh</value>
-    <value type="QString">DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-Mlyu0WFOxe,guid=6dbf4aed73c6657c9d41a2ba4b8bcd0b</value>
+    <value type="QString">DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-uPl6ysKlJC,guid=6e73695f71145ab3b407296f4b8fe035</value>
     <value type="QString">DESKTOP_SESSION=gnome</value>
     <value type="QString">DISPLAY=:0.0</value>
     <value type="QString">GDMSESSION=gnome</value>
     <value type="QString">GDM_KEYBOARD_LAYOUT=fr</value>
     <value type="QString">GDM_LANG=fr_FR.UTF-8</value>
     <value type="QString">GNOME_DESKTOP_SESSION_ID=this-is-deprecated</value>
-    <value type="QString">GNOME_KEYRING_PID=1435</value>
-    <value type="QString">GNOME_KEYRING_SOCKET=/tmp/keyring-kUPa2n/socket</value>
+    <value type="QString">GNOME_KEYRING_PID=4642</value>
+    <value type="QString">GNOME_KEYRING_SOCKET=/tmp/keyring-FraS3e/socket</value>
     <value type="QString">GTK_RC_FILES=/etc/gtk/gtkrc:/home/alexises/.gtkrc-1.2-gnome2</value>
     <value type="QString">G_BROKEN_FILENAMES=1</value>
     <value type="QString">HISTCONTROL=ignoreboth</value>
@@ -89,38 +89,37 @@
     <value type="QString">LESSOPEN=|/usr/bin/lesspipe.sh %s</value>
     <value type="QString">LOGNAME=alexises</value>
     <value type="QString">MAIL=/var/spool/mail/alexises</value>
-    <value type="QString">NXDIR=/usr/NX</value>
     <value type="QString">ORBIT_SOCKETDIR=/tmp/orbit-alexises</value>
-    <value type="QString">PATH=/usr/lib/qt4/bin:/usr/lib/qt-3.3/bin:/usr/lib/ccache:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/NX/bin:/home/alexises/bin</value>
+    <value type="QString">PATH=/usr/lib/qt4/bin:/usr/lib/qt-3.3/bin:/usr/lib/ccache:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/alexises/bin</value>
     <value type="QString">PULSE_PROP_media.role=none</value>
-    <value type="QString">PULSE_PROP_phonon.streamid={e9071409-ed8f-420b-bf3a-dd468691a3dd}</value>
+    <value type="QString">PULSE_PROP_phonon.streamid={398330e3-945b-4ae9-94f3-849d7b4e64e5}</value>
     <value type="QString">PWD=/home/alexises</value>
     <value type="QString">QTDIR=/usr/lib/qt4</value>
     <value type="QString">QTINC=/usr/lib/qt-3.3/include</value>
     <value type="QString">QTLIB=/usr/lib/qt-3.3/lib</value>
     <value type="QString">QT_IM_MODULE=xim</value>
-    <value type="QString">SESSION_MANAGER=local/unix:@/tmp/.ICE-unix/1442,unix/unix:/tmp/.ICE-unix/1442</value>
+    <value type="QString">SESSION_MANAGER=local/unix:@/tmp/.ICE-unix/4657,unix/unix:/tmp/.ICE-unix/4657</value>
     <value type="QString">SHELL=/bin/bash</value>
     <value type="QString">SHLVL=1</value>
     <value type="QString">SSH_ASKPASS=/usr/libexec/openssh/gnome-ssh-askpass</value>
-    <value type="QString">SSH_AUTH_SOCK=/tmp/keyring-kUPa2n/socket.ssh</value>
+    <value type="QString">SSH_AUTH_SOCK=/tmp/keyring-FraS3e/socket.ssh</value>
     <value type="QString">TERM=dumb</value>
     <value type="QString">USER=alexises</value>
     <value type="QString">USERNAME=alexises</value>
-    <value type="QString">XAUTHORITY=/var/run/gdm/auth-for-alexises-EwhGUm/database</value>
-    <value type="QString">XDG_SESSION_COOKIE=eade1cf93dc5cbef44600a524b34e77a-1267453195.459730-1771721168</value>
+    <value type="QString">XAUTHORITY=/var/run/gdm/auth-for-alexises-IloYi5/database</value>
+    <value type="QString">XDG_SESSION_COOKIE=fc07be3064540219eff8ea694b003cb5-1267720242.178460-127787217</value>
     <value type="QString">XMODIFIERS=@im=none</value>
     <value type="QString">_=/usr/bin/gnome-session</value>
    </valuelist>
    <valuelist key="abstractProcess.arguments" type="QVariantList">
-    <value type="QString">/home/alexises/progc/qplanning/QPlanning.pro</value>
+    <value type="QString">/home/alexises/data/prog/progcpp/qplanning/QPlanning.pro</value>
     <value type="QString">-spec</value>
     <value type="QString">linux-g++</value>
     <value type="QString">-r</value>
    </valuelist>
    <value key="abstractProcess.command" type="QString">/usr/bin/qmake-qt4</value>
    <value key="abstractProcess.enabled" type="bool">false</value>
-   <value key="abstractProcess.workingDirectory" type="QString">/home/alexises/progc/qplanning</value>
+   <value key="abstractProcess.workingDirectory" type="QString">/home/alexises/data/prog/progcpp/qplanning</value>
    <valuelist key="qmakeArgs" type="QVariantList"/>
   </valuemap>
  </data>
@@ -130,15 +129,15 @@
    <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString">Release</value>
    <valuelist key="abstractProcess.Environment" type="QVariantList">
     <value type="QString">CVS_RSH=ssh</value>
-    <value type="QString">DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-Mlyu0WFOxe,guid=6dbf4aed73c6657c9d41a2ba4b8bcd0b</value>
+    <value type="QString">DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-uPl6ysKlJC,guid=6e73695f71145ab3b407296f4b8fe035</value>
     <value type="QString">DESKTOP_SESSION=gnome</value>
     <value type="QString">DISPLAY=:0.0</value>
     <value type="QString">GDMSESSION=gnome</value>
     <value type="QString">GDM_KEYBOARD_LAYOUT=fr</value>
     <value type="QString">GDM_LANG=fr_FR.UTF-8</value>
     <value type="QString">GNOME_DESKTOP_SESSION_ID=this-is-deprecated</value>
-    <value type="QString">GNOME_KEYRING_PID=1435</value>
-    <value type="QString">GNOME_KEYRING_SOCKET=/tmp/keyring-kUPa2n/socket</value>
+    <value type="QString">GNOME_KEYRING_PID=4642</value>
+    <value type="QString">GNOME_KEYRING_SOCKET=/tmp/keyring-FraS3e/socket</value>
     <value type="QString">GTK_RC_FILES=/etc/gtk/gtkrc:/home/alexises/.gtkrc-1.2-gnome2</value>
     <value type="QString">G_BROKEN_FILENAMES=1</value>
     <value type="QString">HISTCONTROL=ignoreboth</value>
@@ -151,26 +150,25 @@
     <value type="QString">LESSOPEN=|/usr/bin/lesspipe.sh %s</value>
     <value type="QString">LOGNAME=alexises</value>
     <value type="QString">MAIL=/var/spool/mail/alexises</value>
-    <value type="QString">NXDIR=/usr/NX</value>
     <value type="QString">ORBIT_SOCKETDIR=/tmp/orbit-alexises</value>
-    <value type="QString">PATH=/usr/lib/qt4/bin:/usr/lib/qt-3.3/bin:/usr/lib/ccache:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/NX/bin:/home/alexises/bin</value>
+    <value type="QString">PATH=/usr/lib/qt4/bin:/usr/lib/qt-3.3/bin:/usr/lib/ccache:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/alexises/bin</value>
     <value type="QString">PULSE_PROP_media.role=none</value>
-    <value type="QString">PULSE_PROP_phonon.streamid={e9071409-ed8f-420b-bf3a-dd468691a3dd}</value>
+    <value type="QString">PULSE_PROP_phonon.streamid={398330e3-945b-4ae9-94f3-849d7b4e64e5}</value>
     <value type="QString">PWD=/home/alexises</value>
     <value type="QString">QTDIR=/usr/lib/qt4</value>
     <value type="QString">QTINC=/usr/lib/qt-3.3/include</value>
     <value type="QString">QTLIB=/usr/lib/qt-3.3/lib</value>
     <value type="QString">QT_IM_MODULE=xim</value>
-    <value type="QString">SESSION_MANAGER=local/unix:@/tmp/.ICE-unix/1442,unix/unix:/tmp/.ICE-unix/1442</value>
+    <value type="QString">SESSION_MANAGER=local/unix:@/tmp/.ICE-unix/4657,unix/unix:/tmp/.ICE-unix/4657</value>
     <value type="QString">SHELL=/bin/bash</value>
     <value type="QString">SHLVL=1</value>
     <value type="QString">SSH_ASKPASS=/usr/libexec/openssh/gnome-ssh-askpass</value>
-    <value type="QString">SSH_AUTH_SOCK=/tmp/keyring-kUPa2n/socket.ssh</value>
+    <value type="QString">SSH_AUTH_SOCK=/tmp/keyring-FraS3e/socket.ssh</value>
     <value type="QString">TERM=dumb</value>
     <value type="QString">USER=alexises</value>
     <value type="QString">USERNAME=alexises</value>
-    <value type="QString">XAUTHORITY=/var/run/gdm/auth-for-alexises-EwhGUm/database</value>
-    <value type="QString">XDG_SESSION_COOKIE=eade1cf93dc5cbef44600a524b34e77a-1267453195.459730-1771721168</value>
+    <value type="QString">XAUTHORITY=/var/run/gdm/auth-for-alexises-IloYi5/database</value>
+    <value type="QString">XDG_SESSION_COOKIE=fc07be3064540219eff8ea694b003cb5-1267720242.178460-127787217</value>
     <value type="QString">XMODIFIERS=@im=none</value>
     <value type="QString">_=/usr/bin/gnome-session</value>
    </valuelist>
@@ -180,7 +178,7 @@
    </valuelist>
    <value key="abstractProcess.command" type="QString">/usr/bin/make</value>
    <value key="abstractProcess.enabled" type="bool">true</value>
-   <value key="abstractProcess.workingDirectory" type="QString">/home/alexises/progc/qplanning</value>
+   <value key="abstractProcess.workingDirectory" type="QString">/home/alexises/data/prog/progcpp/qplanning</value>
   </valuemap>
  </data>
  <data>
