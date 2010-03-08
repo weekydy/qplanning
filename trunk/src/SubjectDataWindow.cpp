@@ -16,6 +16,12 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
+///
+/// \file SubjectDataWindow.cpp
+/// \brief window to edit subject
+/// \author Lameire Alexis
+///
+
 #include "SubjectDataWindow.h"
 #include "ui_SubjectDataWindow.h"
 

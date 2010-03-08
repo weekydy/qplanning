@@ -15,6 +15,12 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
+///
+/// \file Control.cpp
+/// \brief manage communication bitwin veuws and models
+/// \author Lameire Alexis
+///
+
 #include "Control.h"
 
 Control::Control() : m_windows(), m_config_subject(&m_windows), m_config_timetable(&m_windows)

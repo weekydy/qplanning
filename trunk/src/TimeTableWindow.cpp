@@ -15,6 +15,12 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
+
+///
+/// \file TimeTableWindow.cpp
+/// \brief editing a half time
+/// \author Lameire Alexis
+///
 #include "TimeTableWindow.h"
 
 TimeTableWindow::TimeTableWindow(QWidget *parent) : QDialog(parent)
