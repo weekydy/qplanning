@@ -17,6 +17,11 @@
  */
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
+///
+/// \file MainWindow.h
+/// \brief header of main window of Qplanning
+/// \author Lameire Alexis
+///
 
 #include <QMainWindow>
 #include <QHBoxLayout>
@@ -33,10 +38,17 @@
 #include <QVector>
 #include "KeyValue.h"
 
+///
+/// \class MainWindow MainWindow.h
+/// \brief main window of qplanning
+///
 class MainWindow : public QMainWindow
 {
 	Q_OBJECT;
 	public:
+	///
+	/// \brief default constructor of MainWindow
+	///
         MainWindow();
 
 	private:
@@ -65,19 +77,59 @@ class MainWindow : public QMainWindow
 	QVector<KeyValue> m_timetable_items;
 
 	public slots:
+	///
+	/// \brief update the list of lessons vewved
+	/// \param subjects list of lessons to show
+	///
 	void update_all_lessons(QVector<KeyValue> subjects);
+	///
+	/// \brief update the list of timetable vewved
+	/// \param timetable list of timetable to show
+	///
 	void update_all_timetable(QVector<KeyValue> timetable);
+	///
+	/// \brief slot to emit the god signal when modify button is pressed
+	///
 	void modify_pressed();
+	///
+	/// \brief slot to emit the god signal when add button is pressed
+	///
 	void add_pressed();
 
 	signals:
+	///
+	/// \brief signal emit when subject need to be edit
+	/// \param subject subject data to edit
+	///
 	void modify_subject(KeyValue subject);
+	///
+	/// \brief signal emit when timetable need to be edit
+	/// \param timetable timetable data to edit
+	///
 	void modify_timetable(KeyValue timetable);
+	///
+	/// \brief signal emit when subject need to be add
+	///
 	void add_subject();
+	///
+	/// \brief signal emit when timetable need to be edit
+	///
 	void add_timetable();
+	///
+	/// \brief signal emit when file need to be open
+	///
 	void open_file();
+	///
+	/// \brief signal emit when file need to be create
+	///
         void create_file();
+	///
+	/// \brief signal emit when file need to be save
+	///
 	void save_file();
+	///
+	/// \brief signal emit when file need to be save as
+	///
 	void save_as_file();
 };
 #endif

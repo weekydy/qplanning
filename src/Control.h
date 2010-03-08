@@ -17,6 +17,11 @@
  */
 #ifndef CONTROL_H
 #define CONTROL_H
+///
+/// \file Control.h
+/// \brief manage communication bitwin veuws and models
+/// \author Lameire Alexis
+///
 
 #include <QObject>
 #include <QString>
@@ -29,13 +34,24 @@
 #include "TimeTable.h"
 #include "define.h"
 
+///
+/// \class Control Control.h
+/// \brief manage communication between veuw and models
+///
+
 class Control : public QObject
 {
 	Q_OBJECT
         public:
+	///
+	/// \brief default constructor
+	///
         Control();
 
 	private:
+	///
+	/// \brief tell to user if he would like save is fale and save it
+	///
 	void save_before_changing();
 
         private:
@@ -46,14 +62,43 @@ class Control : public QObject
 	XmlPlanning m_config;
 
 	public slots:
+	///
+	/// \brief tell to view to begin editing a subject
+	/// \arg subject id to edit
+	///
 	void show_subject(KeyValue subject);
+	///
+	/// \brief tell to view to begin editing a timetable
+	/// \arg timetable id to edit
+	///
 	void show_timetable(KeyValue timetable);
+	///
+	/// \brief create a new subject and tell to view to edit it
+	///
 	void add_subject();
+	///
+	/// \brief create a newx timetable and tell to view to edit it
+	///
 	void add_timetable();
+	///
+	/// \brief managing opening a new file
+	///
 	void manage_open_file();
+	///
+	/// \brief managing create a new file
+	///
         void manage_create_file();
+	///
+	/// \brief manazging save current file
+	///
 	void manage_save_file();
+	///
+	/// \brief managing save as the current file
+	///
 	void manage_save_as_file();
+	///
+	/// \brief update xml after editing subject
+	///
 	void update_xml();
 };
 #endif

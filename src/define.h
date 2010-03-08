@@ -17,8 +17,19 @@
  */
 #ifndef DEFINE_H
 #define DEFINE_H
-//define some structure used to search files
+///
+/// \file define.h
+/// \brief some usefull constants
+/// \author Lameire Alexis
+///
+
+///
+/// \brief name of xml shemas
+///
 #define XSD_FILENAME "XmlSpec.xsd"
-//used to create an empty id node
+
+///
+/// \brief default name of a new lesson
+///
 #define DEFAULT_ID_NAME "default"
 #endif 

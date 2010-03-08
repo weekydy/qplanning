@@ -17,12 +17,23 @@
  */
 #ifndef KEYVALUE_H
 #define KEYVALUE_H
+///
+/// \file KeyValue.h
+/// \brief couple of Key and Value
+/// \author Lameire Alexis
+///
+
 #include <QString>
+
+///
+/// \struct KeyValue KeyValue.h
+/// \brief couple of Key and Value
+///
 
 struct KeyValue
 {
-	unsigned int key;
-	QString value;
+	unsigned int key; ///< key
+	QString value; ///< text value associated to key
 };
 
 #endif // KEYVALUE_H

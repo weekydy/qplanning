@@ -15,6 +15,13 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
+
+///
+/// \file MainWindow.cpp
+/// \brief main window of qplanning
+/// \author Lameire Alexis
+///
+
 #include "MainWindow.h"
 
 MainWindow::MainWindow()

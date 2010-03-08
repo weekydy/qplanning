@@ -18,27 +18,60 @@
 #ifndef SUBJECTDATAWINDOW_H
 #define SUBJECTDATAWINDOW_H
 
+///
+/// \file SubjectDataWindow.h
+/// \brief window to modify subject
+/// \author Lameire Alexis
+///
+
 #include <QDialog>
 #include "SubjectData.h"
 #include "ui_SubjectDataWindow.h"
 #include <QColorDialog>
 
+///
+/// \class SubjectDataWindow SubjectDataWindow.h
+/// \brief window to modify subject
+///
+
 class SubjectDataWindow : public QDialog, private Ui::DataWindowModel
 {
 	Q_OBJECT
 	public:
+		///
+		/// \brief construct a new SubjectDataWindow with parent
+		/// \arg parent parent windows of this window
+		///
 		SubjectDataWindow(QWidget *parent = 0);
+		///
+		/// \brief set contant of window
+		/// \arg data data to set, if null an empty window is created
+		///
 		void set_contant(SubjectData *data = 0);
+		///
+		/// \brief get contant of window if case of modification
+		///
 		SubjectData get_contant();
 
 	private:
-		QString create_text_label(int red, int green, int blue);
 		unsigned int m_id;
 
 	public slots:
+		///
+		/// \brief slot to update the color of the text in the prevew box
+		///
 		void update_text_prevew();
+		///
+		/// \brief slot to update the background color of the text ine the prevew box
+		///
 		void update_background_prevew();
+		///
+		/// \brief slot called when color need to be choice for the forgournd of the text
+		///
 		void select_text_color();
+		///
+		/// \brief slot called when color need to be choice for the background of the text
+		///
 		void select_background_color();
 };
 
