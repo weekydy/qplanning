@@ -40,3 +40,5 @@ OTHER_FILES += XmlSpec.xsd \
     COPYING.txt \
     test.xml \
     CMakeList.txt
+
+TRANSLATIONS += ts/QPlanning_fr.ts

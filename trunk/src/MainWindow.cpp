@@ -31,30 +31,30 @@ MainWindow::MainWindow()
 	setCentralWidget(m_main);
 	
         //initializing menu bar
-	m_file_menu = menuBar()->addMenu("&Fichier");
+	m_file_menu = menuBar()->addMenu(tr("&Fichier"));
 
-	m_file_menu_new = m_file_menu->addAction("&New");
-	m_file_menu_new->setShortcut(QKeySequence("Ctrl+N"));
+	m_file_menu_new = m_file_menu->addAction(tr("&New"));
+	m_file_menu_new->setShortcut(QKeySequence(tr("Ctrl+N", "new file")));
 	m_file_menu_new->setIcon(QIcon::fromTheme("document-new"));
 
-	m_file_menu_open = m_file_menu->addAction("&Ouvrir");
-	m_file_menu_open->setShortcut(QKeySequence("Ctrl+O"));
+	m_file_menu_open = m_file_menu->addAction(tr("&Ouvrir"));
+	m_file_menu_open->setShortcut(QKeySequence(tr("Ctrl+O", "open file")));
 	m_file_menu_open->setIcon(QIcon::fromTheme("document-open"));
 
-	m_file_menu_save = m_file_menu->addAction("&Enregistrer");
-	m_file_menu_save->setShortcut(QKeySequence("Ctrl+S"));
+	m_file_menu_save = m_file_menu->addAction(tr("&Save"));
+	m_file_menu_save->setShortcut(QKeySequence(tr("Ctrl+S", "save fil")));
 	m_file_menu_save->setIcon(QIcon::fromTheme("document-save"));
 
-	m_file_menu_save_as = m_file_menu->addAction("&Enregistrer_sous");
-	m_file_menu_save_as->setShortcut(QKeySequence("Ctrl+Maj+S"));
+	m_file_menu_save_as = m_file_menu->addAction(tr("&Save as"));
+	m_file_menu_save_as->setShortcut(QKeySequence(tr("Ctrl+Maj+S", "save as")));
 	m_file_menu_save_as->setIcon(QIcon::fromTheme("document-save-as"));
 
-	m_file_menu_quit = m_file_menu->addAction("&Quiter");
-	m_file_menu_quit->setShortcut(QKeySequence("Ctrl+Q"));
+	m_file_menu_quit = m_file_menu->addAction(tr("&Quit"));
+	m_file_menu_quit->setShortcut(QKeySequence(tr("Ctrl+Q", "quit")));
 	m_file_menu_quit->setIcon(QIcon::fromTheme("application-exit"));
 	
         //initializing toolbar
-	m_toolbar = addToolBar("toolbar");
+	m_toolbar = addToolBar(tr("toolbar"));
 	m_toolbar->addAction(m_file_menu_new);
 	m_toolbar->addAction(m_file_menu_open);
 	m_toolbar->addAction(m_file_menu_save);
@@ -78,13 +78,13 @@ MainWindow::MainWindow()
 	m_layout_1_2->addLayout(m_layout_1_2_1);
 	m_layout_1_2->addWidget(m_layout_1_2_2);
 
-	m_timetable_id = m_layout_1_2_2->addTab(m_timetable, "timetable");
-	m_subjects_id = m_layout_1_2_2->addTab(m_subjects, "subjects");
+	m_timetable_id = m_layout_1_2_2->addTab(m_timetable, tr("timetable"));
+	m_subjects_id = m_layout_1_2_2->addTab(m_subjects, tr("subjects"));
 
 	//initialisation button
-	m_add_lesson = new QPushButton("ajouter");
-        m_delete_lesson = new QPushButton("retirer");
-	m_modify_lesson = new QPushButton("modifier");
+	m_add_lesson = new QPushButton(tr("add"));
+	m_delete_lesson = new QPushButton(tr("del"));
+	m_modify_lesson = new QPushButton(tr("edit"));
 	m_layout_1_2_1->addWidget(m_add_lesson);
         m_layout_1_2_1->addWidget(m_delete_lesson);
 	m_layout_1_2_1->addWidget(m_modify_lesson);
