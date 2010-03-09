@@ -51,8 +51,8 @@ void Control::save_before_changing()
 {
 	qDebug( Q_FUNC_INFO );
 	int reponse = QMessageBox::question(NULL,
-		"would you like save",
-		"the file have been modified, would you like save it before",
+		tr("would you like save"),
+		tr("the file have been modified, would you like save it before"),
 		QMessageBox::Yes,
 		QMessageBox::No);
 	if (reponse == QMessageBox::Yes)
@@ -69,7 +69,7 @@ void Control::manage_open_file()
 		save_before_changing();
 	}
 	QString filename = QFileDialog::getOpenFileName(&m_windows,
-							"open file",
+							tr("open file"),
 							"/home",
 							"XML files (*.xml)");
 	if (!filename.isNull())
@@ -178,7 +178,7 @@ void Control::manage_save_file()
 void Control::manage_save_as_file()
 {
 	QString filename = QFileDialog::getSaveFileName(&m_windows,
-							"save file",
+							tr("save file"),
 							"/home",
 							"XML files (*.xml)");
 	if (!filename.isNull())
