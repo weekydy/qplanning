@@ -37,7 +37,7 @@ MainWindow::MainWindow()
 	m_file_menu_new->setShortcut(QKeySequence(tr("Ctrl+N", "new file")));
 	m_file_menu_new->setIcon(QIcon::fromTheme("document-new"));
 
-	m_file_menu_open = m_file_menu->addAction(tr("&Ouvrir"));
+	m_file_menu_open = m_file_menu->addAction(tr("&Open"));
 	m_file_menu_open->setShortcut(QKeySequence(tr("Ctrl+O", "open file")));
 	m_file_menu_open->setIcon(QIcon::fromTheme("document-open"));
 
