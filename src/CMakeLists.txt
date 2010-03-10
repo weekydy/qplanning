@@ -6,6 +6,7 @@ set(
 	ui_FILES
 	SubjectDataWindow.ui
 	TimeTableWindow.ui
+	CACHE FILEPATH "ui files" FORCE
 )
 
 set(
@@ -19,6 +20,7 @@ set(
 	TimeTableWindow.h
 	KeyValue.h
 	TimeTable.h
+	CACHE FILEPATH "header files" FORCE
 )
 
 set(
@@ -29,6 +31,7 @@ set(
 	XmlPlanning.cpp
 	SubjectDataWindow.cpp
 	TimeTableWindow.cpp
+	CACHE FILEPATH "source files" FORCE
 )
 
 QT4_WRAP_UI(ui_h_FILES ${ui_FILES})
