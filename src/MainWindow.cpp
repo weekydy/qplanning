@@ -66,14 +66,14 @@ MainWindow::MainWindow()
 
         //initializing layout
 	m_layout_1 = new QHBoxLayout(m_main);
-	m_layout_1_1 = new QTableView;
+	m_widget_1_1 = new QGraphicsView;
 	m_layout_1_2 = new QVBoxLayout;
 	m_layout_1_2_1 = new QHBoxLayout;
 	m_layout_1_2_2 = new QTabWidget;
 	m_timetable = new QListWidget;
 	m_subjects = new QListWidget;
 
-	m_layout_1->addWidget(m_layout_1_1);
+	m_layout_1->addWidget(m_widget_1_1);
 	m_layout_1->addLayout(m_layout_1_2);
 	m_layout_1_2->addLayout(m_layout_1_2_1);
 	m_layout_1_2->addWidget(m_layout_1_2_2);
@@ -96,6 +96,11 @@ MainWindow::MainWindow()
 	QObject::connect(m_file_menu_save_as, SIGNAL(triggered()), this, SIGNAL(save_as_file()));
 	QObject::connect(m_modify_lesson, SIGNAL(clicked()), this, SLOT(modify_pressed()));
 	QObject::connect(m_add_lesson, SIGNAL(clicked()), this, SLOT(add_pressed()));
+}
+
+void MainWindow::set_scean(QGraphicsScene *scene)
+{
+	m_widget_1_1->setScene(scene);
 }
 
 void MainWindow::update_all_lessons(QVector<KeyValue> subjects)

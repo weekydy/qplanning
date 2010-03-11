@@ -23,11 +23,13 @@
 
 #include "Control.h"
 
-Control::Control() : m_windows(), m_config_subject(&m_windows), m_config_timetable(&m_windows)
+Control::Control() : m_windows(), m_config_subject(&m_windows), m_config_timetable(&m_windows), m_timetable_veuw(&m_windows)
 {
 	qDebug( Q_FUNC_INFO );
 	m_is_modified = false;
-	
+	m_windows.set_scean(&m_timetable_veuw);
+
+
 	QObject::connect(&m_windows, SIGNAL(open_file()), this, SLOT(manage_open_file()));
 	QObject::connect(&m_windows, SIGNAL(create_file()), this, SLOT(manage_create_file()));
 	QObject::connect(&m_windows, SIGNAL(save_file()), this, SLOT(manage_save_file()));

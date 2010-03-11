@@ -32,6 +32,7 @@
 #include "SubjectDataWindow.h"
 #include "TimeTableWindow.h"
 #include "TimeTable.h"
+#include "DrawTimetable.h"
 #include "define.h"
 
 ///
@@ -60,6 +61,7 @@ class Control : public QObject
 	SubjectDataWindow m_config_subject;
 	TimeTableWindow m_config_timetable;
 	XmlPlanning m_config;
+	DrawTimetable m_timetable_veuw;
 
 	public slots:
 	///
