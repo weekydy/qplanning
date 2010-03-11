@@ -20,6 +20,7 @@ set(
 	TimeTableWindow.h
 	KeyValue.h
 	TimeTable.h
+	DrawTimetable.h
 	CACHE FILEPATH "header files" FORCE
 )
 
@@ -31,6 +32,7 @@ set(
 	XmlPlanning.cpp
 	SubjectDataWindow.cpp
 	TimeTableWindow.cpp
+	DrawTimetable.cpp
 	CACHE FILEPATH "source files" FORCE
 )
 

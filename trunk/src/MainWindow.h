@@ -35,6 +35,7 @@
 #include <QListWidget>
 #include <QString>
 #include <QStringList>
+#include <QGraphicsView>
 #include <QVector>
 #include "KeyValue.h"
 
@@ -51,6 +52,12 @@ class MainWindow : public QMainWindow
 	///
         MainWindow();
 
+	///
+	/// \brief connect the scean veuw to his content
+	/// \arg scean sceane to set
+	///
+	void set_scean(QGraphicsScene * scene);
+
 	private:
 	QWidget* m_main;
         QMenu* m_file_menu;
@@ -66,7 +73,7 @@ class MainWindow : public QMainWindow
         QPushButton* m_modify_lesson;
 	QHBoxLayout* m_layout_1;
 	QVBoxLayout* m_layout_1_2;
-	QTableView* m_layout_1_1;
+	QGraphicsView* m_widget_1_1;
 	QHBoxLayout* m_layout_1_2_1;
 	QListWidget* m_subjects;
 	int m_subjects_id;
