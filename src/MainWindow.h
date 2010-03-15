@@ -58,6 +58,13 @@ class MainWindow : public QMainWindow
 	///
 	void set_scean(QGraphicsScene * scene);
 
+	protected:
+	///
+	/// \brief reemplemented resizeEvent of QWidget to add capability to rescale m_widget_1_1
+	/// \arg event event sended by Qt
+	///
+	void resizeEvent(QResizeEvent* event);
+
 	private:
 	QWidget* m_main;
         QMenu* m_file_menu;
