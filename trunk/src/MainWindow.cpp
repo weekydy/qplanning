@@ -73,6 +73,8 @@ MainWindow::MainWindow()
 	m_timetable = new QListWidget;
 	m_subjects = new QListWidget;
 
+	m_widget_1_1->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+	m_widget_1_1->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 	m_layout_1->addWidget(m_widget_1_1);
 	m_layout_1->addLayout(m_layout_1_2);
 	m_layout_1_2->addLayout(m_layout_1_2_1);
@@ -161,4 +163,17 @@ void MainWindow::add_pressed()
 	{
 		emit add_timetable();
 	}
+}
+
+void MainWindow::resizeEvent(QResizeEvent* event)
+{
+	QWidget::resizeEvent(event);
+	m_widget_1_1->resetTransform();
+
+	int x = m_widget_1_1->size().width();
+	int y = m_widget_1_1->size().height();
+
+	qreal x_scale = (qreal) x /(qreal) 1000;
+	qreal y_scale = (qreal) y /(qreal) 1000;
+	m_widget_1_1->scale(x_scale, y_scale);
 }
