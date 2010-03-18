@@ -99,6 +99,10 @@ class Control : public QObject
 	///
 	void manage_save_as_file();
 	///
+	/// \brief quitting safely the application
+	///
+	void manage_quit();
+	///
 	/// \brief update xml after editing subject
 	///
 	void update_xml();

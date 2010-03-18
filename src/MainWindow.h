@@ -145,5 +145,9 @@ class MainWindow : public QMainWindow
 	/// \brief signal emit when file need to be save as
 	///
 	void save_as_file();
+	///
+	/// \brief signal emit when programm must be quit
+	///
+	void quit();
 };
 #endif

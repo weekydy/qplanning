@@ -45,6 +45,7 @@ Control::Control() : m_windows(), m_config_subject(&m_windows), m_config_timetab
 	QObject::connect(&m_config_subject, SIGNAL(accepted()), this, SLOT(update_xml()));
 	QObject::connect(&m_windows, SIGNAL(add_subject()), this, SLOT(add_subject()));
 	QObject::connect(&m_windows, SIGNAL(add_timetable()), this, SLOT(add_timetable()));
+	QObject::connect(&m_windows, SIGNAL(quit()), this, SLOT(manage_quit()));
 
 	m_windows.show();
 }
@@ -89,6 +90,7 @@ void Control::manage_create_file()
 		save_before_changing();
 	}
 	m_config.new_file();
+	m_is_modified = false;
 }
 
 void Control::show_subject(KeyValue subject)
@@ -146,6 +148,7 @@ void Control::add_subject()
 	SubjectData data = m_config.search_id(id_to_store);
 	m_config_subject.set_contant(&data);
 	m_config_subject.show();
+	m_is_modified = true;
 }
 
 void Control::add_timetable()
@@ -169,10 +172,12 @@ void Control::add_timetable()
 
 	m_config_timetable.set_content(data, lesson_list);
 	m_config_timetable.show();
+	m_is_modified = true;
 }
 
 void Control::manage_save_file()
 {
+	qDebug( Q_FUNC_INFO );
 	m_config.save();
 	m_is_modified = false;
 }
@@ -188,4 +193,14 @@ void Control::manage_save_as_file()
 		m_config.save(filename);
 		m_is_modified = false;
 	}
+}
+
+void Control::manage_quit()
+{
+	qDebug( Q_FUNC_INFO );
+	if (m_is_modified)
+	{
+		save_before_changing();
+	}
+	qApp->quit();
 }
