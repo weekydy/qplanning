@@ -47,7 +47,7 @@ set(
 	${h_FILES}
 )
 
-include_directories(${QT_INCLUDE_DIR})
+include_directories(${QT_INCLUDE_DIR} ${CMAKE_BINARY_DIR}/src)
 add_executable(QPlanning ${sources_FILES})
 target_link_libraries(QPlanning ${QT_LIBRARIES})
 set_target_properties(QPlanning PROPERTIES RUNTIME_OUTPUT_DIRECTORY ../bin)
