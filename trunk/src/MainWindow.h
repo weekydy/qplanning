@@ -37,6 +37,8 @@
 #include <QStringList>
 #include <QGraphicsView>
 #include <QVector>
+#include <QResizeEvent>
+#include <QCloseEvent>
 #include "KeyValue.h"
 
 ///
@@ -64,6 +66,11 @@ class MainWindow : public QMainWindow
                 /// \arg event event sended by Qt
                 ///
                 void resizeEvent(QResizeEvent* event);
+                ///
+                /// \brief eneable capability to don't quit windows
+                /// \arg event infos
+                ///
+                void closeEvent(QCloseEvent* event);
 
         private:
                 QWidget* m_main;
@@ -89,6 +96,7 @@ class MainWindow : public QMainWindow
                 QTabWidget* m_layout_1_2_2;
                 QVector<KeyValue> m_subject_items;
                 QVector<KeyValue> m_timetable_items;
+                bool m_need_to_close;
 
         public slots:
                 ///
@@ -109,6 +117,10 @@ class MainWindow : public QMainWindow
                 /// \brief slot to emit the god signal when add button is pressed
                 ///
                 void add_pressed();
+                ///
+                /// \brief slot to emit quit_needed and set the m_need_to_close
+                ///
+                void manage_quit_needed();
 
         signals:
                 ///
@@ -148,6 +160,6 @@ class MainWindow : public QMainWindow
                 ///
                 /// \brief signal emit when programm must be quit
                 ///
-                void quit();
+                void quit_needed();
 };
 #endif

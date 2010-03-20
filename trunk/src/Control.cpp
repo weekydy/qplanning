@@ -46,7 +46,7 @@ Control::Control() : m_windows(), m_config_subject(&m_windows), m_config_timetab
         QObject::connect(&m_config_timetable, SIGNAL(accepted()), this, SLOT(update_timetable()));
         QObject::connect(&m_windows, SIGNAL(add_subject()), this, SLOT(add_subject()));
         QObject::connect(&m_windows, SIGNAL(add_timetable()), this, SLOT(add_timetable()));
-        QObject::connect(&m_windows, SIGNAL(quit()), this, SLOT(manage_quit()));
+        QObject::connect(&m_windows, SIGNAL(quit_needed()), this, SLOT(manage_quit()));
 
         m_windows.show();
 }
@@ -61,7 +61,7 @@ void Control::save_before_changing()
                                             QMessageBox::No);
         if (reponse == QMessageBox::Yes)
         {
-                //save
+                m_config.save();
         }
 }
 
@@ -212,5 +212,8 @@ void Control::manage_quit()
         {
                 save_before_changing();
         }
+        m_windows.close();
+        m_config_timetable.close();
+        m_config_subject.close();
         qApp->quit();
 }

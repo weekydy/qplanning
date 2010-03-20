@@ -24,7 +24,7 @@
 
 #include "MainWindow.h"
 
-MainWindow::MainWindow()
+MainWindow::MainWindow() : m_need_to_close(false)
 {
         //initializing main window
         m_main = new QWidget;
@@ -96,7 +96,7 @@ MainWindow::MainWindow()
         QObject::connect(m_file_menu_new, SIGNAL(triggered()), this, SIGNAL(create_file()));
         QObject::connect(m_file_menu_save, SIGNAL(triggered()), this, SIGNAL(save_file()));
         QObject::connect(m_file_menu_save_as, SIGNAL(triggered()), this, SIGNAL(save_as_file()));
-        QObject::connect(m_file_menu_quit, SIGNAL(triggered()), this, SIGNAL(quit()));
+        QObject::connect(m_file_menu_quit, SIGNAL(triggered()), this, SLOT(manage_quit_needed()));
         QObject::connect(m_modify_lesson, SIGNAL(clicked()), this, SLOT(modify_pressed()));
         QObject::connect(m_add_lesson, SIGNAL(clicked()), this, SLOT(add_pressed()));
 }
@@ -168,7 +168,7 @@ void MainWindow::add_pressed()
 
 void MainWindow::resizeEvent(QResizeEvent* event)
 {
-        QWidget::resizeEvent(event);
+        event->accept();
         m_widget_1_1->resetTransform();
 
         int x = m_widget_1_1->size().width();
@@ -177,4 +177,23 @@ void MainWindow::resizeEvent(QResizeEvent* event)
         qreal x_scale = (qreal) x / (qreal) 1000;
         qreal y_scale = (qreal) y / (qreal) 1000;
         m_widget_1_1->scale(x_scale, y_scale);
+}
+
+void MainWindow::closeEvent(QCloseEvent* event)
+{
+        if (m_need_to_close)
+        {
+                event->accept();
+        }
+        else
+        {
+                event->ignore();
+                manage_quit_needed();
+        }
+}
+
+void MainWindow::manage_quit_needed()
+{
+        m_need_to_close = true;
+        emit quit_needed();
 }

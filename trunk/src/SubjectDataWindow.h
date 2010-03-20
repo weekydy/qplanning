@@ -28,6 +28,7 @@
 #include "SubjectData.h"
 #include "ui_SubjectDataWindow.h"
 #include <QColorDialog>
+#include <QCloseEvent>
 
 ///
 /// \class SubjectDataWindow SubjectDataWindow.h
@@ -52,7 +53,12 @@ class SubjectDataWindow : public QDialog, private Ui::DataWindowModel
                 /// \brief get contant of window if case of modification
                 ///
                 SubjectData get_contant();
-
+        protected:
+                ///
+                /// \brief eneable capability to don't quit windows
+                /// \arg event infos
+                ///
+                void closeEvent(QCloseEvent* event);
         private:
                 unsigned int m_id;
 

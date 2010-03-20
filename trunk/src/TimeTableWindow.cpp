@@ -93,3 +93,15 @@ Timetable TimeTableWindow::get_content()
         data.unparsed_date.sprintf("%c%.1f-%c%.1f", data.half_day, data.begin_interval, data.half_day, data.end_interval);
         return data;
 }
+
+void TimeTableWindow::closeEvent(QCloseEvent* event)
+{
+        if (isVisible())
+        {
+                event->ignore();
+        }
+        else
+        {
+                event->accept();
+        }
+}
