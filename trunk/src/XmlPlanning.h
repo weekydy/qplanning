@@ -90,10 +90,15 @@ class XmlPlanning : public QObject
 		Timetable search_id_lesson(KeyValue id);
 
 		///
-		/// \brief search the good id referenced and update his info with the contend of struct
+		/// \brief search the good id referenced and update his info with the content of struct
 		/// \arg id struct that contain the id to edit and the data to update
 		///
 		void update_id_lesson(SubjectData id);
+		///
+		/// \brief search the good id referanced and update his info with the content of struct
+		/// \arg id struct that content the id to edit and the data to update
+		///
+		void update_timetable(Timetable id);
 		///
 		/// \brief create an empty id and set is name to filneme
 		/// \arg name name to tell to the new lesson
@@ -191,7 +196,7 @@ class XmlPlanning : public QObject
 		///
 		void new_file();
 		///
-		/// \brief call to emit refresh views signals
+		/// \brief call to emit signals to refresh timetable and lessons list
 		///
 		void refresh_all_view();
 

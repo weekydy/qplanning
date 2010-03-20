@@ -49,9 +49,11 @@ class TimeTableWindow : public QDialog, private Ui::TimeTableWindow
 		/// \param lessons_list list of all lessons avalable
 		///
                 void set_content(Timetable &data, QVector<KeyValue> lessons_list);
+		Timetable get_content();
 
         private:
                 QVector<KeyValue> m_lessons_list;
+		unsigned int m_id;
 };
 
 #endif // TIMETABLEWINDOW_H

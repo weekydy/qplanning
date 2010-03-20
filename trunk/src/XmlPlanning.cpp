@@ -325,7 +325,9 @@ Timetable XmlPlanning::search_id_lesson(KeyValue id)
 
                         char half_day;
                         QTextStream stream(return_value.unparsed_date.toAscii());
-                        stream >> half_day >> return_value.begin_interval >> return_value.end_interval;
+			stream >> half_day >> return_value.begin_interval;
+			stream.seek(stream.pos() + 2);
+			stream >> return_value.end_interval;
                         //bug here
 
 			if (half_day == 'M')
@@ -513,6 +515,82 @@ void XmlPlanning::update_id_lesson(SubjectData data)
 	color = join_color(data.red_background, data.green_background, data.blue_background);
 	node_to_edit.firstChildElement("background").firstChild().toText().setData(color);
 	qDebug("done");
+}
+
+void XmlPlanning::update_timetable(Timetable id)
+{
+	qDebug( Q_FUNC_INFO );
+	QDomElement node_to_edit;
+	QDomNodeList list = m_lesson_list.childNodes();
+	bool is_found = false;
+
+	for (int i = 0; i != list.count(); i++)
+	{
+		unsigned int current_id = list.item(i).toElement().firstChildElement("ident")
+					  .firstChild().toText().data().toInt();
+		if (current_id == id.ident)
+		{
+			node_to_edit = list.item(i).toElement();
+			is_found = true;
+			qDebug("node found");
+			break;
+		}
+	}
+	if (!is_found)
+	{
+		_add_empty_lesson();
+	}
+
+	node_to_edit.firstChildElement("hour").firstChild().toText().setData(id.unparsed_date);
+	node_to_edit.firstChildElement("id-lesson").firstChild().toText().setData(QString::number(id.id_lesson));
+	node_to_edit.firstChildElement("class").firstChild().toText().setData(id.classroom);
+	switch (id.week)
+	{
+		case ALL_WEEK:
+			node_to_edit.removeChild(node_to_edit.firstChildElement("week"));
+			break;
+		default:
+			if (node_to_edit.firstChildElement("week").isNull())
+			{
+				node_to_edit.appendChild(m_xml_document.createElement("week"));
+			}
+			switch (id.week)
+			{
+				case PEER:
+					node_to_edit.firstChildElement("week").firstChild()
+						    .toText().setData("1");
+					break;
+				case UNPEER:
+					node_to_edit.firstChildElement("week").firstChild()
+						    .toText().setData("2");
+					break;
+			}
+			break;
+	}
+
+	switch (id.group)
+	{
+		case ALL_GROUP:
+			node_to_edit.removeChild(node_to_edit.firstChildElement("group"));
+			break;
+		default:
+			if (node_to_edit.firstChildElement("group").isNull())
+			{
+				node_to_edit.appendChild(m_xml_document.createElement("group"));
+			}
+			switch (id.group)
+			{
+				case ONE:
+					node_to_edit.firstChildElement("group").firstChild()
+						    .toText().setData("1");
+					break;
+				case TWO:
+					node_to_edit.firstChildElement("group").firstChild()
+						    .toText().setData("2");
+					break;
+			}
+			break;
+	}
 }
 
 unsigned int XmlPlanning::add_empty_id(QString name)

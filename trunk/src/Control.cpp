@@ -42,7 +42,8 @@ Control::Control() : m_windows(), m_config_subject(&m_windows), m_config_timetab
 			this, SLOT(show_subject(KeyValue)));
 	QObject::connect(&m_windows, SIGNAL(modify_timetable(KeyValue)),
 			 this, SLOT(show_timetable(KeyValue)));
-	QObject::connect(&m_config_subject, SIGNAL(accepted()), this, SLOT(update_xml()));
+	QObject::connect(&m_config_subject, SIGNAL(accepted()), this, SLOT(update_subject()));
+	QObject::connect(&m_config_timetable, SIGNAL(accepted()), this, SLOT(update_timetable()));
 	QObject::connect(&m_windows, SIGNAL(add_subject()), this, SLOT(add_subject()));
 	QObject::connect(&m_windows, SIGNAL(add_timetable()), this, SLOT(add_timetable()));
 	QObject::connect(&m_windows, SIGNAL(quit()), this, SLOT(manage_quit()));
@@ -131,10 +132,19 @@ void Control::show_timetable(KeyValue timetable)
 	m_config_timetable.show();
 }
 
-void Control::update_xml()
+void Control::update_subject()
 {
 	SubjectData subject = m_config_subject.get_contant();
 	m_config.update_id_lesson(subject);
+	m_config.refresh_all_view();
+	m_is_modified = true;
+}
+
+void Control::update_timetable()
+{
+	qDebug( Q_FUNC_INFO );
+	Timetable timetable = m_config_timetable.get_content();
+	m_config.update_timetable(timetable);
 	m_config.refresh_all_view();
 	m_is_modified = true;
 }
