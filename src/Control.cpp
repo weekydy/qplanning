@@ -25,192 +25,192 @@
 
 Control::Control() : m_windows(), m_config_subject(&m_windows), m_config_timetable(&m_windows), m_timetable_veuw(&m_windows)
 {
-	qDebug( Q_FUNC_INFO );
-	m_is_modified = false;
-	m_windows.set_scean(&m_timetable_veuw);
+        qDebug( Q_FUNC_INFO );
+        m_is_modified = false;
+        m_windows.set_scean(&m_timetable_veuw);
 
 
-	QObject::connect(&m_windows, SIGNAL(open_file()), this, SLOT(manage_open_file()));
-	QObject::connect(&m_windows, SIGNAL(create_file()), this, SLOT(manage_create_file()));
-	QObject::connect(&m_windows, SIGNAL(save_file()), this, SLOT(manage_save_file()));
-	QObject::connect(&m_windows, SIGNAL(save_as_file()), this, SLOT(manage_save_as_file()));
-	QObject::connect(&m_config, SIGNAL(new_lessons_avalables(QVector<KeyValue>)),
-			&m_windows, SLOT(update_all_lessons(QVector<KeyValue>)));
-	QObject::connect(&m_config, SIGNAL(new_timetable_avalable(QVector<KeyValue>)),
-			 &m_windows, SLOT(update_all_timetable(QVector<KeyValue>)));
-	QObject::connect(&m_windows, SIGNAL(modify_subject(KeyValue)),
-			this, SLOT(show_subject(KeyValue)));
-	QObject::connect(&m_windows, SIGNAL(modify_timetable(KeyValue)),
-			 this, SLOT(show_timetable(KeyValue)));
-	QObject::connect(&m_config_subject, SIGNAL(accepted()), this, SLOT(update_subject()));
-	QObject::connect(&m_config_timetable, SIGNAL(accepted()), this, SLOT(update_timetable()));
-	QObject::connect(&m_windows, SIGNAL(add_subject()), this, SLOT(add_subject()));
-	QObject::connect(&m_windows, SIGNAL(add_timetable()), this, SLOT(add_timetable()));
-	QObject::connect(&m_windows, SIGNAL(quit()), this, SLOT(manage_quit()));
+        QObject::connect(&m_windows, SIGNAL(open_file()), this, SLOT(manage_open_file()));
+        QObject::connect(&m_windows, SIGNAL(create_file()), this, SLOT(manage_create_file()));
+        QObject::connect(&m_windows, SIGNAL(save_file()), this, SLOT(manage_save_file()));
+        QObject::connect(&m_windows, SIGNAL(save_as_file()), this, SLOT(manage_save_as_file()));
+        QObject::connect(&m_config, SIGNAL(new_lessons_avalables(QVector<KeyValue>)),
+                         &m_windows, SLOT(update_all_lessons(QVector<KeyValue>)));
+        QObject::connect(&m_config, SIGNAL(new_timetable_avalable(QVector<KeyValue>)),
+                         &m_windows, SLOT(update_all_timetable(QVector<KeyValue>)));
+        QObject::connect(&m_windows, SIGNAL(modify_subject(KeyValue)),
+                         this, SLOT(show_subject(KeyValue)));
+        QObject::connect(&m_windows, SIGNAL(modify_timetable(KeyValue)),
+                         this, SLOT(show_timetable(KeyValue)));
+        QObject::connect(&m_config_subject, SIGNAL(accepted()), this, SLOT(update_subject()));
+        QObject::connect(&m_config_timetable, SIGNAL(accepted()), this, SLOT(update_timetable()));
+        QObject::connect(&m_windows, SIGNAL(add_subject()), this, SLOT(add_subject()));
+        QObject::connect(&m_windows, SIGNAL(add_timetable()), this, SLOT(add_timetable()));
+        QObject::connect(&m_windows, SIGNAL(quit()), this, SLOT(manage_quit()));
 
-	m_windows.show();
+        m_windows.show();
 }
 
 void Control::save_before_changing()
 {
-	qDebug( Q_FUNC_INFO );
-	int reponse = QMessageBox::question(NULL,
-		tr("would you like save"),
-		tr("the file have been modified, would you like save it before"),
-		QMessageBox::Yes,
-		QMessageBox::No);
-	if (reponse == QMessageBox::Yes)
-	{
-		//save
-	}
+        qDebug( Q_FUNC_INFO );
+        int reponse = QMessageBox::question(NULL,
+                                            tr("would you like save"),
+                                            tr("the file have been modified, would you like save it before"),
+                                            QMessageBox::Yes,
+                                            QMessageBox::No);
+        if (reponse == QMessageBox::Yes)
+        {
+                //save
+        }
 }
 
 void Control::manage_open_file()
 {
-	qDebug( Q_FUNC_INFO );
-	if (m_is_modified)
-	{
-		save_before_changing();
-	}
-	QString filename = QFileDialog::getOpenFileName(&m_windows,
-							tr("open file"),
-							"/home",
-							"XML files (*.xml)");
-	if (!filename.isNull())
-	{
-		m_config.open(filename);
-		m_config.refresh_all_view();
-	}
+        qDebug( Q_FUNC_INFO );
+        if (m_is_modified)
+        {
+                save_before_changing();
+        }
+        QString filename = QFileDialog::getOpenFileName(&m_windows,
+                           tr("open file"),
+                           "/home",
+                           "XML files (*.xml)");
+        if (!filename.isNull())
+        {
+                m_config.open(filename);
+                m_config.refresh_all_view();
+        }
 }
 
 void Control::manage_create_file()
 {
-	qDebug( Q_FUNC_INFO );
-	if (m_is_modified)
-	{
-		save_before_changing();
-	}
-	m_config.new_file();
-	m_is_modified = false;
+        qDebug( Q_FUNC_INFO );
+        if (m_is_modified)
+        {
+                save_before_changing();
+        }
+        m_config.new_file();
+        m_is_modified = false;
 }
 
 void Control::show_subject(KeyValue subject)
 {
-	qDebug( Q_FUNC_INFO );
-	SubjectData info = m_config.search_id(subject);
-	qDebug() << "begin info list";
-	qDebug() << qPrintable(info.name);
-	qDebug() << qPrintable(info.teacher);
-	qDebug("%d.%d.%d", info.red_text, info.green_text, info.blue_text);
-	qDebug("%d.%d.%d", info.red_background, info.green_background, info.blue_background);
-	qDebug() << "end info list";
-	m_config_subject.set_contant(&info);
-	m_config_subject.show();
+        qDebug( Q_FUNC_INFO );
+        SubjectData info = m_config.search_id(subject);
+        qDebug() << "begin info list";
+        qDebug() << qPrintable(info.name);
+        qDebug() << qPrintable(info.teacher);
+        qDebug("%d.%d.%d", info.red_text, info.green_text, info.blue_text);
+        qDebug("%d.%d.%d", info.red_background, info.green_background, info.blue_background);
+        qDebug() << "end info list";
+        m_config_subject.set_contant(&info);
+        m_config_subject.show();
 }
 
 void Control::show_timetable(KeyValue timetable)
 {
-	qDebug( Q_FUNC_INFO );
-	qDebug() << "timetable info list";
-	qDebug() << timetable.key;
-	qDebug() << qPrintable(timetable.value);
-	qDebug() << "end timetable info list";
+        qDebug( Q_FUNC_INFO );
+        qDebug() << "timetable info list";
+        qDebug() << timetable.key;
+        qDebug() << qPrintable(timetable.value);
+        qDebug() << "end timetable info list";
 
-	Timetable info = m_config.search_id_lesson(timetable);
+        Timetable info = m_config.search_id_lesson(timetable);
         QVector<KeyValue> lesson_list = m_config.get_lessons();
 
-	qDebug() << "begin info list";
-	qDebug() << qPrintable(info.unparsed_date);
-	qDebug() << qPrintable(info.classroom);
-	qDebug() << info.ident;
-	qDebug() << info.id_lesson; //
-	qDebug("%f", info.begin_interval);
-	qDebug("%f", info.end_interval);
-	qDebug() << "end info list";
+        qDebug() << "begin info list";
+        qDebug() << qPrintable(info.unparsed_date);
+        qDebug() << qPrintable(info.classroom);
+        qDebug() << info.ident;
+        qDebug() << info.id_lesson; //
+        qDebug("%f", info.begin_interval);
+        qDebug("%f", info.end_interval);
+        qDebug() << "end info list";
 
         m_config_timetable.set_content(info, lesson_list);
-	m_config_timetable.show();
+        m_config_timetable.show();
 }
 
 void Control::update_subject()
 {
-	SubjectData subject = m_config_subject.get_contant();
-	m_config.update_id_lesson(subject);
-	m_config.refresh_all_view();
-	m_is_modified = true;
+        SubjectData subject = m_config_subject.get_contant();
+        m_config.update_id_lesson(subject);
+        m_config.refresh_all_view();
+        m_is_modified = true;
 }
 
 void Control::update_timetable()
 {
-	qDebug( Q_FUNC_INFO );
-	Timetable timetable = m_config_timetable.get_content();
-	m_config.update_timetable(timetable);
-	m_config.refresh_all_view();
-	m_is_modified = true;
+        qDebug( Q_FUNC_INFO );
+        Timetable timetable = m_config_timetable.get_content();
+        m_config.update_timetable(timetable);
+        m_config.refresh_all_view();
+        m_is_modified = true;
 }
 
 void Control::add_subject()
 {
-	unsigned int id = m_config.add_empty_id( DEFAULT_ID_NAME );
-	KeyValue id_to_store;
-	id_to_store.key = id;
-	id_to_store.value = DEFAULT_ID_NAME;
-	SubjectData data = m_config.search_id(id_to_store);
-	m_config_subject.set_contant(&data);
-	m_config_subject.show();
-	m_is_modified = true;
+        unsigned int id = m_config.add_empty_id( DEFAULT_ID_NAME );
+        KeyValue id_to_store;
+        id_to_store.key = id;
+        id_to_store.value = DEFAULT_ID_NAME;
+        SubjectData data = m_config.search_id(id_to_store);
+        m_config_subject.set_contant(&data);
+        m_config_subject.show();
+        m_is_modified = true;
 }
 
 void Control::add_timetable()
 {
-	qDebug( Q_FUNC_INFO );
+        qDebug( Q_FUNC_INFO );
 
-	unsigned int id = m_config.add_empty_lesson();
-	QVector<KeyValue> lesson_list = m_config.get_lessons();
+        unsigned int id = m_config.add_empty_lesson();
+        QVector<KeyValue> lesson_list = m_config.get_lessons();
 
-	KeyValue id_to_edit;
-	id_to_edit.key = id;
-	Timetable data = m_config.search_id_lesson(id_to_edit);
+        KeyValue id_to_edit;
+        id_to_edit.key = id;
+        Timetable data = m_config.search_id_lesson(id_to_edit);
 
-	qDebug("begin info");
-	qDebug() << id;
-	qDebug() << data.unparsed_date;
-	qDebug() << data.group;
-	qDebug() << data.week;
-	qDebug() << data.id_lesson;
-	qDebug("end info");
+        qDebug("begin info");
+        qDebug() << id;
+        qDebug() << data.unparsed_date;
+        qDebug() << data.group;
+        qDebug() << data.week;
+        qDebug() << data.id_lesson;
+        qDebug("end info");
 
-	m_config_timetable.set_content(data, lesson_list);
-	m_config_timetable.show();
-	m_is_modified = true;
+        m_config_timetable.set_content(data, lesson_list);
+        m_config_timetable.show();
+        m_is_modified = true;
 }
 
 void Control::manage_save_file()
 {
-	qDebug( Q_FUNC_INFO );
-	m_config.save();
-	m_is_modified = false;
+        qDebug( Q_FUNC_INFO );
+        m_config.save();
+        m_is_modified = false;
 }
 
 void Control::manage_save_as_file()
 {
-	QString filename = QFileDialog::getSaveFileName(&m_windows,
-							tr("save file"),
-							"/home",
-							"XML files (*.xml)");
-	if (!filename.isNull())
-	{
-		m_config.save(filename);
-		m_is_modified = false;
-	}
+        QString filename = QFileDialog::getSaveFileName(&m_windows,
+                           tr("save file"),
+                           "/home",
+                           "XML files (*.xml)");
+        if (!filename.isNull())
+        {
+                m_config.save(filename);
+                m_is_modified = false;
+        }
 }
 
 void Control::manage_quit()
 {
-	qDebug( Q_FUNC_INFO );
-	if (m_is_modified)
-	{
-		save_before_changing();
-	}
-	qApp->quit();
+        qDebug( Q_FUNC_INFO );
+        if (m_is_modified)
+        {
+                save_before_changing();
+        }
+        qApp->quit();
 }

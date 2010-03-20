@@ -10,15 +10,15 @@
 ///
 class DrawTimetable : public QGraphicsScene
 {
-	Q_OBJECT
-	public:
-		///
-		/// \brief default constructor
-		///
-		DrawTimetable(QObject *parent = 0);
+                Q_OBJECT
+        public:
+                ///
+                /// \brief default constructor
+                ///
+                DrawTimetable(QObject* parent = 0);
 
-	private:
-		void _create_cases();
+        private:
+                void _create_cases();
 };
 
 #endif // DRAWTIMETABLE_H

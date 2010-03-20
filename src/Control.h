@@ -42,73 +42,73 @@
 
 class Control : public QObject
 {
-	Q_OBJECT
+                Q_OBJECT
         public:
-	///
-	/// \brief default constructor
-	///
-        Control();
-
-	private:
-	///
-	/// \brief tell to user if he would like save is fale and save it
-	///
-	void save_before_changing();
+                ///
+                /// \brief default constructor
+                ///
+                Control();
 
         private:
-	bool m_is_modified;
-	MainWindow m_windows;
-	SubjectDataWindow m_config_subject;
-	TimeTableWindow m_config_timetable;
-	XmlPlanning m_config;
-	DrawTimetable m_timetable_veuw;
+                ///
+                /// \brief tell to user if he would like save is fale and save it
+                ///
+                void save_before_changing();
 
-	public slots:
-	///
-	/// \brief tell to view to begin editing a subject
-	/// \arg subject id to edit
-	///
-	void show_subject(KeyValue subject);
-	///
-	/// \brief tell to view to begin editing a timetable
-	/// \arg timetable id to edit
-	///
-	void show_timetable(KeyValue timetable);
-	///
-	/// \brief create a new subject and tell to view to edit it
-	///
-	void add_subject();
-	///
-	/// \brief create a newx timetable and tell to view to edit it
-	///
-	void add_timetable();
-	///
-	/// \brief managing opening a new file
-	///
-	void manage_open_file();
-	///
-	/// \brief managing create a new file
-	///
-        void manage_create_file();
-	///
-	/// \brief manazging save current file
-	///
-	void manage_save_file();
-	///
-	/// \brief managing save as the current file
-	///
-	void manage_save_as_file();
-	///
-	/// \brief quitting safely the application
-	///
-	void manage_quit();
-	///
-	/// \brief update xml after editing subject
-	///
-	void update_subject();
-	///
-	/// \brief update timetable after editing subject
-	///
-	void update_timetable();
+        private:
+                bool m_is_modified;
+                MainWindow m_windows;
+                SubjectDataWindow m_config_subject;
+                TimeTableWindow m_config_timetable;
+                XmlPlanning m_config;
+                DrawTimetable m_timetable_veuw;
+
+        public slots:
+                ///
+                /// \brief tell to view to begin editing a subject
+                /// \arg subject id to edit
+                ///
+                void show_subject(KeyValue subject);
+                ///
+                /// \brief tell to view to begin editing a timetable
+                /// \arg timetable id to edit
+                ///
+                void show_timetable(KeyValue timetable);
+                ///
+                /// \brief create a new subject and tell to view to edit it
+                ///
+                void add_subject();
+                ///
+                /// \brief create a newx timetable and tell to view to edit it
+                ///
+                void add_timetable();
+                ///
+                /// \brief managing opening a new file
+                ///
+                void manage_open_file();
+                ///
+                /// \brief managing create a new file
+                ///
+                void manage_create_file();
+                ///
+                /// \brief manazging save current file
+                ///
+                void manage_save_file();
+                ///
+                /// \brief managing save as the current file
+                ///
+                void manage_save_as_file();
+                ///
+                /// \brief quitting safely the application
+                ///
+                void manage_quit();
+                ///
+                /// \brief update xml after editing subject
+                ///
+                void update_subject();
+                ///
+                /// \brief update timetable after editing subject
+                ///
+                void update_timetable();
 };
 #endif

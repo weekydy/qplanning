@@ -32,16 +32,16 @@
 ///
 struct SubjectData
 {
-	QString name; ///< name of lesson
-	QString teacher; ///< teacher that teach lesson
-	int red_background; ///< red rgb color to background
-	int green_background; ///< green rgb color to background
-	int blue_background; ///< blue rgb color to background
-	int red_text; ///< red rgb text color
-	int green_text; ///< green rgb text color
-	int blue_text; ///< blue rgb text color
-	unsigned int id; ///< id associated with this data
-	bool is_exist; ///< this id are they exist ?
+        QString name; ///< name of lesson
+        QString teacher; ///< teacher that teach lesson
+        int red_background; ///< red rgb color to background
+        int green_background; ///< green rgb color to background
+        int blue_background; ///< blue rgb color to background
+        int red_text; ///< red rgb text color
+        int green_text; ///< green rgb text color
+        int blue_text; ///< blue rgb text color
+        unsigned int id; ///< id associated with this data
+        bool is_exist; ///< this id are they exist ?
 };
 
 #endif // SUBJECTDATA_H

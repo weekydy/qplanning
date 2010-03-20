@@ -36,24 +36,24 @@
 ///
 class TimeTableWindow : public QDialog, private Ui::TimeTableWindow
 {
-	Q_OBJECT
-	public:
-		///
-		/// \brief construct a TimTableWindow object with a parent
-		/// \param parent parent object to link
-		///
-		TimeTableWindow(QWidget *parent = 0);
-		///
-		/// \brief set default data where veuwved when object is show
-		/// \param data Timetable data collected in xml file with get_timetable_id
-		/// \param lessons_list list of all lessons avalable
-		///
-                void set_content(Timetable &data, QVector<KeyValue> lessons_list);
-		Timetable get_content();
+                Q_OBJECT
+        public:
+                ///
+                /// \brief construct a TimTableWindow object with a parent
+                /// \param parent parent object to link
+                ///
+                TimeTableWindow(QWidget* parent = 0);
+                ///
+                /// \brief set default data where veuwved when object is show
+                /// \param data Timetable data collected in xml file with get_timetable_id
+                /// \param lessons_list list of all lessons avalable
+                ///
+                void set_content(Timetable& data, QVector<KeyValue> lessons_list);
+                Timetable get_content();
 
         private:
                 QVector<KeyValue> m_lessons_list;
-		unsigned int m_id;
+                unsigned int m_id;
 };
 
 #endif // TIMETABLEWINDOW_H

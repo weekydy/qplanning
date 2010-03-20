@@ -32,8 +32,8 @@
 
 struct KeyValue
 {
-	unsigned int key; ///< key
-	QString value; ///< text value associated to key
+        unsigned int key; ///< key
+        QString value; ///< text value associated to key
 };
 
 #endif // KEYVALUE_H

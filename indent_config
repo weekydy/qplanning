@@ -1,0 +1,2 @@
+#options to astyle indentig program ised on the project 
+-A1 -s8 -C -S -N -p -H -j -c -k1 -z2 
