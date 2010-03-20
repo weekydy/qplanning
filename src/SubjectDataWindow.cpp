@@ -153,3 +153,15 @@ void SubjectDataWindow::select_background_color()
         blue_background_color->setValue(b);
 
 }
+
+void SubjectDataWindow::closeEvent(QCloseEvent* event)
+{
+        if (isVisible())
+        {
+                event->ignore();
+        }
+        else
+        {
+                event->accept();
+        }
+}

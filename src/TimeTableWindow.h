@@ -26,6 +26,7 @@
 
 #include <QDialog>
 #include <QVector>
+#include <QCloseEvent>
 #include "KeyValue.h"
 #include "ui_TimeTableWindow.h"
 #include "TimeTable.h"
@@ -51,6 +52,12 @@ class TimeTableWindow : public QDialog, private Ui::TimeTableWindow
                 void set_content(Timetable& data, QVector<KeyValue> lessons_list);
                 Timetable get_content();
 
+        protected:
+                ///
+                /// \brief eneable capability to don't quit windows
+                /// \param event infos
+                ///
+                void closeEvent(QCloseEvent* event);
         private:
                 QVector<KeyValue> m_lessons_list;
                 unsigned int m_id;
