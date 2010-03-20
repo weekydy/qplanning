@@ -105,6 +105,10 @@ class Control : public QObject
 	///
 	/// \brief update xml after editing subject
 	///
-	void update_xml();
+	void update_subject();
+	///
+	/// \brief update timetable after editing subject
+	///
+	void update_timetable();
 };
 #endif

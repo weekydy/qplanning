@@ -37,6 +37,7 @@ void TimeTableWindow::set_content(Timetable &data, QVector<KeyValue> lessons_lis
 	week_edit->setCurrentIndex(data.week - 1);
 	group_edit->setCurrentIndex(data.group - 1);
 	begin_edit->setCurrentIndex(data.begin_interval * 2);
+	subject_edit->clear();
 	end_edit->setCurrentIndex(data.end_interval * 2);
         switch (data.half_day)
         {
@@ -64,5 +65,31 @@ void TimeTableWindow::set_content(Timetable &data, QVector<KeyValue> lessons_lis
 
 
         m_lessons_list = lessons_list;
+	m_id = data.ident;
 }
 
+Timetable TimeTableWindow::get_content()
+{
+	Timetable data;
+
+	data.classroom = class_edit->text();
+	data.week = (Week) (week_edit->currentIndex() + 1);
+	data.group = (Group) (group_edit->currentIndex() + 1);
+	data.begin_interval = (float) begin_edit->currentIndex()/ (float) 2;
+	data.end_interval = (float) end_edit->currentIndex() / (float) 2;
+	data.ident = m_id;
+	data.id_lesson = m_lessons_list[subject_edit->currentIndex()].key;
+
+	int part_day = part_day_edit->currentIndex();
+	switch(part_day)
+	{
+		case 0:
+			data.half_day = MORNING;
+			break;
+		case 1:
+			data.half_day = AFTERNOON;
+			break;
+	}
+	data.unparsed_date.sprintf("%c%.1f-%c%.1f", data.half_day, data.begin_interval, data.half_day, data.end_interval);
+	return data;
+}
