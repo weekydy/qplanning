@@ -25,131 +25,131 @@
 #include "SubjectDataWindow.h"
 #include "ui_SubjectDataWindow.h"
 
-SubjectDataWindow::SubjectDataWindow(QWidget *parent) : QDialog(parent)
+SubjectDataWindow::SubjectDataWindow(QWidget* parent) : QDialog(parent)
 {
-	setupUi(this);
-	QObject::connect(red_text_color, SIGNAL(valueChanged(int)), this, SLOT(update_text_prevew()));
-	QObject::connect(green_text_color, SIGNAL(valueChanged(int)), this, SLOT(update_text_prevew()));
-	QObject::connect(blue_text_color, SIGNAL(valueChanged(int)), this, SLOT(update_text_prevew()));
-	QObject::connect(red_background_color, SIGNAL(valueChanged(int)), this, SLOT(update_background_prevew()));
-	QObject::connect(green_background_color, SIGNAL(valueChanged(int)), this, SLOT(update_background_prevew()));
-	QObject::connect(blue_background_color, SIGNAL(valueChanged(int)), this, SLOT(update_background_prevew()));
-	QObject::connect(text_color_edit, SIGNAL(pressed()), this, SLOT(select_text_color()));
-	QObject::connect(background_color_edit, SIGNAL(pressed()), this, SLOT(select_background_color()));
+        setupUi(this);
+        QObject::connect(red_text_color, SIGNAL(valueChanged(int)), this, SLOT(update_text_prevew()));
+        QObject::connect(green_text_color, SIGNAL(valueChanged(int)), this, SLOT(update_text_prevew()));
+        QObject::connect(blue_text_color, SIGNAL(valueChanged(int)), this, SLOT(update_text_prevew()));
+        QObject::connect(red_background_color, SIGNAL(valueChanged(int)), this, SLOT(update_background_prevew()));
+        QObject::connect(green_background_color, SIGNAL(valueChanged(int)), this, SLOT(update_background_prevew()));
+        QObject::connect(blue_background_color, SIGNAL(valueChanged(int)), this, SLOT(update_background_prevew()));
+        QObject::connect(text_color_edit, SIGNAL(pressed()), this, SLOT(select_text_color()));
+        QObject::connect(background_color_edit, SIGNAL(pressed()), this, SLOT(select_background_color()));
 }
 
 SubjectData SubjectDataWindow::get_contant()
 {
-	SubjectData content;
-	content.name = name_edit->text();
-	content.teacher = teacher_edit->text();
+        SubjectData content;
+        content.name = name_edit->text();
+        content.teacher = teacher_edit->text();
 
-	content.red_text = red_text_color->value();
-	content.green_text = green_text_color->value();
-	content.blue_text = blue_text_color->value();
+        content.red_text = red_text_color->value();
+        content.green_text = green_text_color->value();
+        content.blue_text = blue_text_color->value();
 
 
-	content.red_background = red_background_color->value();
-	content.green_background = green_background_color->value();
-	content.blue_background = blue_background_color->value();
+        content.red_background = red_background_color->value();
+        content.green_background = green_background_color->value();
+        content.blue_background = blue_background_color->value();
 
-	content.id = m_id;
-	if (m_id != UINT_MAX)
-	{
-		content.is_exist = true;
-	}
-	else
-	{
-		content.is_exist = false;
-	}
-	return content;
+        content.id = m_id;
+        if (m_id != UINT_MAX)
+        {
+                content.is_exist = true;
+        }
+        else
+        {
+                content.is_exist = false;
+        }
+        return content;
 }
 
-void SubjectDataWindow::set_contant(SubjectData *data)
+void SubjectDataWindow::set_contant(SubjectData* data)
 {
-	if (data == 0)
-	{
-		name_edit->clear();
-		teacher_edit->clear();
+        if (data == 0)
+        {
+                name_edit->clear();
+                teacher_edit->clear();
 
-		red_text_color->clear();
-		green_text_color->clear();
-		blue_text_color->clear();
+                red_text_color->clear();
+                green_text_color->clear();
+                blue_text_color->clear();
 
-		red_background_color->clear();
-		green_background_color->clear();
-		blue_background_color->clear();
-		m_id = UINT_MAX;
-	}
-	else
-	{
-		name_edit->setText(data->name);
-		teacher_edit->setText(data->teacher);
+                red_background_color->clear();
+                green_background_color->clear();
+                blue_background_color->clear();
+                m_id = UINT_MAX;
+        }
+        else
+        {
+                name_edit->setText(data->name);
+                teacher_edit->setText(data->teacher);
 
-		red_text_color->setValue(data->red_text);
-		green_text_color->setValue(data->green_text);
-		blue_text_color->setValue(data->blue_text);
+                red_text_color->setValue(data->red_text);
+                green_text_color->setValue(data->green_text);
+                blue_text_color->setValue(data->blue_text);
 
-		red_background_color->setValue(data->red_background);
-		green_background_color->setValue(data->green_background);
-		blue_background_color->setValue(data->blue_background);
-		m_id = data->id;
-	}
+                red_background_color->setValue(data->red_background);
+                green_background_color->setValue(data->green_background);
+                blue_background_color->setValue(data->blue_background);
+                m_id = data->id;
+        }
 }
 
 void SubjectDataWindow::update_text_prevew()
 {
-	qDebug( Q_FUNC_INFO );
-	QString color("background-color: rgb(");
-	color += QString::number(red_text_color->value());
-	color += ", ";
-	color += QString::number(green_text_color->value());
-	color += ", ";
-	color += QString::number(blue_text_color->value());
-	color += ");";
-	qDebug(qPrintable(color));
-	text_color_prevew->setStyleSheet(color);
+        qDebug( Q_FUNC_INFO );
+        QString color("background-color: rgb(");
+        color += QString::number(red_text_color->value());
+        color += ", ";
+        color += QString::number(green_text_color->value());
+        color += ", ";
+        color += QString::number(blue_text_color->value());
+        color += ");";
+        qDebug(qPrintable(color));
+        text_color_prevew->setStyleSheet(color);
 }
 
 void SubjectDataWindow::update_background_prevew()
 {
-	qDebug( Q_FUNC_INFO );
-	QString color ("background-color: rgb(");
-	color += QString::number(red_background_color->value());
-	color += ", ";
-	color += QString::number(green_background_color->value());
-	color += ", ";
-	color += QString::number(blue_background_color->value());
-	color += ");";
-	qDebug(qPrintable(color));
-	background_color_prevew->setStyleSheet(color);
+        qDebug( Q_FUNC_INFO );
+        QString color ("background-color: rgb(");
+        color += QString::number(red_background_color->value());
+        color += ", ";
+        color += QString::number(green_background_color->value());
+        color += ", ";
+        color += QString::number(blue_background_color->value());
+        color += ");";
+        qDebug(qPrintable(color));
+        background_color_prevew->setStyleSheet(color);
 }
 
 void SubjectDataWindow::select_text_color()
 {
-	QColor color(red_text_color->value(),
-		     green_text_color->value(),
-		     blue_text_color->value());
-	QColor new_color = QColorDialog::getColor(color, this);
-	int r, g, b;
-	new_color.getRgb(&r, &g, &b);
+        QColor color(red_text_color->value(),
+                     green_text_color->value(),
+                     blue_text_color->value());
+        QColor new_color = QColorDialog::getColor(color, this);
+        int r, g, b;
+        new_color.getRgb(&r, &g, &b);
 
-	red_text_color->setValue(r);
-	green_text_color->setValue(g);
-	blue_text_color->setValue(b);
+        red_text_color->setValue(r);
+        green_text_color->setValue(g);
+        blue_text_color->setValue(b);
 }
 
 void SubjectDataWindow::select_background_color()
 {
-	QColor color(red_background_color->value(),
-		     green_background_color->value(),
-		     blue_background_color->value());
-	QColor new_color = QColorDialog::getColor(color, this);
-	int r, g, b;
-	new_color.getRgb(&r, &g, &b);
+        QColor color(red_background_color->value(),
+                     green_background_color->value(),
+                     blue_background_color->value());
+        QColor new_color = QColorDialog::getColor(color, this);
+        int r, g, b;
+        new_color.getRgb(&r, &g, &b);
 
-	red_background_color->setValue(r);
-	green_background_color->setValue(g);
-	blue_background_color->setValue(b);
+        red_background_color->setValue(r);
+        green_background_color->setValue(g);
+        blue_background_color->setValue(b);
 
 }

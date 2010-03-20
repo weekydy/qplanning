@@ -32,4 +32,4 @@
 /// \brief default name of a new lesson
 ///
 #define DEFAULT_ID_NAME "default"
-#endif 
+#endif
