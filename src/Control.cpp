@@ -48,6 +48,7 @@ Control::Control() : m_windows(), m_config_subject(&m_windows), m_config_timetab
         QObject::connect(&m_windows, SIGNAL(add_timetable()), this, SLOT(add_timetable()));
         QObject::connect(&m_windows, SIGNAL(quit_needed()), this, SLOT(manage_quit()));
 
+        manage_create_file();
         m_windows.show();
 }
 
@@ -164,31 +165,46 @@ void Control::add_subject()
 void Control::add_timetable()
 {
         qDebug( Q_FUNC_INFO );
-
-        unsigned int id = m_config.add_empty_lesson();
         QVector<KeyValue> lesson_list = m_config.get_lessons();
 
-        KeyValue id_to_edit;
-        id_to_edit.key = id;
-        Timetable data = m_config.search_id_lesson(id_to_edit);
+        if (lesson_list.isEmpty())
+        {
+                QMessageBox::warning(&m_windows,
+                                     tr("warning"),
+                                     tr("you cant add a timetable if you don't have lessons"));
+        }
+        else
+        {
+                unsigned int id = m_config.add_empty_lesson();
+                KeyValue id_to_edit;
+                id_to_edit.key = id;
+                Timetable data = m_config.search_id_lesson(id_to_edit);
 
-        qDebug("begin info");
-        qDebug() << id;
-        qDebug() << data.unparsed_date;
-        qDebug() << data.group;
-        qDebug() << data.week;
-        qDebug() << data.id_lesson;
-        qDebug("end info");
+                qDebug("begin info");
+                qDebug() << id;
+                qDebug() << data.unparsed_date;
+                qDebug() << data.group;
+                qDebug() << data.week;
+                qDebug() << data.id_lesson;
+                qDebug("end info");
 
-        m_config_timetable.set_content(data, lesson_list);
-        m_config_timetable.show();
-        m_is_modified = true;
+                m_config_timetable.set_content(data, lesson_list);
+                m_config_timetable.show();
+                m_is_modified = true;
+        }
 }
 
 void Control::manage_save_file()
 {
         qDebug( Q_FUNC_INFO );
-        m_config.save();
+        if (m_config.get_filename().isNull())
+        {
+                manage_save_as_file();
+        }
+        else
+        {
+                m_config.save();
+        }
         m_is_modified = false;
 }
 

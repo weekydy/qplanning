@@ -115,6 +115,11 @@ class XmlPlanning : public QObject
                 /// \return return all lesson name and his associated id
                 ///
                 QVector<KeyValue> get_lessons();
+                ///
+                /// \brief accessor to get the m_filename private attribut
+                /// \return m_filename
+                ///
+                QString get_filename();
 
         private:
                 ///

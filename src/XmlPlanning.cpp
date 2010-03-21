@@ -658,3 +658,8 @@ QVector<KeyValue> XmlPlanning::get_lessons()
         }
         return lesson_list;
 }
+
+QString XmlPlanning::get_filename()
+{
+        return m_filename;
+}
