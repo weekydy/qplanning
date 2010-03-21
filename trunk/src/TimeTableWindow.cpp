@@ -105,3 +105,28 @@ void TimeTableWindow::closeEvent(QCloseEvent* event)
                 event->accept();
         }
 }
+
+void TimeTableWindow::accept()
+{
+        bool is_error = false;
+        if (subject_edit->currentIndex() == -1)
+        {
+                QMessageBox::warning(this,
+                                     tr("can't validate"),
+                                     tr("you must select a subject")
+                                     );
+                is_error = true;
+        }
+        if (begin_edit->currentIndex() >= end_edit->currentIndex())
+        {
+                QMessageBox::warning(this,
+                                     tr("can't validate"),
+                                     tr("the begin interval must be smoller them the end interval")
+                                     );
+                is_error = true;
+        }
+        if (!is_error)
+        {
+                QDialog::accept();
+        }
+}
