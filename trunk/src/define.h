@@ -32,4 +32,18 @@
 /// \brief default name of a new lesson
 ///
 #define DEFAULT_ID_NAME "default"
+
+/*************************************
+ *          draw constants           *
+ *************************************/
+
+#define TOP_PER_MIL 150
+#define LEFT_PER_MIL 45
+#define RIGHT_PER_MIL 45
+#define BOTTOM_PER_MIL 50
+#define ROW_PREMITIVE_PER_MIL 80
+#define COLLUM_PREMITIVE_PER_MIL 70
+#define HEIGHT 1000
+#define LENGTH 1000
+
 #endif
