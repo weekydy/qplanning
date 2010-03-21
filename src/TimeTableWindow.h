@@ -27,6 +27,7 @@
 #include <QDialog>
 #include <QVector>
 #include <QCloseEvent>
+#include <QMessageBox>
 #include "KeyValue.h"
 #include "ui_TimeTableWindow.h"
 #include "TimeTable.h"
@@ -50,7 +51,17 @@ class TimeTableWindow : public QDialog, private Ui::TimeTableWindow
                 /// \param lessons_list list of all lessons avalable
                 ///
                 void set_content(Timetable& data, QVector<KeyValue> lessons_list);
+                ///
+                /// \brief get the contant after modifying
+                /// \return contant modified
+                ///
                 Timetable get_content();
+
+        public slots:
+                ///
+                /// \brief surcharged accept() slot to add capability to don't valid windows in certains cases
+                ///
+                void accept();
 
         protected:
                 ///
@@ -58,6 +69,7 @@ class TimeTableWindow : public QDialog, private Ui::TimeTableWindow
                 /// \param event infos
                 ///
                 void closeEvent(QCloseEvent* event);
+
         private:
                 QVector<KeyValue> m_lessons_list;
                 unsigned int m_id;
