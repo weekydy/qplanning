@@ -40,6 +40,7 @@
 #include <QResizeEvent>
 #include <QCloseEvent>
 #include "KeyValue.h"
+#include "define.h"
 
 ///
 /// \class MainWindow MainWindow.h

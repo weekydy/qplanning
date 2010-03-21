@@ -174,8 +174,8 @@ void MainWindow::resizeEvent(QResizeEvent* event)
         int x = m_widget_1_1->size().width();
         int y = m_widget_1_1->size().height();
 
-        qreal x_scale = (qreal) x / (qreal) 1000;
-        qreal y_scale = (qreal) y / (qreal) 1000;
+        qreal x_scale = (qreal) x / (qreal) LENGTH;
+        qreal y_scale = (qreal) y / (qreal) HEIGHT;
         m_widget_1_1->scale(x_scale, y_scale);
 }
 
