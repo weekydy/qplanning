@@ -39,6 +39,7 @@
 #include <QVector>
 #include <QResizeEvent>
 #include <QCloseEvent>
+#include <QShowEvent>
 #include "KeyValue.h"
 #include "define.h"
 
@@ -69,9 +70,20 @@ class MainWindow : public QMainWindow
                 void resizeEvent(QResizeEvent* event);
                 ///
                 /// \brief eneable capability to don't quit windows
-                /// \arg event infos
+                /// \arg event event infos
                 ///
                 void closeEvent(QCloseEvent* event);
+                ///
+                /// \brief same usage of resizeEvent but it's solve it in the first veuw
+                /// \arg event event info
+                ///
+                void showEvent(QShowEvent* event);
+
+        private:
+                ///
+                /// \brief calcule and aplie the scale factor in function of space area avalable
+                ///
+                void calcule_scale_factor();
 
         private:
                 QWidget* m_main;
