@@ -40,6 +40,7 @@
 #include <QResizeEvent>
 #include <QCloseEvent>
 #include <QShowEvent>
+#include <QSizePolicy>
 #include "KeyValue.h"
 #include "define.h"
 
