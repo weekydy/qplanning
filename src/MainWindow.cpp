@@ -104,6 +104,7 @@ MainWindow::MainWindow() : m_need_to_close(false)
 void MainWindow::set_scean(QGraphicsScene* scene)
 {
         m_widget_1_1->setScene(scene);
+        calcule_scale_factor();
 }
 
 void MainWindow::update_all_lessons(QVector<KeyValue> subjects)
@@ -166,9 +167,8 @@ void MainWindow::add_pressed()
         }
 }
 
-void MainWindow::resizeEvent(QResizeEvent* event)
+void MainWindow::calcule_scale_factor()
 {
-        event->accept();
         m_widget_1_1->resetTransform();
 
         int x = m_widget_1_1->size().width();
@@ -177,6 +177,12 @@ void MainWindow::resizeEvent(QResizeEvent* event)
         qreal x_scale = (qreal) x / (qreal) LENGTH;
         qreal y_scale = (qreal) y / (qreal) HEIGHT;
         m_widget_1_1->scale(x_scale, y_scale);
+}
+
+void MainWindow::resizeEvent(QResizeEvent* event)
+{
+        event->accept();
+        calcule_scale_factor();
 }
 
 void MainWindow::closeEvent(QCloseEvent* event)
@@ -190,6 +196,12 @@ void MainWindow::closeEvent(QCloseEvent* event)
                 event->ignore();
                 manage_quit_needed();
         }
+}
+
+void MainWindow::showEvent(QShowEvent* event)
+{
+        event->accept();
+        calcule_scale_factor();
 }
 
 void MainWindow::manage_quit_needed()
