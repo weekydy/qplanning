@@ -75,6 +75,14 @@ MainWindow::MainWindow() : m_need_to_close(false)
 
         m_widget_1_1->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         m_widget_1_1->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        QSizePolicy policy;
+        policy.setHorizontalPolicy(QSizePolicy::Minimum);
+        policy.setVerticalPolicy(QSizePolicy::Minimum);
+        policy.setHorizontalStretch(4);
+        policy.setVerticalStretch(4);
+        m_widget_1_1->setSizePolicy(policy);
+
+
         m_layout_1->addWidget(m_widget_1_1);
         m_layout_1->addLayout(m_layout_1_2);
         m_layout_1_2->addLayout(m_layout_1_2_1);
