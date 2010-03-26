@@ -46,6 +46,7 @@ Control::Control() : m_windows(), m_config_subject(&m_windows), m_config_timetab
         QObject::connect(&m_config_timetable, SIGNAL(accepted()), this, SLOT(update_timetable()));
         QObject::connect(&m_windows, SIGNAL(add_subject()), this, SLOT(add_subject()));
         QObject::connect(&m_windows, SIGNAL(add_timetable()), this, SLOT(add_timetable()));
+        QObject::connect(&m_windows, SIGNAL(del_timetable(KeyValue)), this, SLOT(del_timetable(KeyValue)));
         QObject::connect(&m_windows, SIGNAL(quit_needed()), this, SLOT(manage_quit()));
 
         manage_create_file();
@@ -191,6 +192,22 @@ void Control::add_timetable()
                 m_config_timetable.set_content(data, lesson_list);
                 m_config_timetable.show();
                 m_is_modified = true;
+        }
+}
+
+void Control::del_timetable(KeyValue timetable)
+{
+        qDebug( Q_FUNC_INFO );
+        int confirm = QMessageBox::question(&m_windows,
+                                            tr("confirm deleting"),
+                                            tr("would you like delete this timetable"),
+                                            QMessageBox::Yes,
+                                            QMessageBox::No);
+        if (confirm == QMessageBox::Yes)
+        {
+                qDebug( "okey : save" ),
+                m_config.del_timetable(timetable);
+                m_config.refresh_all_view();
         }
 }
 

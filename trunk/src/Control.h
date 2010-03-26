@@ -83,7 +83,12 @@ class Control : public QObject
                 ///
                 void add_timetable();
                 ///
+                /// \brief delete the current selected timetable.
+                ///
+                void del_timetable(KeyValue timetable);
+                ///
                 /// \brief managing opening a new file
+                /// \arg timetable id and text to deleate
                 ///
                 void manage_open_file();
                 ///

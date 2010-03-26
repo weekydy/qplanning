@@ -107,6 +107,7 @@ MainWindow::MainWindow() : m_need_to_close(false)
         QObject::connect(m_file_menu_quit, SIGNAL(triggered()), this, SLOT(manage_quit_needed()));
         QObject::connect(m_modify_lesson, SIGNAL(clicked()), this, SLOT(modify_pressed()));
         QObject::connect(m_add_lesson, SIGNAL(clicked()), this, SLOT(add_pressed()));
+        QObject::connect(m_delete_lesson, SIGNAL(clicked()), this, SLOT(del_pressed()));
 }
 
 void MainWindow::set_scean(QGraphicsScene* scene)
@@ -172,6 +173,22 @@ void MainWindow::add_pressed()
         else
         {
                 emit add_timetable();
+        }
+}
+
+void MainWindow::del_pressed()
+{
+        qDebug( Q_FUNC_INFO );
+        KeyValue value_to_return;
+        if (m_layout_1_2_2->currentIndex() == m_subjects_id)
+        {
+                //nothing at this time
+        }
+        else
+        {
+                value_to_return.value = m_timetable->currentItem()->text();
+                value_to_return.key = m_timetable_items[m_timetable->currentRow()].key;
+                emit del_timetable(value_to_return);
         }
 }
 

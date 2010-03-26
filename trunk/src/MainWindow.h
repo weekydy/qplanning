@@ -132,6 +132,10 @@ class MainWindow : public QMainWindow
                 ///
                 void add_pressed();
                 ///
+                /// \brief slot to emit the god signa when dell button is pressed
+                ///
+                void del_pressed();
+                ///
                 /// \brief slot to emit quit_needed and set the m_need_to_close
                 ///
                 void manage_quit_needed();
@@ -156,7 +160,12 @@ class MainWindow : public QMainWindow
                 ///
                 void add_timetable();
                 ///
+                /// \brief signel emit when timetable need to be delete
+                ///
+                void del_timetable(KeyValue data);
+                ///
                 /// \brief signal emit when file need to be open
+                /// \arg[in] data id and name of the id to dell
                 ///
                 void open_file();
                 ///
