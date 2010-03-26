@@ -255,6 +255,83 @@ SubjectData XmlPlanning::search_id(KeyValue id)
 Timetable XmlPlanning::search_id_lesson(KeyValue id)
 {
         qDebug( Q_FUNC_INFO );
+        QDomElement element_found = _search_timetable(id.key);
+        Timetable return_value;
+        if (element_found.isNull())
+        {
+                qDebug("error");
+        }
+
+        return_value.ident = id.key;
+        return_value.classroom = element_found.firstChildElement("class")
+                                              .firstChild().toText().data();
+        return_value.unparsed_date = element_found.firstChildElement("hour")
+                                                   .firstChild().toText().data();
+        return_value.id_lesson = element_found.firstChildElement("id-lesson")
+                                              .firstChild().toText().data().toUInt();
+        if (element_found.firstChildElement("group").isNull())
+        {
+                return_value.group = ALL_GROUP;
+        }
+        else
+        {
+                int group = element_found.firstChildElement("group")
+                                         .firstChild().toText().data().toInt();
+                switch (group)
+                {
+                        case ALL_GROUP:
+                                return_value.group = ALL_GROUP;
+                                break;
+                        case ONE:
+                                return_value.group = ONE;
+                                break;
+                        case TWO:
+                                return_value.group = TWO;
+                                break;
+                }
+        }
+
+        if (element_found.firstChildElement("week").isNull())
+        {
+                return_value.week = ALL_WEEK;
+        }
+        else
+        {
+                int week = element_found.firstChildElement("week")
+                                        .firstChild().toText().data().toInt();
+                switch (week)
+                {
+                        case ALL_WEEK:
+                                return_value.week = ALL_WEEK;
+                                break;
+                        case PEER:
+                                return_value.week = PEER;
+                                break;
+                        case UNPEER:
+                                return_value.week = UNPEER;
+                                break;
+                }
+        }
+
+        char half_day;
+        QTextStream stream(return_value.unparsed_date.toAscii());
+        stream >> half_day >> return_value.begin_interval;
+        stream.seek(stream.pos() + 2);
+        stream >> return_value.end_interval;
+
+        if (half_day == 'M')
+        {
+                return_value.half_day = MORNING;
+        }
+        else
+        {
+                return_value.half_day = AFTERNOON;
+        }
+        return return_value;
+}
+
+QDomElement XmlPlanning::_search_timetable(unsigned int id)
+{
         QDomNodeList lesson_list = m_lesson_list.childNodes();
         Timetable return_value;
         int i;
@@ -263,86 +340,14 @@ Timetable XmlPlanning::search_id_lesson(KeyValue id)
                 unsigned int id_tested = lesson_list.item(i).firstChildElement("ident").firstChild()
                                          .toText().data().toUInt();
                 qDebug("id_tested = %d", id_tested);
-                if (id_tested == id.key)
+                qDebug("id = %d", id);
+                if (id_tested == id)
                 {
-                        qDebug("id found");
-                        if (lesson_list.item(i).isNull())
-                        {
-                                qDebug("error");
-                        }
-
-                        return_value.ident = id.key;
-                        return_value.classroom = lesson_list.item(i).firstChildElement("class")
-                                                 .firstChild().toText().data();
-                        return_value.unparsed_date = lesson_list.item(i)
-                                                     .firstChildElement("hour").firstChild()
-                                                     .toText().data();
-                        return_value.id_lesson = lesson_list.item(i).firstChildElement("id-lesson")
-                                                 .firstChild().toText().data().toUInt();
-                        if (lesson_list.item(i).firstChildElement("group").isNull())
-                        {
-                                return_value.group = ALL_GROUP;
-                        }
-                        else
-                        {
-                                int group = lesson_list.item(i).firstChildElement("group")
-                                            .firstChild().toText().data().toInt();
-                                switch (group)
-                                {
-                                        case ALL_GROUP:
-                                                return_value.group = ALL_GROUP;
-                                                break;
-                                        case ONE:
-                                                return_value.group = ONE;
-                                                break;
-                                        case TWO:
-                                                return_value.group = TWO;
-                                                break;
-                                }
-                        }
-
-                        if (lesson_list.item(i).firstChildElement("week").isNull())
-                        {
-                                return_value.week = ALL_WEEK;
-                        }
-                        else
-                        {
-                                int week = lesson_list.item(i).firstChildElement("week")
-                                           .firstChild().toText().data().toInt();
-                                switch (week)
-                                {
-                                        case ALL_WEEK:
-                                                return_value.week = ALL_WEEK;
-                                                break;
-                                        case PEER:
-                                                return_value.week = PEER;
-                                                break;
-                                        case UNPEER:
-                                                return_value.week = UNPEER;
-                                                break;
-                                }
-                        }
-
-                        char half_day;
-                        QTextStream stream(return_value.unparsed_date.toAscii());
-                        stream >> half_day >> return_value.begin_interval;
-                        stream.seek(stream.pos() + 2);
-                        stream >> return_value.end_interval;
-                        //bug here
-
-                        if (half_day == 'M')
-                        {
-                                return_value.half_day = MORNING;
-                        }
-                        else
-                        {
-                                return_value.half_day = AFTERNOON;
-                        }
-                        return return_value;
+                        Q_ASSERT(!lesson_list.item(i).isNull());
+                        return lesson_list.item(i).toElement();
                 }
         }
-        Q_ASSERT(i != lesson_list.size());
-        return return_value; //never used only to disable warning
+        throw;
 }
 
 void XmlPlanning::separe_color(QString& src, int& red, int& green, int& blue)
@@ -591,6 +596,14 @@ void XmlPlanning::update_timetable(Timetable id)
                         }
                         break;
         }
+}
+
+void XmlPlanning::del_timetable(KeyValue timetable)
+{
+        QDomElement element_to_delete = _search_timetable(timetable.key);
+        Q_ASSERT(!element_to_delete.isNull());
+
+        element_to_delete.parentNode().removeChild(element_to_delete);
 }
 
 unsigned int XmlPlanning::add_empty_id(QString name)

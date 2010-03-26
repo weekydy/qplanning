@@ -114,6 +114,10 @@ class XmlPlanning : public QObject
                 /// \brief get all lessons avalable
                 /// \return return all lesson name and his associated id
                 ///
+                void del_timetable(KeyValue timetable);
+                ///
+                /// \brief del the lessons pointed by the timetable.key
+                ///
                 QVector<KeyValue> get_lessons();
                 ///
                 /// \brief accessor to get the m_filename private attribut
@@ -143,6 +147,12 @@ class XmlPlanning : public QObject
                 /// \brief add empty half time and set default value
                 ///
                 QDomElement _add_empty_lesson();
+                ///
+                /// \brief search timetable and return the node that contein data
+                /// \arg id id to search
+                /// \return timetable found
+                ///
+                QDomElement _search_timetable(unsigned int id);
                 ///
                 /// \brief get all lessons ids to found an empty ud
                 /// \return ids founds
