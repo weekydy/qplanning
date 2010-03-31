@@ -4,6 +4,7 @@
         <lesson-list>
                 <lesson>
                         <ident>0</ident>
+                        <day>2</day>
                         <hour>A1.5-A2.5</hour>
                         <id-lesson>1</id-lesson>
                         <class>E4</class>

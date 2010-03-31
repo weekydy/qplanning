@@ -35,6 +35,18 @@ enum Group
         ALL_GROUP = 3, ///< all group
 };
 
+/// \enum Day
+/// \brief select a day
+enum Day
+{
+        MONDAY = 1,
+        TUESDAY = 2,
+        WEDNESDAY = 3,
+        THURSDAY = 4,
+        FRIDAY = 5,
+        SATURDAY = 6
+};
+
 ///
 /// \struct Timetable TimeTable.h
 /// \brief timetable structure to comunicate with TimeTableWindow
@@ -51,6 +63,7 @@ struct Timetable
         Half_Day half_day; ///< half day period
         Week week; ///< week concerned by this lesson
         Group group; ///< group concerned by this lesson
+        Day day; ///< day concerned by this lesson
 };
 
 #endif // TIMETABLE_H

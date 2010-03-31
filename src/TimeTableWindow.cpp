@@ -39,6 +39,7 @@ void TimeTableWindow::set_content(Timetable& data, QVector<KeyValue> lessons_lis
         begin_edit->setCurrentIndex(data.begin_interval * 2);
         subject_edit->clear();
         end_edit->setCurrentIndex(data.end_interval * 2);
+        day_edit->setCurrentIndex(data.day - 1);
         switch (data.half_day)
         {
                 case MORNING:
@@ -79,6 +80,7 @@ Timetable TimeTableWindow::get_content()
         data.end_interval = (float) end_edit->currentIndex() / (float) 2;
         data.ident = m_id;
         data.id_lesson = m_lessons_list[subject_edit->currentIndex()].key;
+        data.day = (Day) (day_edit->currentIndex() + 1);
 
         int part_day = part_day_edit->currentIndex();
         switch (part_day)
