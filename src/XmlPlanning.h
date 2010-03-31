@@ -78,17 +78,15 @@ class XmlPlanning : public QObject
                 ///
                 XmlPlanning(QString& filename);
                 ///
-                /// \brief search an half time that match the id.key
-                /// \arg id id to search
-                /// \return data collected on the found half time
-                ///
-                SubjectData search_id(KeyValue id);
-                ///
                 /// \brief search a subject that match the id.key
                 /// \arg id id to search
                 /// \return data collected on the found subject
-                Timetable search_id_lesson(KeyValue id);
-
+                SubjectData search_subject(KeyValue id);
+                ///
+                /// \brief search the good id referenced and update his info with the content of struct
+                /// \arg id struct that contain the id to edit and the data to update
+                ///
+                Timetable search_timetable(KeyValue id);
                 ///
                 /// \brief search the good id referenced and update his info with the content of struct
                 /// \arg id struct that contain the id to edit and the data to update
@@ -111,14 +109,32 @@ class XmlPlanning : public QObject
                 ///
                 unsigned int add_empty_lesson();
                 ///
-                /// \brief get all lessons avalable
-                /// \return return all lesson name and his associated id
+                /// \brief del the timetable pointed by the timetable.key
+                /// \arg timetable timetable to delete
                 ///
                 void del_timetable(KeyValue timetable);
                 ///
-                /// \brief del the lessons pointed by the timetable.key
+                /// \brief del the subject pointed by the subject.key
+                /// \arg subject subject to delete
+                ///
+                void del_subject(KeyValue subject);
+                ///
+                /// \brief get all lessons avalable
+                /// \return return all lesson name and his associated id
                 ///
                 QVector<KeyValue> get_lessons();
+                ///
+                /// \brief get all timetable avalable
+                /// \return return all timetable hour and day and his associated id
+                ///
+                QVector<KeyValue> get_timetables();
+                ///
+                /// \brief get all data of all lesson
+                /// \return return all lessons data (name, id, ...) see TimeTable structure for more info
+                /// differency bitween this method and get_timetables is that get_lesson only retunrn id and name of the lesson
+                /// this method here return all data
+                ///
+                QVector<Timetable> get_full_timetables();
                 ///
                 /// \brief accessor to get the m_filename private attribut
                 /// \return m_filename
@@ -153,6 +169,12 @@ class XmlPlanning : public QObject
                 /// \return timetable found
                 ///
                 QDomElement _search_timetable(unsigned int id);
+                ///
+                /// \brief search subject and return the node that contein data
+                /// \arg id id to search
+                /// \return timetable found
+                ///
+                QDomElement _search_subject(unsigned int id);
                 ///
                 /// \brief get all lessons ids to found an empty ud
                 /// \return ids founds

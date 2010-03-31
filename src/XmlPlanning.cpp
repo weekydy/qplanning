@@ -182,88 +182,44 @@ void XmlPlanning::refresh_all_view()
 {
         qDebug( Q_FUNC_INFO );
 
-        QDomNodeList timetable_id_list = m_lesson_list.childNodes();
-        QVector<KeyValue> timetable_list;
-        QLocale locale;
-
-        for (int i = 0; i != timetable_id_list.count(); i++)
-        {
-                QString timetable = locale.dayName(timetable_id_list.item(i)
-                                    .firstChildElement("day")
-                                    .firstChild().toText().data().toInt());
-                timetable += " ";
-                timetable += timetable_id_list.item(i).firstChildElement("hour")
-                                              .firstChild().toText().data();
-                unsigned int id = timetable_id_list.item(i)
-                                  .firstChildElement("ident")
-                                  .firstChild().toText().data().toUInt();
-
-                qDebug() << "begin 2";
-                qDebug(qPrintable(timetable));
-                qDebug("%d", id);
-                qDebug() << "end 2";
-
-                KeyValue current_item;
-                current_item.key = id;
-                current_item.value = timetable;
-                timetable_list.push_back(current_item);
-        }
-
         emit new_lessons_avalables(get_lessons());
-        emit new_timetable_avalable(timetable_list);
+        emit new_timetable_avalable(get_timetables());
 }
 
-SubjectData XmlPlanning::search_id(KeyValue id)
+SubjectData XmlPlanning::search_subject(KeyValue id)
 {
         qDebug( Q_FUNC_INFO );
-        QDomNodeList lesson_id_list = m_lesson_id_list.childNodes();
         SubjectData return_value;
+        QDomElement element = _search_subject(id.key);
 
-        for (int i = 0; i != lesson_id_list.count(); i++)
-        {
-                unsigned int current_id = lesson_id_list.item(i)
-                                          .firstChildElement("ident")
-                                          .firstChild().toText().data().toUInt();
-                if (current_id == id.key)
-                {
-                        return_value.id = current_id;
-                        return_value.name = lesson_id_list.item(i)
-                                            .firstChildElement("name")
-                                            .firstChild().toText().data();
-                        return_value.teacher = lesson_id_list.item(i)
-                                               .firstChildElement("teacher")
-                                               .firstChild().toText().data();
-                        return_value.id = lesson_id_list.item(i)
-                                          .firstChildElement("ident")
-                                          .firstChild().toText().data().toUInt();
-                        QString color = lesson_id_list.item(i)
-                                        .firstChildElement("color")
-                                        .firstChild().toText().data();
-                        QString background = lesson_id_list.item(i)
-                                             .firstChildElement("background")
-                                             .firstChild().toText().data();
-                        separe_color(color, return_value.red_text,
-                                     return_value.green_text,
-                                     return_value.blue_text);
-                        separe_color(background, return_value.red_background,
-                                     return_value.green_background,
-                                     return_value.blue_background);
+        return_value.id = id.key;
+        return_value.name = element.firstChildElement("name")
+                            .firstChild().toText().data();
+        return_value.teacher = element.firstChildElement("teacher")
+                               .firstChild().toText().data();
+        return_value.id = element.firstChildElement("ident")
+                          .firstChild().toText().data().toUInt();
+        QString color = element.firstChildElement("color")
+                        .firstChild().toText().data();
+        QString background = element.firstChildElement("background")
+                             .firstChild().toText().data();
+        separe_color(color, return_value.red_text,
+                     return_value.green_text,
+                     return_value.blue_text);
+        separe_color(background, return_value.red_background,
+                     return_value.green_background,
+                     return_value.blue_background);
 
-                        qDebug("begin debug");
-                        qDebug() << qPrintable(color);
-                        qDebug() << qPrintable(background);
-                        qDebug() << return_value.id;
-                        qDebug("end debug");
+        qDebug("begin debug");
+        qDebug() << qPrintable(color);
+        qDebug() << qPrintable(background);
+        qDebug() << return_value.id;
+        qDebug("end debug");
 
-                        return_value.is_exist = true;
-                        return return_value;
-                }
-        }
-        return_value.is_exist = false;
         return return_value;
 }
 
-Timetable XmlPlanning::search_id_lesson(KeyValue id)
+Timetable XmlPlanning::search_timetable(KeyValue id)
 {
         qDebug( Q_FUNC_INFO );
         QDomElement element_found = _search_timetable(id.key);
@@ -361,6 +317,22 @@ QDomElement XmlPlanning::_search_timetable(unsigned int id)
                 }
         }
         throw;
+}
+
+QDomElement XmlPlanning::_search_subject(unsigned int id)
+{
+        QDomNodeList lesson_id_list = m_lesson_id_list.childNodes();
+
+        for (int i = 0; i != lesson_id_list.count(); i++)
+        {
+                unsigned int current_id = lesson_id_list.item(i)
+                                          .firstChildElement("ident")
+                                          .firstChild().toText().data().toUInt();
+                if (current_id == id)
+                {
+                        return lesson_id_list.item(i).toElement();
+                }
+        }
 }
 
 void XmlPlanning::separe_color(QString& src, int& red, int& green, int& blue)
@@ -622,6 +594,14 @@ void XmlPlanning::del_timetable(KeyValue timetable)
         element_to_delete.parentNode().removeChild(element_to_delete);
 }
 
+void XmlPlanning::del_subject(KeyValue subject)
+{
+        QDomElement element_to_delete = _search_subject(subject.key);
+        Q_ASSERT(!element_to_delete.isNull());
+
+        element_to_delete.parentNode().removeChild(element_to_delete);
+}
+
 unsigned int XmlPlanning::add_empty_id(QString name)
 {
         qDebug( Q_FUNC_INFO );
@@ -686,6 +666,49 @@ QVector<KeyValue> XmlPlanning::get_lessons()
                 lesson_list.push_back(current_item);
         }
         return lesson_list;
+}
+
+QVector<KeyValue> XmlPlanning::get_timetables()
+{
+        QDomNodeList timetable_id_list = m_lesson_list.childNodes();
+        QVector<KeyValue> timetable_list;
+        QLocale locale;
+
+        for (int i = 0; i != timetable_id_list.count(); i++)
+        {
+                QString timetable = locale.dayName(timetable_id_list.item(i)
+                                    .firstChildElement("day")
+                                    .firstChild().toText().data().toInt());
+                timetable += " ";
+                timetable += timetable_id_list.item(i).firstChildElement("hour")
+                                              .firstChild().toText().data();
+                unsigned int id = timetable_id_list.item(i)
+                                  .firstChildElement("ident")
+                                  .firstChild().toText().data().toUInt();
+
+                qDebug() << "begin 2";
+                qDebug(qPrintable(timetable));
+                qDebug("%d", id);
+                qDebug() << "end 2";
+
+                KeyValue current_item;
+                current_item.key = id;
+                current_item.value = timetable;
+                timetable_list.push_back(current_item);
+        }
+        return timetable_list;
+}
+
+QVector<Timetable> XmlPlanning::get_full_timetables()
+{
+        QVector<KeyValue> timetable_list = get_timetables();
+        QVector<Timetable> full_timetable_list;
+        for (int i = 0; i != timetable_list.size(); i++)
+        {
+                Timetable timetable_to_add = search_timetable(timetable_list[i]);
+                full_timetable_list.push_back(timetable_to_add);
+        }
+        return full_timetable_list;
 }
 
 QString XmlPlanning::get_filename()
