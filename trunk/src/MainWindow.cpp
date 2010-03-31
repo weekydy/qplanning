@@ -182,7 +182,9 @@ void MainWindow::del_pressed()
         KeyValue value_to_return;
         if (m_layout_1_2_2->currentIndex() == m_subjects_id)
         {
-                //nothing at this time
+               value_to_return.value = m_subjects->currentItem()->text();
+               value_to_return.key = m_subject_items[m_subjects->currentRow()].key;
+               emit del_subject(value_to_return);
         }
         else
         {

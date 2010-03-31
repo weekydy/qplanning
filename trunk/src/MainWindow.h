@@ -161,11 +161,16 @@ class MainWindow : public QMainWindow
                 void add_timetable();
                 ///
                 /// \brief signel emit when timetable need to be delete
+                /// \arg[in] data id and name of the id to dell
                 ///
                 void del_timetable(KeyValue data);
                 ///
-                /// \brief signal emit when file need to be open
+                /// \brief signal emit when subject need to be delete
                 /// \arg[in] data id and name of the id to dell
+                ///
+                void del_subject(KeyValue data);
+                ///
+                /// \brief signal emit when file need to be open
                 ///
                 void open_file();
                 ///

@@ -47,6 +47,7 @@ Control::Control() : m_windows(), m_config_subject(&m_windows), m_config_timetab
         QObject::connect(&m_windows, SIGNAL(add_subject()), this, SLOT(add_subject()));
         QObject::connect(&m_windows, SIGNAL(add_timetable()), this, SLOT(add_timetable()));
         QObject::connect(&m_windows, SIGNAL(del_timetable(KeyValue)), this, SLOT(del_timetable(KeyValue)));
+        QObject::connect(&m_windows, SIGNAL(del_subject(KeyValue)), this, SLOT(del_subject(KeyValue)));
         QObject::connect(&m_windows, SIGNAL(quit_needed()), this, SLOT(manage_quit()));
 
         manage_create_file();
@@ -99,7 +100,7 @@ void Control::manage_create_file()
 void Control::show_subject(KeyValue subject)
 {
         qDebug( Q_FUNC_INFO );
-        SubjectData info = m_config.search_id(subject);
+        SubjectData info = m_config.search_subject(subject);
         qDebug() << "begin info list";
         qDebug() << qPrintable(info.name);
         qDebug() << qPrintable(info.teacher);
@@ -118,7 +119,7 @@ void Control::show_timetable(KeyValue timetable)
         qDebug() << qPrintable(timetable.value);
         qDebug() << "end timetable info list";
 
-        Timetable info = m_config.search_id_lesson(timetable);
+        Timetable info = m_config.search_timetable(timetable);
         QVector<KeyValue> lesson_list = m_config.get_lessons();
 
         qDebug() << "begin info list";
@@ -157,7 +158,7 @@ void Control::add_subject()
         KeyValue id_to_store;
         id_to_store.key = id;
         id_to_store.value = DEFAULT_ID_NAME;
-        SubjectData data = m_config.search_id(id_to_store);
+        SubjectData data = m_config.search_subject(id_to_store);
         m_config_subject.set_contant(&data);
         m_config_subject.show();
         m_is_modified = true;
@@ -179,7 +180,7 @@ void Control::add_timetable()
                 unsigned int id = m_config.add_empty_lesson();
                 KeyValue id_to_edit;
                 id_to_edit.key = id;
-                Timetable data = m_config.search_id_lesson(id_to_edit);
+                Timetable data = m_config.search_timetable(id_to_edit);
 
                 qDebug("begin info");
                 qDebug() << id;
@@ -193,6 +194,57 @@ void Control::add_timetable()
                 m_config_timetable.show();
                 m_is_modified = true;
         }
+}
+
+void Control::del_subject(KeyValue subject)
+{
+        bool delete_file = false;
+        bool operate_cancel = false;
+        QVector<Timetable> all_lesson = m_config.get_full_timetables();
+
+        for (int i = 0;i != all_lesson.size(); i++)
+        {
+                if (all_lesson[i].id_lesson == subject.key)
+                {
+                        int result;
+                        if (!delete_file)
+                        {
+                                QLocale locale;
+                                QString sentence = tr("this subject is referenced on ");
+                                sentence += locale.dayName(all_lesson[i].day);
+                                sentence += " ";
+                                sentence += all_lesson[i].unparsed_date;
+                                sentence += tr(" would you like to delete it ?");
+                                result = QMessageBox::question(&m_windows,
+                                                               tr("conflict detected"),
+                                                               sentence,
+                                                               QMessageBox::Yes
+                                                               | QMessageBox::YesAll
+                                                               | QMessageBox::No
+                                                               );
+                        }
+                        if (result == QMessageBox::No)
+                        {
+                                operate_cancel = true;
+                                break;
+                        }
+                        else
+                        {
+                                KeyValue element_to_del;
+                                element_to_del.key = all_lesson[i].ident;
+                                m_config.del_timetable(element_to_del);
+                                if (result == QMessageBox::YesAll)
+                                {
+                                        delete_file = true;
+                                }
+                        }
+                }
+        }
+        if (!operate_cancel)
+        {
+                m_config.del_subject(subject);
+        }
+        m_config.refresh_all_view();
 }
 
 void Control::del_timetable(KeyValue timetable)
