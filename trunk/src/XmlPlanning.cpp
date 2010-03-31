@@ -88,7 +88,12 @@ void XmlPlanning::open(QString filename)
 
 xmlerror XmlPlanning::verify_xsd()
 {
-        qDebug("verify xsd error");
+        /*
+         * disabling fealure : because sheama.load wount stop
+         * http://bugreports.qt.nokia.com/browse/QTBUG-6485
+         *
+
+        qDebug(Q_FUNC_INFO);
         QUrl xsd_file("file://" + QCoreApplication::applicationDirPath() + "/" + XSD_FILENAME);
         qDebug("file://%s/%s", qPrintable(QCoreApplication::applicationDirPath()), XSD_FILENAME);
         QXmlSchema schema;
@@ -114,6 +119,8 @@ xmlerror XmlPlanning::verify_xsd()
                         return NO_ERROR;
                 }
         }
+        */
+        return NO_ERROR;
 }
 xmlerror XmlPlanning::verify_id()
 {
@@ -177,12 +184,16 @@ void XmlPlanning::refresh_all_view()
 
         QDomNodeList timetable_id_list = m_lesson_list.childNodes();
         QVector<KeyValue> timetable_list;
+        QLocale locale;
 
         for (int i = 0; i != timetable_id_list.count(); i++)
         {
-                QString timetable = timetable_id_list.item(i)
-                                    .firstChildElement("hour")
-                                    .firstChild().toText().data();
+                QString timetable = locale.dayName(timetable_id_list.item(i)
+                                    .firstChildElement("day")
+                                    .firstChild().toText().data().toInt());
+                timetable += " ";
+                timetable += timetable_id_list.item(i).firstChildElement("hour")
+                                              .firstChild().toText().data();
                 unsigned int id = timetable_id_list.item(i)
                                   .firstChildElement("ident")
                                   .firstChild().toText().data().toUInt();
@@ -269,6 +280,8 @@ Timetable XmlPlanning::search_id_lesson(KeyValue id)
                                                    .firstChild().toText().data();
         return_value.id_lesson = element_found.firstChildElement("id-lesson")
                                               .firstChild().toText().data().toUInt();
+        return_value.day = (Day) element_found.firstChildElement("day")
+                                        .firstChild().toText().data().toUInt();
         if (element_found.firstChildElement("group").isNull())
         {
                 return_value.group = ALL_GROUP;
@@ -458,6 +471,7 @@ QDomElement XmlPlanning::_add_empty_lesson()
         id.appendChild(m_xml_document.createElement("id-lesson"));
         id.appendChild(m_xml_document.createElement("group"));
         id.appendChild(m_xml_document.createElement("week"));
+        id.appendChild(m_xml_document.createElement("day"));
 
         //creating default node
         id.firstChildElement("class").appendChild(m_xml_document.createTextNode(""));
@@ -465,6 +479,7 @@ QDomElement XmlPlanning::_add_empty_lesson()
         id.firstChildElement("group").appendChild(m_xml_document.createTextNode("3"));
         id.firstChildElement("week").appendChild(m_xml_document.createTextNode("3"));
         id.firstChildElement("hour").appendChild(m_xml_document.createTextNode("undefined"));
+        id.firstChildElement("day").appendChild(m_xml_document.createTextNode("1"));
 
         //get all nodes
         QVector<unsigned int> idents = _all_ident_lesson();
@@ -546,6 +561,7 @@ void XmlPlanning::update_timetable(Timetable id)
                 _add_empty_lesson();
         }
 
+        node_to_edit.firstChildElement("day").firstChild().toText().setData(QString::number(id.day));
         node_to_edit.firstChildElement("hour").firstChild().toText().setData(id.unparsed_date);
         node_to_edit.firstChildElement("id-lesson").firstChild().toText().setData(QString::number(id.id_lesson));
         node_to_edit.firstChildElement("class").firstChild().toText().setData(id.classroom);
