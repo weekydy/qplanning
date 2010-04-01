@@ -116,6 +116,14 @@ void DrawTimetable::_create_labels()
 void DrawTimetable::create_cases(QVector<FullTimetable> cases)
 {
         qDebug( Q_FUNC_INFO );
+        _clean_timetable_rect();
+        _create_timetable_rect(cases);
+        _draw_text();
+}
+
+void DrawTimetable::_create_timetable_rect(QVector<FullTimetable> cases)
+{
+        qDebug( Q_FUNC_INFO );
         for (int i = 0; i != cases.size(); i++)
         {
                 qDebug("ok");
@@ -138,7 +146,9 @@ void DrawTimetable::create_cases(QVector<FullTimetable> cases)
 
                 QRect background_timetable(x, y, l, h);
 
-                addRect(background_timetable)->setBrush(
+                RectData current_rect;
+                current_rect.item = addRect(background_timetable);
+                current_rect.item->setBrush(
                                                QBrush(
                                                QColor(
                                                cases[i].subject_associated.red_background,
@@ -146,6 +156,26 @@ void DrawTimetable::create_cases(QVector<FullTimetable> cases)
                                                cases[i].subject_associated.blue_background
                                                )
                                                )
-                                               );
+                                       );
+                current_rect.x = x;
+                current_rect.y = y;
+                current_rect.h = h;
+                current_rect.l = l;
+                m_timetable_rect.push_back(current_rect);
         }
+}
+
+void DrawTimetable::_clean_timetable_rect()
+{
+        for (int i = 0; i != m_timetable_rect.size(); i++)
+        {
+                removeItem(m_timetable_rect[i].item);
+                delete m_timetable_rect[i].item;
+        }
+        m_timetable_rect.clear();
+}
+
+void DrawTimetable::_draw_text()
+{
+
 }

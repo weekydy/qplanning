@@ -9,6 +9,19 @@
 #include "define.h"
 #include "FullTimetable.h"
 ///
+/// \struct RectData;
+/// \brief store rect and his coordonies
+struct RectData
+{
+        int x;
+        int y;
+        int h;
+        int l;
+        QGraphicsRectItem* item;
+};
+
+
+///
 /// \class DrawTimetable DrawTimetable.h
 /// \brief draw the timetable with data
 ///
@@ -35,6 +48,21 @@ class DrawTimetable : public QGraphicsScene
                 /// \brief place the title of collums and rows
                 ///
                 void _create_labels();
+                ///
+                /// \brief create all timetable rect
+                ///
+                void _create_timetable_rect(QVector<FullTimetable> cases);
+                ///
+                /// \brief clean previous rect
+                ///
+                void _clean_timetable_rect();
+                ///
+                /// \brief draw the text into text
+                ///
+                void _draw_text();
+
+        private:
+                QVector<RectData> m_timetable_rect;
 };
 
 #endif // DRAWTIMETABLE_H
