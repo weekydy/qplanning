@@ -11,6 +11,7 @@ DrawTimetable::DrawTimetable(QObject* parent) : QGraphicsScene(parent)
 void DrawTimetable::_create_cases()
 {
         qDebug( Q_FUNC_INFO );
+        setBackgroundBrush(Qt::white);
         QRect border(LEFT_PER_MIL,
                      TOP_PER_MIL,
                      LENGTH - (LEFT_PER_MIL + RIGHT_PER_MIL),
@@ -70,6 +71,8 @@ void DrawTimetable::_create_labels()
 
                 day_label[i-1]->setX(LEFT_PER_MIL + (2*i-1) * COLLUM_PREMITIVE_PER_MIL + center_x);
                 day_label[i-1]->setY(TOP_PER_MIL + center_y);
+
+                day_label[i-1]->setDefaultTextColor(Qt::black);
         }
 
         for (int i = 1; i != 5; i++)
@@ -87,6 +90,7 @@ void DrawTimetable::_create_labels()
 
                 hour_label[i-1]->setX(LEFT_PER_MIL + center_x);
                 hour_label[i-1]->setY(TOP_PER_MIL + i*ROW_PREMITIVE_PER_MIL + center_y);
+                hour_label[i-1]->setDefaultTextColor(Qt::black);
         }
 
         for (int i = 6; i != 10; i++)
@@ -104,5 +108,44 @@ void DrawTimetable::_create_labels()
 
                 hour_label[i-2]->setX(LEFT_PER_MIL + center_x);
                 hour_label[i-2]->setY(TOP_PER_MIL + i*ROW_PREMITIVE_PER_MIL + center_y);
+
+                hour_label[i-2]->setDefaultTextColor(Qt::black);
+        }
+}
+
+void DrawTimetable::create_cases(QVector<FullTimetable> cases)
+{
+        qDebug( Q_FUNC_INFO );
+        for (int i = 0; i != cases.size(); i++)
+        {
+                qDebug("ok");
+                int x = LEFT_PER_MIL + COLLUM_PREMITIVE_PER_MIL;
+                x += cases[i].timetable.day * 2 * COLLUM_PREMITIVE_PER_MIL;
+                int y = TOP_PER_MIL + ROW_PREMITIVE_PER_MIL;
+                switch (cases[i].timetable.half_day)
+                {
+                        case MORNING:
+                                y += ROW_PREMITIVE_PER_MIL * cases[i].timetable.begin_interval;
+                                break;
+                        case AFTERNOON:
+                                y += 5 * ROW_PREMITIVE_PER_MIL;
+                                y += ROW_PREMITIVE_PER_MIL * cases[i].timetable.begin_interval;
+                                break;
+                }
+
+                int h = (cases[i].timetable.end_interval - cases[i].timetable.begin_interval) * ROW_PREMITIVE_PER_MIL;
+                int l = 2*COLLUM_PREMITIVE_PER_MIL;
+
+                QRect background_timetable(x, y, l, h);
+
+                addRect(background_timetable)->setBrush(
+                                               QBrush(
+                                               QColor(
+                                               cases[i].subject_associated.red_background,
+                                               cases[i].subject_associated.green_background,
+                                               cases[i].subject_associated.blue_background
+                                               )
+                                               )
+                                               );
         }
 }

@@ -33,6 +33,7 @@
 #include "TimeTableWindow.h"
 #include "TimeTable.h"
 #include "DrawTimetable.h"
+#include "FullTimetable.h"
 #include "define.h"
 
 ///
@@ -54,7 +55,14 @@ class Control : public QObject
                 /// \brief tell to user if he would like save is fale and save it
                 ///
                 void save_before_changing();
-
+                ///
+                /// \brief collect all timetable and put his associeted id
+                ///
+                QVector<FullTimetable> create_full_timetable();
+                ///
+                /// \brief update veuw when needed;
+                ///
+                void _update_all_veuw();
         private:
                 bool m_is_modified;
                 MainWindow m_windows;
@@ -120,6 +128,6 @@ class Control : public QObject
                 ///
                 /// \brief update timetable after editing subject
                 ///
-                void update_timetable();
+                void update_timetable();             
 };
 #endif

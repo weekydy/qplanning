@@ -21,6 +21,7 @@ set(
 	KeyValue.h
 	TimeTable.h
 	DrawTimetable.h
+	FullTimetable.h
 	CACHE FILEPATH "header files" FORCE
 )
 

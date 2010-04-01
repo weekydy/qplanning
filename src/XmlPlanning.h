@@ -136,6 +136,13 @@ class XmlPlanning : public QObject
                 ///
                 QVector<Timetable> get_full_timetables();
                 ///
+                /// \brief get all data of all lesson
+                /// \return return all lessons data (hour, id, id_lesson, ...) see SubjectData structure for more info
+                /// differency bitween this method and get_lesson() is that get_lesson only return id and and value composend by day and unparsed_hour.
+                /// this method is more disigned to drowing the timetable and get_lessons is dissigned to be veuwved in QListView
+                ///
+                QVector<SubjectData> get_full_subjects();
+                ///
                 /// \brief accessor to get the m_filename private attribut
                 /// \return m_filename
                 ///
