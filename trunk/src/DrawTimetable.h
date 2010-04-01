@@ -7,6 +7,7 @@
 #include <QVector>
 #include <QRect>
 #include "define.h"
+#include "FullTimetable.h"
 ///
 /// \class DrawTimetable DrawTimetable.h
 /// \brief draw the timetable with data
@@ -20,6 +21,11 @@ class DrawTimetable : public QGraphicsScene
                 ///
                 DrawTimetable(QObject* parent = 0);
 
+                ///
+                /// \brief creates cases
+                /// \arg cases cases to draw
+                ///
+                void create_cases(QVector<FullTimetable> cases);
         private:
                 ///
                 /// \brief create cases of the timetable

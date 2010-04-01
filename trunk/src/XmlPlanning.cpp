@@ -711,6 +711,18 @@ QVector<Timetable> XmlPlanning::get_full_timetables()
         return full_timetable_list;
 }
 
+QVector<SubjectData> XmlPlanning::get_full_subjects()
+{
+        QVector<KeyValue> lessons_list = get_lessons();
+        QVector<SubjectData> full_lessons_list;
+        for (int i = 0; i != lessons_list.size(); i++)
+        {
+                SubjectData subject_to_add = search_subject(lessons_list[i]);
+                full_lessons_list.push_back(subject_to_add);
+        }
+        return full_lessons_list;
+}
+
 QString XmlPlanning::get_filename()
 {
         return m_filename;

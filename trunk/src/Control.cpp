@@ -82,7 +82,7 @@ void Control::manage_open_file()
         if (!filename.isNull())
         {
                 m_config.open(filename);
-                m_config.refresh_all_view();
+                _update_all_veuw();
         }
 }
 
@@ -139,7 +139,7 @@ void Control::update_subject()
 {
         SubjectData subject = m_config_subject.get_contant();
         m_config.update_id_lesson(subject);
-        m_config.refresh_all_view();
+        _update_all_veuw();
         m_is_modified = true;
 }
 
@@ -148,7 +148,7 @@ void Control::update_timetable()
         qDebug( Q_FUNC_INFO );
         Timetable timetable = m_config_timetable.get_content();
         m_config.update_timetable(timetable);
-        m_config.refresh_all_view();
+        _update_all_veuw();
         m_is_modified = true;
 }
 
@@ -244,7 +244,7 @@ void Control::del_subject(KeyValue subject)
         {
                 m_config.del_subject(subject);
         }
-        m_config.refresh_all_view();
+        _update_all_veuw();
 }
 
 void Control::del_timetable(KeyValue timetable)
@@ -259,7 +259,7 @@ void Control::del_timetable(KeyValue timetable)
         {
                 qDebug( "okey : save" ),
                 m_config.del_timetable(timetable);
-                m_config.refresh_all_view();
+                _update_all_veuw();
         }
 }
 
@@ -301,4 +301,42 @@ void Control::manage_quit()
         m_config_timetable.close();
         m_config_subject.close();
         qApp->quit();
+}
+
+QVector<FullTimetable> Control::create_full_timetable()
+{
+        qDebug( Q_FUNC_INFO );
+        QVector<Timetable> all_timetable = m_config.get_full_timetables();
+        QVector<SubjectData> all_subject = m_config.get_full_subjects();
+        QVector<FullTimetable> full_timetable;
+        bool id_found = false;
+
+        for (int i = 0; i != all_timetable.size(); i++)
+        {
+                FullTimetable current_full_timetable;
+                current_full_timetable.timetable = all_timetable[i];
+                for (int j = 0; j != all_subject.size(); j++)
+                {
+                        qDebug("current_full_timetable.timetable.id_lesson = %d",
+                               current_full_timetable.timetable.id_lesson);
+                        qDebug("all_subject[j].id = %d",
+                               all_subject[j].id);
+                        if (current_full_timetable.timetable.id_lesson == all_subject[j].id)
+                        {
+                                current_full_timetable.subject_associated = all_subject[j];
+                                full_timetable.push_back(current_full_timetable);
+                                id_found = true;
+                                qDebug("ok");
+                                break;
+                        }
+                }
+                Q_ASSERT(id_found);
+        }
+        return full_timetable;
+}
+
+void Control::_update_all_veuw()
+{
+        m_config.refresh_all_view();
+        m_timetable_veuw.create_cases(create_full_timetable());
 }
