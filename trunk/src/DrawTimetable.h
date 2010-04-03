@@ -6,8 +6,10 @@
 #include <QLocale>
 #include <QVector>
 #include <QRect>
+#include <QPainter>
 #include "define.h"
 #include "FullTimetable.h"
+#include "QGraphicsItemBoundedText.h"
 ///
 /// \struct RectData;
 /// \brief store rect and his coordonies
@@ -59,7 +61,7 @@ class DrawTimetable : public QGraphicsScene
                 ///
                 /// \brief draw the text into text
                 ///
-                void _draw_text();
+                void _draw_text(QVector<FullTimetable> cases);
 
         private:
                 QVector<RectData> m_timetable_rect;

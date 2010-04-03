@@ -118,7 +118,7 @@ void DrawTimetable::create_cases(QVector<FullTimetable> cases)
         qDebug( Q_FUNC_INFO );
         _clean_timetable_rect();
         _create_timetable_rect(cases);
-        _draw_text();
+        _draw_text(cases);
 }
 
 void DrawTimetable::_create_timetable_rect(QVector<FullTimetable> cases)
@@ -175,7 +175,21 @@ void DrawTimetable::_clean_timetable_rect()
         m_timetable_rect.clear();
 }
 
-void DrawTimetable::_draw_text()
+void DrawTimetable::_draw_text(QVector<FullTimetable> cases)
 {
-
+        qDebug( Q_FUNC_INFO );
+        QVector<QGraphicsItemBoundedText *> all_text;
+        for (int i = 0; i != m_timetable_rect.size(); i++)
+        {
+               all_text.push_back(new QGraphicsItemBoundedText);
+               all_text[i]->setColor(cases[i].subject_associated.red_text,
+                                    cases[i].subject_associated.green_text,
+                                    cases[i].subject_associated.blue_text);
+               all_text[i]->setText(cases[i].subject_associated.name);
+               all_text[i]->setBoundingRect(m_timetable_rect[i].x,
+                                           m_timetable_rect[i].y,
+                                           m_timetable_rect[i].h,
+                                           m_timetable_rect[i].l);
+               addItem(all_text[i]);
+        }
 }
