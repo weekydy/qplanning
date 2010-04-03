@@ -1,4 +1,26 @@
+/*
+ * ./DrawTimetable.cpp
+ * Copyright (C) 2010 Lameire Alexis
+ *
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * this program. If not, see <http://www.gnu.org/licenses/>.
+ */
 #include "DrawTimetable.h"
+///
+/// \file DrawTimetable.cpp
+/// \brief draw timetable with data of model
+/// \author Lameire Alexis
+///
 
 DrawTimetable::DrawTimetable(QObject* parent) : QGraphicsScene(parent)
 {
@@ -116,7 +138,7 @@ void DrawTimetable::_create_labels()
 void DrawTimetable::create_cases(QVector<FullTimetable> cases)
 {
         qDebug( Q_FUNC_INFO );
-        _clean_timetable_rect();
+        _clean_timetable_rect_and_text();
         _create_timetable_rect(cases);
         _draw_text(cases);
 }
@@ -128,7 +150,7 @@ void DrawTimetable::_create_timetable_rect(QVector<FullTimetable> cases)
         {
                 qDebug("ok");
                 int x = LEFT_PER_MIL + COLLUM_PREMITIVE_PER_MIL;
-                x += cases[i].timetable.day * 2 * COLLUM_PREMITIVE_PER_MIL;
+                x += (cases[i].timetable.day - 1) * 2 * COLLUM_PREMITIVE_PER_MIL;
                 int y = TOP_PER_MIL + ROW_PREMITIVE_PER_MIL;
                 switch (cases[i].timetable.half_day)
                 {
@@ -142,9 +164,9 @@ void DrawTimetable::_create_timetable_rect(QVector<FullTimetable> cases)
                 }
 
                 int h = (cases[i].timetable.end_interval - cases[i].timetable.begin_interval) * ROW_PREMITIVE_PER_MIL;
-                int l = 2*COLLUM_PREMITIVE_PER_MIL;
+                int w = 2*COLLUM_PREMITIVE_PER_MIL;
 
-                QRect background_timetable(x, y, l, h);
+                QRect background_timetable(x, y, w, h);
 
                 RectData current_rect;
                 current_rect.item = addRect(background_timetable);
@@ -160,36 +182,68 @@ void DrawTimetable::_create_timetable_rect(QVector<FullTimetable> cases)
                 current_rect.x = x;
                 current_rect.y = y;
                 current_rect.h = h;
-                current_rect.l = l;
+                current_rect.w = w;
                 m_timetable_rect.push_back(current_rect);
         }
 }
 
-void DrawTimetable::_clean_timetable_rect()
+void DrawTimetable::_clean_timetable_rect_and_text()
 {
         for (int i = 0; i != m_timetable_rect.size(); i++)
         {
                 removeItem(m_timetable_rect[i].item);
+                removeItem(m_all_lesson[i]);
+                removeItem(m_all_class[i]);
+                removeItem(m_all_teacher[i]);
                 delete m_timetable_rect[i].item;
+                delete m_all_lesson[i];
+                delete m_all_class[i];
+                delete m_all_teacher[i];
         }
         m_timetable_rect.clear();
+        m_all_lesson.clear();
+        m_all_class.clear();
+        m_all_teacher.clear();
 }
 
 void DrawTimetable::_draw_text(QVector<FullTimetable> cases)
 {
         qDebug( Q_FUNC_INFO );
-        QVector<QGraphicsItemBoundedText *> all_text;
+
         for (int i = 0; i != m_timetable_rect.size(); i++)
         {
-               all_text.push_back(new QGraphicsItemBoundedText);
-               all_text[i]->setColor(cases[i].subject_associated.red_text,
+               m_all_lesson.push_back(new QGraphicsItemBoundedText);
+               m_all_lesson[i]->setColor(cases[i].subject_associated.red_text,
                                     cases[i].subject_associated.green_text,
                                     cases[i].subject_associated.blue_text);
-               all_text[i]->setText(cases[i].subject_associated.name);
-               all_text[i]->setBoundingRect(m_timetable_rect[i].x,
+               m_all_lesson[i]->setText(cases[i].subject_associated.name);
+               m_all_lesson[i]->setBoundingRect(m_timetable_rect[i].x,
                                            m_timetable_rect[i].y,
-                                           m_timetable_rect[i].h,
-                                           m_timetable_rect[i].l);
-               addItem(all_text[i]);
+                                           m_timetable_rect[i].w,
+                                           m_timetable_rect[i].h/3);
+
+               m_all_class.push_back(new QGraphicsItemBoundedText);
+               m_all_class[i]->setColor(cases[i].subject_associated.red_text,
+                                      cases[i].subject_associated.green_text,
+                                      cases[i].subject_associated.blue_text);
+               m_all_class[i]->setText(cases[i].timetable.classroom);
+               m_all_class[i]->setBoundingRect(m_timetable_rect[i].x,
+                                             m_timetable_rect[i].y + m_timetable_rect[i].h/3,
+                                             m_timetable_rect[i].w,
+                                             m_timetable_rect[i].h/3);
+
+               m_all_teacher.push_back(new QGraphicsItemBoundedText);
+               m_all_teacher[i]->setColor(cases[i].subject_associated.red_text,
+                                        cases[i].subject_associated.green_text,
+                                        cases[i].subject_associated.blue_text);
+               m_all_teacher[i]->setText(cases[i].subject_associated.teacher);
+               m_all_teacher[i]->setBoundingRect(m_timetable_rect[i].x,
+                                               m_timetable_rect[i].y + (m_timetable_rect[i].h * 2)/3,
+                                               m_timetable_rect[i].w,
+                                               m_timetable_rect[i].h/3);
+
+               addItem(m_all_lesson[i]);
+               addItem(m_all_class[i]);
+               addItem(m_all_teacher[i]);
         }
 }

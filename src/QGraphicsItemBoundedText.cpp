@@ -1,4 +1,26 @@
+/*
+ * ./QGraphicsItemBoundedText.cpp
+ * Copyright (C) 2010 Lameire Alexis
+ *
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * this program. If not, see <http://www.gnu.org/licenses/>.
+ */
 #include "QGraphicsItemBoundedText.h"
+///
+/// \file QGraphicsItemBoundedText.cpp
+/// \brief implementation of QGraphicsItemBoundedText class
+/// \author Lameire Alexis
+///
 
 QGraphicsItemBoundedText::QGraphicsItemBoundedText() : color(255,255,255)
 {
@@ -9,10 +31,10 @@ void QGraphicsItemBoundedText::paint(QPainter *painter, const QStyleOptionGraphi
         qDebug( Q_FUNC_INFO );
         int i;
         QFont font = painter->font();
-        int font_size = bounding_rect.width();
-        if ((font_size * m_text.size()) >= bounding_rect.height())
+        int font_size = bounding_rect.height();
+        if ((font_size * m_text.size()) >= bounding_rect.width())
         {
-                font_size = font_size / m_text.size();
+                font_size = bounding_rect.width() / m_text.size();
         }
         font.setPixelSize(font_size);
         painter->setPen(color);
@@ -42,9 +64,9 @@ void QGraphicsItemBoundedText::setColor(int r, int g, int b)
         }
 }
 
-void QGraphicsItemBoundedText::setBoundingRect(int x, int y, int h, int l)
+void QGraphicsItemBoundedText::setBoundingRect(int x, int y, int w, int h)
 {
-        bounding_rect.setRect(x, y, l, h);
+        bounding_rect.setRect(x, y, w, h);
 }
 
 QRectF QGraphicsItemBoundedText::boundingRect() const
