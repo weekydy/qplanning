@@ -22,6 +22,7 @@ set(
 	TimeTable.h
 	DrawTimetable.h
 	FullTimetable.h
+	QGraphicsItemBoundedText.h
 	CACHE FILEPATH "header files" FORCE
 )
 
@@ -34,6 +35,7 @@ set(
 	SubjectDataWindow.cpp
 	TimeTableWindow.cpp
 	DrawTimetable.cpp
+	QGraphicsItemBoundedText.cpp
 	CACHE FILEPATH "source files" FORCE
 )
 
