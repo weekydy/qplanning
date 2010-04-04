@@ -29,23 +29,38 @@ QGraphicsItemBoundedText::QGraphicsItemBoundedText() : color(255,255,255)
 void QGraphicsItemBoundedText::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
         qDebug( Q_FUNC_INFO );
-        int i;
-        QFont font = painter->font();
-        int font_size = bounding_rect.height();
-        if ((font_size * m_text.size()) >= bounding_rect.width())
+        if (!m_text.isNull())
         {
-                font_size = bounding_rect.width() / m_text.size();
+                int i;
+                QFont font = painter->font();
+                int font_size = bounding_rect.height();
+                if ((font_size * m_text.size()) >= bounding_rect.width())
+                {
+                        qDebug("size of string ; %d", m_text.size());
+                        qDebug("bounding_rect.width : %d", m_text.size());
+                        font_size = bounding_rect.width() / m_text.size();
+                        qDebug("font size : %d", font_size);
+                }
+                font.setPixelSize(font_size);
+                painter->setPen(color);
+                painter->setFont(font);
+                painter->drawText(bounding_rect, Qt::AlignCenter, m_text, &bounding_rect);
         }
-        font.setPixelSize(font_size);
-        painter->setPen(color);
-        painter->setFont(font);
-        painter->drawText(bounding_rect, Qt::AlignCenter, m_text, &bounding_rect);
 }
 
 void QGraphicsItemBoundedText::setText(QString text)
 {
         qDebug( Q_FUNC_INFO );
-        m_text = text;
+        if (text.isNull())
+        {
+                qDebug("free ok");
+                m_text.clear();
+        }
+        else
+        {
+                qDebug("set ok");
+                m_text = text;
+        }
 }
 
 void QGraphicsItemBoundedText::setColor(int r, int g, int b)

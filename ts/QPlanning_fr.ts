@@ -96,13 +96,13 @@
 <context>
     <name>DrawTimetable</name>
     <message>
-        <location filename="../src/DrawTimetable.cpp" line="81"/>
+        <location filename="../src/DrawTimetable.cpp" line="103"/>
         <source>M</source>
         <comment>Morning</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DrawTimetable.cpp" line="99"/>
+        <location filename="../src/DrawTimetable.cpp" line="121"/>
         <source>A</source>
         <comment>Afternoon</comment>
         <translation type="unfinished"></translation>
