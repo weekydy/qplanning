@@ -151,6 +151,12 @@ void DrawTimetable::_create_timetable_rect(QVector<FullTimetable> cases)
                 qDebug("ok");
                 int x = LEFT_PER_MIL + COLLUM_PREMITIVE_PER_MIL;
                 x += (cases[i].timetable.day - 1) * 2 * COLLUM_PREMITIVE_PER_MIL;
+
+                if (cases[i].timetable.week == UNPEER)
+                {
+                        x += COLLUM_PREMITIVE_PER_MIL;
+                }
+
                 int y = TOP_PER_MIL + ROW_PREMITIVE_PER_MIL;
                 switch (cases[i].timetable.half_day)
                 {
@@ -165,6 +171,11 @@ void DrawTimetable::_create_timetable_rect(QVector<FullTimetable> cases)
 
                 int h = (cases[i].timetable.end_interval - cases[i].timetable.begin_interval) * ROW_PREMITIVE_PER_MIL;
                 int w = 2*COLLUM_PREMITIVE_PER_MIL;
+
+                if (cases[i].timetable.week != ALL_WEEK)
+                {
+                        w /= 2;
+                }
 
                 QRect background_timetable(x, y, w, h);
 
@@ -221,6 +232,7 @@ void DrawTimetable::_draw_text(QVector<FullTimetable> cases)
                                            m_timetable_rect[i].y,
                                            m_timetable_rect[i].w,
                                            m_timetable_rect[i].h/3);
+               qDebug("first bounding rect");
 
                m_all_class.push_back(new QGraphicsItemBoundedText);
                m_all_class[i]->setColor(cases[i].subject_associated.red_text,
@@ -231,6 +243,7 @@ void DrawTimetable::_draw_text(QVector<FullTimetable> cases)
                                              m_timetable_rect[i].y + m_timetable_rect[i].h/3,
                                              m_timetable_rect[i].w,
                                              m_timetable_rect[i].h/3);
+               qDebug("second bounding rect");
 
                m_all_teacher.push_back(new QGraphicsItemBoundedText);
                m_all_teacher[i]->setColor(cases[i].subject_associated.red_text,
@@ -241,9 +254,11 @@ void DrawTimetable::_draw_text(QVector<FullTimetable> cases)
                                                m_timetable_rect[i].y + (m_timetable_rect[i].h * 2)/3,
                                                m_timetable_rect[i].w,
                                                m_timetable_rect[i].h/3);
+               qDebug("last bounding rect");
 
                addItem(m_all_lesson[i]);
                addItem(m_all_class[i]);
                addItem(m_all_teacher[i]);
+               qDebug("set items");
         }
 }
