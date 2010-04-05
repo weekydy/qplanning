@@ -49,6 +49,7 @@ Control::Control() : m_windows(), m_config_subject(&m_windows), m_config_timetab
         QObject::connect(&m_windows, SIGNAL(del_timetable(KeyValue)), this, SLOT(del_timetable(KeyValue)));
         QObject::connect(&m_windows, SIGNAL(del_subject(KeyValue)), this, SLOT(del_subject(KeyValue)));
         QObject::connect(&m_windows, SIGNAL(quit_needed()), this, SLOT(manage_quit()));
+        QObject::connect(&m_windows, SIGNAL(print_needed()), this, SLOT(print_timetable()));
 
         manage_create_file();
         m_windows.show();
@@ -339,4 +340,23 @@ void Control::_update_all_veuw()
 {
         m_config.refresh_all_view();
         m_timetable_veuw.create_cases(create_full_timetable());
+}
+
+void Control::print_timetable()
+{
+        qDebug( Q_FUNC_INFO );
+
+        QPrinter printer(QPrinter::HighResolution);
+        printer.setPaperSize(QPrinter::A4);
+        printer.setOrientation(QPrinter::Landscape);
+        printer.setPageMargins(0, 0, 0, 0, QPrinter::Millimeter);
+
+        QPrintDialog *dialog = new QPrintDialog(&printer, &m_windows);
+        dialog->setWindowTitle(tr("Print Document"));
+        if (dialog->exec() == QDialog::Accepted)
+        {
+                QPainter page(&printer);
+                page.setTransform(QTransform::fromScale(1.41421356, 1)); //sqrt(2);
+                m_timetable_veuw.render(&page);
+        }
 }

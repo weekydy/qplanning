@@ -27,6 +27,9 @@
 #include <QString>
 #include <QFileDialog>
 #include <QMessageBox>
+#include <QPrinter>
+#include <QPrintDialog>
+#include <QTransform>
 #include "MainWindow.h"
 #include "XmlPlanning.h"
 #include "SubjectDataWindow.h"
@@ -128,6 +131,10 @@ class Control : public QObject
                 ///
                 /// \brief update timetable after editing subject
                 ///
-                void update_timetable();             
+                void update_timetable();
+                ///
+                /// \brief print timetable
+                ///
+                void print_timetable();
 };
 #endif

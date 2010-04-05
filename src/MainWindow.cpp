@@ -41,6 +41,10 @@ MainWindow::MainWindow() : m_need_to_close(false)
         m_file_menu_open->setShortcut(QKeySequence(tr("Ctrl+O", "open file")));
         m_file_menu_open->setIcon(QIcon::fromTheme("document-open"));
 
+        m_file_menu_print = m_file_menu->addAction(tr("&Print"));
+        m_file_menu_print->setShortcut(QKeySequence(tr("Ctrl+P", "print")));
+        m_file_menu_print->setIcon(QIcon::fromTheme("document-print"));
+
         m_file_menu_save = m_file_menu->addAction(tr("&Save"));
         m_file_menu_save->setShortcut(QKeySequence(tr("Ctrl+S", "save fil")));
         m_file_menu_save->setIcon(QIcon::fromTheme("document-save"));
@@ -57,6 +61,7 @@ MainWindow::MainWindow() : m_need_to_close(false)
         m_toolbar = addToolBar(tr("toolbar"));
         m_toolbar->addAction(m_file_menu_new);
         m_toolbar->addAction(m_file_menu_open);
+        m_toolbar->addAction(m_file_menu_print);
         m_toolbar->addAction(m_file_menu_save);
         m_toolbar->addAction(m_file_menu_save_as);
         m_toolbar->addAction(m_file_menu_quit);
@@ -104,6 +109,7 @@ MainWindow::MainWindow() : m_need_to_close(false)
         QObject::connect(m_file_menu_new, SIGNAL(triggered()), this, SIGNAL(create_file()));
         QObject::connect(m_file_menu_save, SIGNAL(triggered()), this, SIGNAL(save_file()));
         QObject::connect(m_file_menu_save_as, SIGNAL(triggered()), this, SIGNAL(save_as_file()));
+        QObject::connect(m_file_menu_print, SIGNAL(triggered()), this, SIGNAL(print_needed()));
         QObject::connect(m_file_menu_quit, SIGNAL(triggered()), this, SLOT(manage_quit_needed()));
         QObject::connect(m_modify_lesson, SIGNAL(clicked()), this, SLOT(modify_pressed()));
         QObject::connect(m_add_lesson, SIGNAL(clicked()), this, SLOT(add_pressed()));
