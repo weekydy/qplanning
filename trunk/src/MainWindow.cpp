@@ -182,15 +182,21 @@ void MainWindow::del_pressed()
         KeyValue value_to_return;
         if (m_layout_1_2_2->currentIndex() == m_subjects_id)
         {
-               value_to_return.value = m_subjects->currentItem()->text();
-               value_to_return.key = m_subject_items[m_subjects->currentRow()].key;
-               emit del_subject(value_to_return);
+               if (m_subjects->currentItem() != NULL)
+               {
+                      value_to_return.value = m_subjects->currentItem()->text();
+                      value_to_return.key = m_subject_items[m_subjects->currentRow()].key;
+                      emit del_subject(value_to_return);
+               }
         }
         else
         {
-                value_to_return.value = m_timetable->currentItem()->text();
-                value_to_return.key = m_timetable_items[m_timetable->currentRow()].key;
-                emit del_timetable(value_to_return);
+                if (m_timetable->currentItem() != NULL)
+                {
+                        value_to_return.value = m_timetable->currentItem()->text();
+                        value_to_return.key = m_timetable_items[m_timetable->currentRow()].key;
+                        emit del_timetable(value_to_return);
+                }
         }
 }
 

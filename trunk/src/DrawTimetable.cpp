@@ -177,10 +177,38 @@ void DrawTimetable::_create_timetable_rect(QVector<FullTimetable> cases)
                         w /= 2;
                 }
 
-                QRect background_timetable(x, y, w, h);
+                QPolygonF background_timetable;
+                switch (cases[i].timetable.group)
+                {
+                        case ALL_GROUP:
+                                background_timetable << QPointF(x, y)
+                                                     << QPointF(x + w, y)
+                                                     << QPointF(x + w, y + h)
+                                                     << QPointF(x, y + h)
+                                                     << QPointF(x, y);
+                                break;
+                        case ONE:
+                                background_timetable << QPointF(x, y)
+                                                     << QPointF(x + w, y)
+                                                     << QPointF(x, y + h)
+                                                     << QPointF(x, y);
+                                h /= 2;
+                                w /= 2;
+                                break;
+                        case TWO:
+                                background_timetable << QPointF(x + w, y)
+                                                     << QPointF(x + w, y + h)
+                                                     << QPointF(x, y + h)
+                                                     << QPointF(x + w, y);
+                                h /= 2;
+                                w /= 2;
+                                x += w;
+                                y += h;
+                                break;
+                }
 
                 RectData current_rect;
-                current_rect.item = addRect(background_timetable);
+                current_rect.item = addPolygon(background_timetable);
                 current_rect.item->setBrush(
                                                QBrush(
                                                QColor(
