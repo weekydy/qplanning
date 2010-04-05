@@ -95,6 +95,7 @@ class MainWindow : public QMainWindow
                 QAction* m_file_menu_save;
                 QAction* m_file_menu_save_as;
                 QAction* m_file_menu_quit;
+                QAction* m_file_menu_print;
                 QStatusBar* m_statusbar;
                 QPushButton* m_add_lesson;
                 QPushButton* m_delete_lesson;
@@ -189,5 +190,9 @@ class MainWindow : public QMainWindow
                 /// \brief signal emit when programm must be quit
                 ///
                 void quit_needed();
+                ///
+                /// \brief signal emit when timetable need to be printed
+                ///
+                void print_needed();
 };
 #endif
