@@ -95,6 +95,8 @@ void SubjectDataWindow::set_contant(SubjectData* data)
                 blue_background_color->setValue(data->blue_background);
                 m_id = data->id;
         }
+        update_text_prevew();
+        update_background_prevew();
 }
 
 void SubjectDataWindow::update_text_prevew()

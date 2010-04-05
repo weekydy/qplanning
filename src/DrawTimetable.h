@@ -26,9 +26,11 @@
 
 #include <QGraphicsScene>
 #include <QGraphicsTextItem>
+#include <QGraphicsPolygonItem>
 #include <QLocale>
 #include <QVector>
 #include <QRect>
+#include <QPolygonF>
 #include <QPainter>
 #include "define.h"
 #include "FullTimetable.h"
@@ -43,7 +45,7 @@ struct RectData
         int y;
         int w;
         int h;
-        QGraphicsRectItem* item;
+        QGraphicsPolygonItem* item;
 };
 
 
