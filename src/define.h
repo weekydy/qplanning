@@ -23,10 +23,13 @@
 /// \author Lameire Alexis
 ///
 
+#include "define_cmake.h"
 ///
 /// \brief name of xml shemas
 ///
-#define XSD_FILENAME "XmlSpec.xsd"
+#define XSD_FILENAME PROGRAMME_DIR_PREFIX + "XmlSpec.xsd"
+
+
 
 ///
 /// \brief default name of a new lesson

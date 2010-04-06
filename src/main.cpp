@@ -21,6 +21,7 @@
 #include "SubjectDataWindow.h"
 #include "XmlPlanning.h"
 #include "Control.h"
+#include "define.h"
 
 int main(int argc, char** argv)
 {
@@ -29,7 +30,7 @@ int main(int argc, char** argv)
 
         QString locale = QLocale::system().name().section('_', 0, 0);
         QTranslator translator;
-        translator.load(QString("QPlanning_") + locale);
+        translator.load(QString("QPlanning_") + locale + QM_FILES);
 
         app.installTranslator(&translator);
         return app.exec();

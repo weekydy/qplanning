@@ -14,3 +14,4 @@ qt4_create_translation(
 )
 
 add_custom_target(qm ALL DEPENDS ${qm_FILES})
+install(FILES ${qm_FILES} DESTINATION ${PREFIX}/${TRANSLATION_DIR})

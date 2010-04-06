@@ -1,6 +1,7 @@
 set(QT_USE_QTXML true)
 set(QT_USE_QTXMLPATTERNS true)
 include(${QT_USE_FILE})
+configure_file(define_cmake.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/define_cmake.h)
 
 set(
 	ui_FILES
@@ -23,6 +24,7 @@ set(
 	DrawTimetable.h
 	FullTimetable.h
 	QGraphicsItemBoundedText.h
+	${CMAKE_CURRENT_BINARY_DIR}/define_cmake.h
 	CACHE FILEPATH "header files" FORCE
 )
 
@@ -54,3 +56,5 @@ include_directories(${QT_INCLUDE_DIR} ${CMAKE_BINARY_DIR}/src)
 add_executable(QPlanning ${sources_FILES})
 target_link_libraries(QPlanning ${QT_LIBRARIES})
 set_target_properties(QPlanning PROPERTIES RUNTIME_OUTPUT_DIRECTORY ../bin)
+
+install(TARGETS QPlanning DESTINATION ${PREFIX}/${PROGRAM_DIR_EXECUTABLE})
