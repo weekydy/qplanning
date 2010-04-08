@@ -94,8 +94,7 @@ xmlerror XmlPlanning::verify_xsd()
          *
 
         qDebug(Q_FUNC_INFO);
-        QUrl xsd_file("file://" + QCoreApplication::applicationDirPath() + "/" + XSD_FILENAME);
-        qDebug("file://%s/%s", qPrintable(QCoreApplication::applicationDirPath()), XSD_FILENAME);
+        QUrl xsd_file("file://" + XSD_FILENAME);
         QXmlSchema schema;
         schema.load(xsd_file);
 

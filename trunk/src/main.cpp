@@ -26,12 +26,17 @@
 int main(int argc, char** argv)
 {
         QApplication app(argc, argv);
-        Control controler;
+
 
         QString locale = QLocale::system().name().section('_', 0, 0);
         QTranslator translator;
-        translator.load(QString("QPlanning_") + locale + QM_FILES);
-
+        qDebug() << qPrintable(locale);
+        QString path = QM_FILES + QString("/QPlanning_") + locale;
+        qDebug(qPrintable(path));
+        bool result = translator.load("QPlanning_" + locale, QM_FILES);
+        Q_ASSERT(result);
         app.installTranslator(&translator);
+
+        Control controler;
         return app.exec();
 }

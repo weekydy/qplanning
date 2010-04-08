@@ -31,7 +31,7 @@ MainWindow::MainWindow() : m_need_to_close(false)
         setCentralWidget(m_main);
 
         //initializing menu bar
-        m_file_menu = menuBar()->addMenu(tr("&Fichier"));
+        m_file_menu = menuBar()->addMenu(tr("&File"));
 
         m_file_menu_new = m_file_menu->addAction(tr("&New"));
         m_file_menu_new->setShortcut(QKeySequence(tr("Ctrl+N", "new file")));

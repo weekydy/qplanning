@@ -4,59 +4,64 @@
 <context>
     <name>Control</name>
     <message>
-        <location filename="../src/Control.cpp" line="61"/>
-        <source>would you like save</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/Control.cpp" line="62"/>
+        <source>would you like save</source>
+        <translation>voulez vous sauvegarder</translation>
+    </message>
+    <message>
+        <location filename="../src/Control.cpp" line="63"/>
         <source>the file have been modified, would you like save it before</source>
-        <translation type="unfinished"></translation>
+        <translation>le fichier à été modifier, voulez vous l&apos;enregister auparavent</translation>
     </message>
     <message>
-        <location filename="../src/Control.cpp" line="79"/>
+        <location filename="../src/Control.cpp" line="80"/>
         <source>open file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/Control.cpp" line="175"/>
-        <source>warning</source>
-        <translation type="unfinished"></translation>
+        <translation>ouvrir</translation>
     </message>
     <message>
         <location filename="../src/Control.cpp" line="176"/>
+        <source>warning</source>
+        <translation>attention</translation>
+    </message>
+    <message>
+        <location filename="../src/Control.cpp" line="177"/>
         <source>you cant add a timetable if you don&apos;t have lessons</source>
-        <translation type="unfinished"></translation>
+        <translation>vous ne pouvez pas ajouter une plage horraire si vous n&apos;avez pas de matiéres</translation>
     </message>
     <message>
-        <location filename="../src/Control.cpp" line="213"/>
+        <location filename="../src/Control.cpp" line="214"/>
         <source>this subject is referenced on </source>
-        <translation type="unfinished"></translation>
+        <translation>ce sujet est réfférencer dans</translation>
     </message>
     <message>
-        <location filename="../src/Control.cpp" line="217"/>
+        <location filename="../src/Control.cpp" line="218"/>
         <source> would you like to delete it ?</source>
-        <translation type="unfinished"></translation>
+        <translation>étes vous sur de vouloir les supprimer ?</translation>
     </message>
     <message>
-        <location filename="../src/Control.cpp" line="219"/>
+        <location filename="../src/Control.cpp" line="220"/>
         <source>conflict detected</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/Control.cpp" line="254"/>
-        <source>confirm deleting</source>
-        <translation type="unfinished"></translation>
+        <translation>conflit détecter</translation>
     </message>
     <message>
         <location filename="../src/Control.cpp" line="255"/>
-        <source>would you like delete this timetable</source>
-        <translation type="unfinished"></translation>
+        <source>confirm deleting</source>
+        <translation>confirmer la suppression</translation>
     </message>
     <message>
-        <location filename="../src/Control.cpp" line="283"/>
+        <location filename="../src/Control.cpp" line="256"/>
+        <source>would you like delete this timetable</source>
+        <translation>voulez vous supprimer cette plage horraire</translation>
+    </message>
+    <message>
+        <location filename="../src/Control.cpp" line="284"/>
         <source>save file</source>
-        <translation type="unfinished"></translation>
+        <translation>sauvegarder</translation>
+    </message>
+    <message>
+        <location filename="../src/Control.cpp" line="355"/>
+        <source>Print Document</source>
+        <translation>imprimer</translation>
     </message>
 </context>
 <context>
@@ -64,33 +69,33 @@
     <message>
         <location filename="../src/SubjectDataWindow.ui" line="14"/>
         <source>teacher edit</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/SubjectDataWindow.ui" line="48"/>
         <source>name</source>
-        <translation type="unfinished"></translation>
+        <translation>nom</translation>
     </message>
     <message>
         <location filename="../src/SubjectDataWindow.ui" line="62"/>
         <source>teacher</source>
-        <translation type="unfinished"></translation>
+        <translation>proffesseur</translation>
     </message>
     <message>
         <location filename="../src/SubjectDataWindow.ui" line="76"/>
         <source>background color</source>
-        <translation type="unfinished"></translation>
+        <translation>couleur de fond</translation>
     </message>
     <message>
         <location filename="../src/SubjectDataWindow.ui" line="104"/>
         <location filename="../src/SubjectDataWindow.ui" line="139"/>
         <source>edit</source>
-        <translation type="unfinished"></translation>
+        <translation>éditer</translation>
     </message>
     <message>
         <location filename="../src/SubjectDataWindow.ui" line="111"/>
         <source>text color</source>
-        <translation type="unfinished"></translation>
+        <translation>couleur de texte</translation>
     </message>
 </context>
 <context>
@@ -99,106 +104,117 @@
         <location filename="../src/DrawTimetable.cpp" line="103"/>
         <source>M</source>
         <comment>Morning</comment>
-        <translation type="unfinished"></translation>
+        <translation>M</translation>
     </message>
     <message>
         <location filename="../src/DrawTimetable.cpp" line="121"/>
         <source>A</source>
         <comment>Afternoon</comment>
-        <translation type="unfinished"></translation>
+        <translation>A</translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
         <location filename="../src/MainWindow.cpp" line="34"/>
-        <source>&amp;Fichier</source>
-        <translation type="unfinished"></translation>
+        <source>&amp;File</source>
+        <translation>&amp;Fichier</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="36"/>
         <source>&amp;New</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Nouveau</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="37"/>
         <source>Ctrl+N</source>
         <comment>new file</comment>
-        <translation type="unfinished"></translation>
+        <translation>nouveau fichier</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="40"/>
         <source>&amp;Open</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ouvrir</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="41"/>
         <source>Ctrl+O</source>
         <comment>open file</comment>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+O</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="44"/>
-        <source>&amp;Save</source>
-        <translation type="unfinished"></translation>
+        <source>&amp;Print</source>
+        <translation>&amp;Imprimmer</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="45"/>
-        <source>Ctrl+S</source>
-        <comment>save fil</comment>
-        <translation type="unfinished"></translation>
+        <source>Ctrl+P</source>
+        <comment>print</comment>
+        <translation>Ctrl+P</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="48"/>
-        <source>&amp;Save as</source>
-        <translation type="unfinished"></translation>
+        <source>&amp;Save</source>
+        <translation>&amp;Sauvegarder</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="49"/>
-        <source>Ctrl+Maj+S</source>
-        <comment>save as</comment>
-        <translation type="unfinished"></translation>
+        <source>Ctrl+S</source>
+        <comment>save fil</comment>
+        <translation>Ctrl+S</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="52"/>
-        <source>&amp;Quit</source>
-        <translation type="unfinished"></translation>
+        <source>&amp;Save as</source>
+        <translation>Save-&amp;as</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="53"/>
-        <source>Ctrl+Q</source>
-        <comment>quit</comment>
-        <translation type="unfinished"></translation>
+        <source>Ctrl+Maj+S</source>
+        <comment>save as</comment>
+        <translation>Ctrl+Maj+S</translation>
+    </message>
+    <message>
+        <location filename="../src/MainWindow.cpp" line="56"/>
+        <source>&amp;Quit</source>
+        <translation>&amp;Quitter</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="57"/>
+        <source>Ctrl+Q</source>
+        <comment>quit</comment>
+        <translation>Ctrl+Q</translation>
+    </message>
+    <message>
+        <location filename="../src/MainWindow.cpp" line="61"/>
         <source>toolbar</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/MainWindow.cpp" line="91"/>
-        <source>timetable</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/MainWindow.cpp" line="92"/>
-        <source>subjects</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/MainWindow.cpp" line="95"/>
-        <source>add</source>
-        <translation type="unfinished"></translation>
+        <translation>barre d&apos;outils</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="96"/>
-        <source>del</source>
-        <translation type="unfinished"></translation>
+        <source>timetable</source>
+        <translation>plage horraire</translation>
     </message>
     <message>
         <location filename="../src/MainWindow.cpp" line="97"/>
+        <source>subjects</source>
+        <translation>sujet</translation>
+    </message>
+    <message>
+        <location filename="../src/MainWindow.cpp" line="100"/>
+        <source>add</source>
+        <translation>ajouter</translation>
+    </message>
+    <message>
+        <location filename="../src/MainWindow.cpp" line="101"/>
+        <source>del</source>
+        <translation>retirer</translation>
+    </message>
+    <message>
+        <location filename="../src/MainWindow.cpp" line="102"/>
         <source>edit</source>
-        <translation type="unfinished"></translation>
+        <translation>éditer</translation>
     </message>
 </context>
 <context>
@@ -206,99 +222,99 @@
     <message>
         <location filename="../src/TimeTableWindow.ui" line="14"/>
         <source>half time edit</source>
-        <translation type="unfinished"></translation>
+        <translation>édition d&apos;une plage horraire</translation>
     </message>
     <message>
         <location filename="../src/TimeTableWindow.ui" line="48"/>
         <source>day</source>
-        <translation type="unfinished"></translation>
+        <translation>jour</translation>
     </message>
     <message>
         <location filename="../src/TimeTableWindow.ui" line="56"/>
         <source>Monday</source>
-        <translation type="unfinished"></translation>
+        <translation>Lundi</translation>
     </message>
     <message>
         <location filename="../src/TimeTableWindow.ui" line="61"/>
         <source>Tuesday</source>
-        <translation type="unfinished"></translation>
+        <translation>Mardi</translation>
     </message>
     <message>
         <location filename="../src/TimeTableWindow.ui" line="66"/>
         <source>Wednesday</source>
-        <translation type="unfinished"></translation>
+        <translation>Mercredi</translation>
     </message>
     <message>
         <location filename="../src/TimeTableWindow.ui" line="71"/>
         <source>Thursday</source>
-        <translation type="unfinished"></translation>
+        <translation>Jeudi</translation>
     </message>
     <message>
         <location filename="../src/TimeTableWindow.ui" line="76"/>
         <source>Friday</source>
-        <translation type="unfinished"></translation>
+        <translation>Vendredi</translation>
     </message>
     <message>
         <location filename="../src/TimeTableWindow.ui" line="81"/>
         <source>Saturday</source>
-        <translation type="unfinished"></translation>
+        <translation>Samedi</translation>
     </message>
     <message>
         <location filename="../src/TimeTableWindow.ui" line="90"/>
         <source>Morning</source>
-        <translation type="unfinished"></translation>
+        <translation>Matin</translation>
     </message>
     <message>
         <location filename="../src/TimeTableWindow.ui" line="95"/>
         <source>Aftenoon</source>
-        <translation type="unfinished"></translation>
+        <translation>Aprés-midi</translation>
     </message>
     <message>
         <location filename="../src/TimeTableWindow.ui" line="230"/>
         <source>subject</source>
-        <translation type="unfinished"></translation>
+        <translation>matiére</translation>
     </message>
     <message>
         <location filename="../src/TimeTableWindow.ui" line="237"/>
         <source>class</source>
-        <translation type="unfinished"></translation>
+        <translation>salle</translation>
     </message>
     <message>
         <location filename="../src/TimeTableWindow.ui" line="253"/>
         <source>week</source>
-        <translation type="unfinished"></translation>
+        <translation>semaine</translation>
     </message>
     <message>
         <location filename="../src/TimeTableWindow.ui" line="261"/>
         <source>1</source>
-        <translation type="unfinished"></translation>
+        <translation>1</translation>
     </message>
     <message>
         <location filename="../src/TimeTableWindow.ui" line="271"/>
         <location filename="../src/TimeTableWindow.ui" line="297"/>
         <source>all</source>
-        <translation type="unfinished"></translation>
+        <translation>tous</translation>
     </message>
     <message>
         <location filename="../src/TimeTableWindow.ui" line="279"/>
         <source>group</source>
-        <translation type="unfinished"></translation>
+        <translation>groupe</translation>
     </message>
     <message>
         <location filename="../src/TimeTableWindow.cpp" line="117"/>
         <location filename="../src/TimeTableWindow.cpp" line="125"/>
         <source>can&apos;t validate</source>
-        <translation type="unfinished"></translation>
+        <translation>impossible de valider</translation>
     </message>
     <message>
         <location filename="../src/TimeTableWindow.cpp" line="118"/>
         <source>you must select a subject</source>
-        <translation type="unfinished"></translation>
+        <translation>vous devez sélectionner une matiére</translation>
     </message>
     <message>
         <location filename="../src/TimeTableWindow.cpp" line="126"/>
         <source>the begin interval must be smoller them the end interval</source>
-        <translation type="unfinished"></translation>
+        <translation>l&apos;interval de début doit étre plus petit que l&apos;interval de fin</translation>
     </message>
 </context>
 </TS>
