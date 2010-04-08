@@ -1,5 +1,6 @@
 set(QT_USE_QTXML true)
 set(QT_USE_QTXMLPATTERNS true)
+
 include(${QT_USE_FILE})
 configure_file(define_cmake.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/define_cmake.h)
 
@@ -40,7 +41,6 @@ set(
 	QGraphicsItemBoundedText.cpp
 	CACHE FILEPATH "source files" FORCE
 )
-
 QT4_WRAP_UI(ui_h_FILES ${ui_FILES})
 QT4_WRAP_CPP(moc_FILES ${h_FILES})
 
@@ -52,9 +52,20 @@ set(
 	${h_FILES}
 )
 
+set(
+	ts_FILES
+	../ts/QPlanning_fr.ts
+)
+
+qt4_add_translation(
+	qm_FILES
+	${ts_FILES}
+)
+
 include_directories(${QT_INCLUDE_DIR} ${CMAKE_BINARY_DIR}/src)
-add_executable(QPlanning ${sources_FILES})
+add_executable(QPlanning ${sources_FILES} ${qm_FILES})
 target_link_libraries(QPlanning ${QT_LIBRARIES})
 set_target_properties(QPlanning PROPERTIES RUNTIME_OUTPUT_DIRECTORY ../bin)
 
 install(TARGETS QPlanning DESTINATION ${PREFIX}/${PROGRAM_DIR_EXECUTABLE})
+install(FILES ${qm_FILES} DESTINATION ${PREFIX}/${TRANSLATION_DIR})
