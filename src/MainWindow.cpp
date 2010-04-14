@@ -26,9 +26,11 @@
 
 MainWindow::MainWindow() : m_need_to_close(false)
 {
-        //initializing main window
-        m_main = new QWidget;
-        setCentralWidget(m_main);
+        //initializing main windows
+        m_main_edit_timetable = new QWidget;
+        m_main_generate_timetable = new QWidget;
+        m_tab = new QTabWidget;
+        setCentralWidget(m_tab);
 
         //initializing menu bar
         m_file_menu = menuBar()->addMenu(tr("&File"));
@@ -69,8 +71,11 @@ MainWindow::MainWindow() : m_need_to_close(false)
         //initializing statue bar
         m_statusbar = statusBar();
 
+        /************************************************
+         *              edit timetable tab              *
+         ************************************************/
         //initializing layout
-        m_layout_1 = new QHBoxLayout(m_main);
+        m_layout_1 = new QHBoxLayout(m_main_edit_timetable);
         m_widget_1_1 = new QGraphicsView;
         m_layout_1_2 = new QVBoxLayout;
         m_layout_1_2_1 = new QHBoxLayout;
@@ -87,7 +92,7 @@ MainWindow::MainWindow() : m_need_to_close(false)
         policy.setVerticalStretch(4);
         m_widget_1_1->setSizePolicy(policy);
 
-
+        m_edit_timetable_id = m_tab->addTab(m_main_edit_timetable, tr("edit timetable"));
         m_layout_1->addWidget(m_widget_1_1);
         m_layout_1->addLayout(m_layout_1_2);
         m_layout_1_2->addLayout(m_layout_1_2_1);
@@ -103,6 +108,58 @@ MainWindow::MainWindow() : m_need_to_close(false)
         m_layout_1_2_1->addWidget(m_add_lesson);
         m_layout_1_2_1->addWidget(m_delete_lesson);
         m_layout_1_2_1->addWidget(m_modify_lesson);
+
+        /*******************************************
+         *        generate timetable tab           *
+         *******************************************/
+        //initializating layout
+        m_layout_2 = new QBoxLayout(QBoxLayout::LeftToRight, m_main_generate_timetable);
+        m_layout_2_1 = new QTabWidget;
+        m_widget_2_1_1 = new QWidget;
+        m_layout_2_1_1_1 = new QHBoxLayout(m_widget_2_1_1);
+        m_layout_2_1_1_1_1 = new QVBoxLayout;
+        m_layout_2_1_1_1_1_2 = new QHBoxLayout;
+        m_layout_2_1_1_1_2 = new QVBoxLayout;
+        m_layout_2_1_1_1_2_2 = new QHBoxLayout;
+
+        //initializating labels
+        m_text_2_1_1_1_1_1 = new QLabel(tr("edit level"));
+        m_text_2_1_1_1_1_1->setAlignment(Qt::AlignCenter);
+        m_text_2_1_1_1_2_1 = new QLabel(tr("edit subject"));
+        m_text_2_1_1_1_2_1->setAlignment(Qt::AlignCenter);
+
+        //create tab
+        m_generate_timetable_id = m_tab->addTab(m_main_generate_timetable, tr("generate timetable"));
+        m_layout_2_1->setTabPosition(QTabWidget::West);
+        m_layout_2_1->addTab(m_widget_2_1_1, tr("define level and subject"));
+
+        //empack layouts
+        m_layout_2->addWidget(m_layout_2_1);
+        m_widget_2_1_1->setLayout(m_layout_2_1_1_1);
+        m_layout_2_1_1_1->addLayout(m_layout_2_1_1_1_1);
+        m_layout_2_1_1_1_1->addWidget(m_text_2_1_1_1_1_1);
+        m_layout_2_1_1_1_1->addLayout(m_layout_2_1_1_1_1_2);
+        m_layout_2_1_1_1->addLayout(m_layout_2_1_1_1_2);
+        m_layout_2_1_1_1_2->addWidget(m_text_2_1_1_1_2_1);
+        m_layout_2_1_1_1_2->addLayout(m_layout_2_1_1_1_2_2);
+
+        //initializating widgets
+        m_add_2_1_1_1_1_2_1 = new QPushButton(tr("add"));
+        m_del_2_1_1_1_1_2_2 = new QPushButton(tr("del"));
+        m_add_2_1_1_1_2_2_1 = new QPushButton(tr("add"));
+        m_del_2_1_1_1_2_2_2 = new QPushButton(tr("del"));
+        m_level_2_1_1_1_1_3 = new QListWidget;
+        m_subject_2_1_1_1_2_3 = new QListWidget;
+
+        //empack widget
+        m_layout_2_1_1_1_1_2->addWidget(m_add_2_1_1_1_1_2_1);
+        m_layout_2_1_1_1_1_2->addWidget(m_del_2_1_1_1_1_2_2);
+        m_layout_2_1_1_1_2_2->addWidget(m_add_2_1_1_1_2_2_1);
+        m_layout_2_1_1_1_2_2->addWidget(m_del_2_1_1_1_2_2_2);
+        m_layout_2_1_1_1_1->addWidget(m_level_2_1_1_1_1_3);
+        m_layout_2_1_1_1_2->addWidget(m_subject_2_1_1_1_2_3);
+        m_level_2_1_1_1_1_3->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        m_subject_2_1_1_1_2_3->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
         //connect signals
         QObject::connect(m_file_menu_open, SIGNAL(triggered()), this, SIGNAL(open_file()));

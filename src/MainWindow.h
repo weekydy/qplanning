@@ -41,6 +41,7 @@
 #include <QCloseEvent>
 #include <QShowEvent>
 #include <QSizePolicy>
+#include <QLabel>
 #include "KeyValue.h"
 #include "define.h"
 
@@ -87,7 +88,8 @@ class MainWindow : public QMainWindow
                 void calcule_scale_factor();
 
         private:
-                QWidget* m_main;
+                QWidget* m_main_edit_timetable;
+                QWidget* m_main_generate_timetable;
                 QMenu* m_file_menu;
                 QToolBar* m_toolbar;
                 QAction* m_file_menu_new;
@@ -100,10 +102,27 @@ class MainWindow : public QMainWindow
                 QPushButton* m_add_lesson;
                 QPushButton* m_delete_lesson;
                 QPushButton* m_modify_lesson;
+                QTabWidget* m_tab;
                 QHBoxLayout* m_layout_1;
                 QVBoxLayout* m_layout_1_2;
                 QGraphicsView* m_widget_1_1;
                 QHBoxLayout* m_layout_1_2_1;
+                QBoxLayout* m_layout_2;
+                QTabWidget* m_layout_2_1;
+                QWidget* m_widget_2_1_1;
+                QHBoxLayout* m_layout_2_1_1_1;
+                QVBoxLayout* m_layout_2_1_1_1_1;
+                QLabel* m_text_2_1_1_1_1_1;
+                QHBoxLayout* m_layout_2_1_1_1_1_2;
+                QPushButton* m_add_2_1_1_1_1_2_1;
+                QPushButton* m_del_2_1_1_1_1_2_2;
+                QListWidget* m_level_2_1_1_1_1_3;
+                QVBoxLayout* m_layout_2_1_1_1_2;
+                QLabel* m_text_2_1_1_1_2_1;
+                QHBoxLayout* m_layout_2_1_1_1_2_2;
+                QPushButton* m_add_2_1_1_1_2_2_1;
+                QPushButton* m_del_2_1_1_1_2_2_2;
+                QListWidget* m_subject_2_1_1_1_2_3;
                 QListWidget* m_subjects;
                 int m_subjects_id;
                 QListWidget* m_timetable;
@@ -112,6 +131,8 @@ class MainWindow : public QMainWindow
                 QVector<KeyValue> m_subject_items;
                 QVector<KeyValue> m_timetable_items;
                 bool m_need_to_close;
+                int m_edit_timetable_id;
+                int m_generate_timetable_id;
 
         public slots:
                 ///
