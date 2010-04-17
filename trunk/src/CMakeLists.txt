@@ -1,5 +1,6 @@
 set(QT_USE_QTXML true)
 set(QT_USE_QTXMLPATTERNS true)
+set(QT_USE_QTSQL true)
 
 include(${QT_USE_FILE})
 configure_file(define_cmake.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/define_cmake.h)
@@ -25,6 +26,7 @@ set(
 	DrawTimetable.h
 	FullTimetable.h
 	QGraphicsItemBoundedText.h
+        SqlModelGenerating.h
 	${CMAKE_CURRENT_BINARY_DIR}/define_cmake.h
 	CACHE FILEPATH "header files" FORCE
 )
@@ -39,6 +41,7 @@ set(
 	TimeTableWindow.cpp
 	DrawTimetable.cpp
 	QGraphicsItemBoundedText.cpp
+        SqlModelGenerating.cpp
 	CACHE FILEPATH "source files" FORCE
 )
 QT4_WRAP_UI(ui_h_FILES ${ui_FILES})

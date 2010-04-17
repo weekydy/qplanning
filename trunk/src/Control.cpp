@@ -34,9 +34,9 @@ Control::Control() : m_windows(), m_config_subject(&m_windows), m_config_timetab
         QObject::connect(&m_windows, SIGNAL(create_file()), this, SLOT(manage_create_file()));
         QObject::connect(&m_windows, SIGNAL(save_file()), this, SLOT(manage_save_file()));
         QObject::connect(&m_windows, SIGNAL(save_as_file()), this, SLOT(manage_save_as_file()));
-        QObject::connect(&m_config, SIGNAL(new_lessons_avalables(QVector<KeyValue>)),
+        QObject::connect(&m_xml_config, SIGNAL(new_lessons_avalables(QVector<KeyValue>)),
                          &m_windows, SLOT(update_all_lessons(QVector<KeyValue>)));
-        QObject::connect(&m_config, SIGNAL(new_timetable_avalable(QVector<KeyValue>)),
+        QObject::connect(&m_xml_config, SIGNAL(new_timetable_avalable(QVector<KeyValue>)),
                          &m_windows, SLOT(update_all_timetable(QVector<KeyValue>)));
         QObject::connect(&m_windows, SIGNAL(modify_subject(KeyValue)),
                          this, SLOT(show_subject(KeyValue)));
@@ -65,7 +65,7 @@ void Control::save_before_changing()
                                             QMessageBox::No);
         if (reponse == QMessageBox::Yes)
         {
-                m_config.save();
+                m_xml_config.save();
         }
 }
 
@@ -82,7 +82,7 @@ void Control::manage_open_file()
                            "XML files (*.xml)");
         if (!filename.isNull())
         {
-                m_config.open(filename);
+                m_xml_config.open(filename);
                 _update_all_veuw();
         }
 }
@@ -94,14 +94,14 @@ void Control::manage_create_file()
         {
                 save_before_changing();
         }
-        m_config.new_file();
+        m_xml_config.new_file();
         m_is_modified = false;
 }
 
 void Control::show_subject(KeyValue subject)
 {
         qDebug( Q_FUNC_INFO );
-        SubjectData info = m_config.search_subject(subject);
+        SubjectData info = m_xml_config.search_subject(subject);
         qDebug() << "begin info list";
         qDebug() << qPrintable(info.name);
         qDebug() << qPrintable(info.teacher);
@@ -120,8 +120,8 @@ void Control::show_timetable(KeyValue timetable)
         qDebug() << qPrintable(timetable.value);
         qDebug() << "end timetable info list";
 
-        Timetable info = m_config.search_timetable(timetable);
-        QVector<KeyValue> lesson_list = m_config.get_lessons();
+        Timetable info = m_xml_config.search_timetable(timetable);
+        QVector<KeyValue> lesson_list = m_xml_config.get_lessons();
 
         qDebug() << "begin info list";
         qDebug() << qPrintable(info.unparsed_date);
@@ -139,7 +139,7 @@ void Control::show_timetable(KeyValue timetable)
 void Control::update_subject()
 {
         SubjectData subject = m_config_subject.get_contant();
-        m_config.update_id_lesson(subject);
+        m_xml_config.update_id_lesson(subject);
         _update_all_veuw();
         m_is_modified = true;
 }
@@ -148,18 +148,18 @@ void Control::update_timetable()
 {
         qDebug( Q_FUNC_INFO );
         Timetable timetable = m_config_timetable.get_content();
-        m_config.update_timetable(timetable);
+        m_xml_config.update_timetable(timetable);
         _update_all_veuw();
         m_is_modified = true;
 }
 
 void Control::add_subject()
 {
-        unsigned int id = m_config.add_empty_id( DEFAULT_ID_NAME );
+        unsigned int id = m_xml_config.add_empty_id( DEFAULT_ID_NAME );
         KeyValue id_to_store;
         id_to_store.key = id;
         id_to_store.value = DEFAULT_ID_NAME;
-        SubjectData data = m_config.search_subject(id_to_store);
+        SubjectData data = m_xml_config.search_subject(id_to_store);
         m_config_subject.set_contant(&data);
         m_config_subject.show();
         m_is_modified = true;
@@ -168,7 +168,7 @@ void Control::add_subject()
 void Control::add_timetable()
 {
         qDebug( Q_FUNC_INFO );
-        QVector<KeyValue> lesson_list = m_config.get_lessons();
+        QVector<KeyValue> lesson_list = m_xml_config.get_lessons();
 
         if (lesson_list.isEmpty())
         {
@@ -178,10 +178,10 @@ void Control::add_timetable()
         }
         else
         {
-                unsigned int id = m_config.add_empty_lesson();
+                unsigned int id = m_xml_config.add_empty_lesson();
                 KeyValue id_to_edit;
                 id_to_edit.key = id;
-                Timetable data = m_config.search_timetable(id_to_edit);
+                Timetable data = m_xml_config.search_timetable(id_to_edit);
 
                 qDebug("begin info");
                 qDebug() << id;
@@ -201,7 +201,7 @@ void Control::del_subject(KeyValue subject)
 {
         bool delete_file = false;
         bool operate_cancel = false;
-        QVector<Timetable> all_lesson = m_config.get_full_timetables();
+        QVector<Timetable> all_lesson = m_xml_config.get_full_timetables();
 
         for (int i = 0;i != all_lesson.size(); i++)
         {
@@ -233,7 +233,7 @@ void Control::del_subject(KeyValue subject)
                         {
                                 KeyValue element_to_del;
                                 element_to_del.key = all_lesson[i].ident;
-                                m_config.del_timetable(element_to_del);
+                                m_xml_config.del_timetable(element_to_del);
                                 if (result == QMessageBox::YesAll)
                                 {
                                         delete_file = true;
@@ -243,7 +243,7 @@ void Control::del_subject(KeyValue subject)
         }
         if (!operate_cancel)
         {
-                m_config.del_subject(subject);
+                m_xml_config.del_subject(subject);
         }
         _update_all_veuw();
 }
@@ -259,7 +259,7 @@ void Control::del_timetable(KeyValue timetable)
         if (confirm == QMessageBox::Yes)
         {
                 qDebug( "okey : save" ),
-                m_config.del_timetable(timetable);
+                m_xml_config.del_timetable(timetable);
                 _update_all_veuw();
         }
 }
@@ -267,13 +267,13 @@ void Control::del_timetable(KeyValue timetable)
 void Control::manage_save_file()
 {
         qDebug( Q_FUNC_INFO );
-        if (m_config.get_filename().isNull())
+        if (m_xml_config.get_filename().isNull())
         {
                 manage_save_as_file();
         }
         else
         {
-                m_config.save();
+                m_xml_config.save();
         }
         m_is_modified = false;
 }
@@ -286,7 +286,7 @@ void Control::manage_save_as_file()
                            "XML files (*.xml)");
         if (!filename.isNull())
         {
-                m_config.save(filename);
+                m_xml_config.save(filename);
                 m_is_modified = false;
         }
 }
@@ -307,8 +307,8 @@ void Control::manage_quit()
 QVector<FullTimetable> Control::create_full_timetable()
 {
         qDebug( Q_FUNC_INFO );
-        QVector<Timetable> all_timetable = m_config.get_full_timetables();
-        QVector<SubjectData> all_subject = m_config.get_full_subjects();
+        QVector<Timetable> all_timetable = m_xml_config.get_full_timetables();
+        QVector<SubjectData> all_subject = m_xml_config.get_full_subjects();
         QVector<FullTimetable> full_timetable;
         bool id_found = false;
 
@@ -338,7 +338,7 @@ QVector<FullTimetable> Control::create_full_timetable()
 
 void Control::_update_all_veuw()
 {
-        m_config.refresh_all_view();
+        m_xml_config.refresh_all_view();
         m_timetable_veuw.create_cases(create_full_timetable());
 }
 

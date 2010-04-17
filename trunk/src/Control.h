@@ -37,6 +37,7 @@
 #include "TimeTable.h"
 #include "DrawTimetable.h"
 #include "FullTimetable.h"
+#include "SqlModelGenerating.h"
 #include "define.h"
 
 ///
@@ -71,7 +72,8 @@ class Control : public QObject
                 MainWindow m_windows;
                 SubjectDataWindow m_config_subject;
                 TimeTableWindow m_config_timetable;
-                XmlPlanning m_config;
+                XmlPlanning m_xml_config;
+                SqlModelGenerating m_sql_config;
                 DrawTimetable m_timetable_veuw;
 
         public slots:
