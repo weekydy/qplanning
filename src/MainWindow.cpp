@@ -151,6 +151,10 @@ MainWindow::MainWindow() : m_need_to_close(false)
         m_level_2_1_1_1_1_3 = new QListWidget;
         m_subject_2_1_1_1_2_3 = new QListWidget;
 
+        //configure widgets
+        m_level_2_1_1_1_1_3->setEditTriggers(QAbstractItemView::DoubleClicked);
+        m_subject_2_1_1_1_2_3->setEditTriggers(QAbstractItemView::DoubleClicked);
+
         //empack widget
         m_layout_2_1_1_1_1_2->addWidget(m_add_2_1_1_1_1_2_1);
         m_layout_2_1_1_1_1_2->addWidget(m_del_2_1_1_1_1_2_2);
@@ -168,9 +172,10 @@ MainWindow::MainWindow() : m_need_to_close(false)
         QObject::connect(m_file_menu_save_as, SIGNAL(triggered()), this, SIGNAL(save_as_file()));
         QObject::connect(m_file_menu_print, SIGNAL(triggered()), this, SIGNAL(print_needed()));
         QObject::connect(m_file_menu_quit, SIGNAL(triggered()), this, SLOT(manage_quit_needed()));
-        QObject::connect(m_modify_lesson, SIGNAL(clicked()), this, SLOT(modify_pressed()));
-        QObject::connect(m_add_lesson, SIGNAL(clicked()), this, SLOT(add_pressed()));
-        QObject::connect(m_delete_lesson, SIGNAL(clicked()), this, SLOT(del_pressed()));
+        QObject::connect(m_modify_lesson, SIGNAL(clicked()), this, SLOT(draw_modify_pressed()));
+        QObject::connect(m_add_lesson, SIGNAL(clicked()), this, SLOT(draw_add_pressed()));
+        QObject::connect(m_delete_lesson, SIGNAL(clicked()), this, SLOT(draw_del_pressed()));
+        QObject::connect(m_add_2_1_1_1_1_2_1, SIGNAL(clicked()), this, SLOT(add_level_pressed()));
 }
 
 void MainWindow::set_scean(QGraphicsScene* scene)
@@ -201,7 +206,7 @@ void MainWindow::update_all_timetable(QVector<KeyValue> timetable)
         }
 }
 
-void MainWindow::modify_pressed()
+void MainWindow::draw_modify_pressed()
 {
         qDebug( Q_FUNC_INFO );
         KeyValue value_to_return;
@@ -227,7 +232,7 @@ void MainWindow::modify_pressed()
         }
 }
 
-void MainWindow::add_pressed()
+void MainWindow::draw_add_pressed()
 {
         if (m_layout_1_2_2->currentIndex() == m_subjects_id)
         {
@@ -239,7 +244,7 @@ void MainWindow::add_pressed()
         }
 }
 
-void MainWindow::del_pressed()
+void MainWindow::draw_del_pressed()
 {
         qDebug( Q_FUNC_INFO );
         KeyValue value_to_return;
@@ -304,4 +309,20 @@ void MainWindow::manage_quit_needed()
 {
         m_need_to_close = true;
         emit quit_needed();
+}
+
+void MainWindow::add_level_pressed()
+{
+        AdvencedKeyValue new_id;
+        new_id.key = 0;
+        new_id.is_exist = false;
+        new_id.value = DEFAULT_ID_NAME;
+        m_level.push_back(new_id);
+
+
+        m_level_2_1_1_1_1_3->addItem(new_id.value);
+        m_level_2_1_1_1_1_3->setCurrentRow(m_level_2_1_1_1_1_3->count() - 1);
+        QListWidgetItem* item = m_level_2_1_1_1_1_3->item(m_level_2_1_1_1_1_3->currentRow());
+        item->setFlags(item->flags() | Qt::ItemIsEditable);
+        m_level_2_1_1_1_1_3->edit(m_level_2_1_1_1_1_3->currentIndex());
 }

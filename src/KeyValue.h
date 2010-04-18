@@ -36,4 +36,16 @@ struct KeyValue
         QString value; ///< text value associated to key
 };
 
+///
+/// \struct AdvencedKeyValue KeyValue.h
+/// \brief advended KeyValue structure that add exist constraint
+///
+
+struct AdvencedKeyValue
+{
+        unsigned int key; ///< key
+        QString value; ///< text value associated to key
+        bool is_exist; ///< exist constraint
+};
+
 #endif // KEYVALUE_H
