@@ -130,6 +130,7 @@ class MainWindow : public QMainWindow
                 QTabWidget* m_layout_1_2_2;
                 QVector<KeyValue> m_subject_items;
                 QVector<KeyValue> m_timetable_items;
+                QVector<AdvencedKeyValue> m_level;
                 bool m_need_to_close;
                 int m_edit_timetable_id;
                 int m_generate_timetable_id;
@@ -148,20 +149,23 @@ class MainWindow : public QMainWindow
                 ///
                 /// \brief slot to emit the god signal when modify button is pressed
                 ///
-                void modify_pressed();
+                void draw_modify_pressed();
                 ///
                 /// \brief slot to emit the god signal when add button is pressed
                 ///
-                void add_pressed();
+                void draw_add_pressed();
                 ///
                 /// \brief slot to emit the god signa when dell button is pressed
                 ///
-                void del_pressed();
+                void draw_del_pressed();
                 ///
                 /// \brief slot to emit quit_needed and set the m_need_to_close
                 ///
                 void manage_quit_needed();
-
+                ///
+                /// \brief slot to add a level in veuw, launch his editing and add new row in database
+                ///
+                void add_level_pressed();
         signals:
                 ///
                 /// \brief signal emit when subject need to be edit
