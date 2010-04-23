@@ -1,5 +1,5 @@
 /*
- * ./FullTimetable.h
+ * ./AdvencedItemDelegate.cpp
  * Copyright (C) 2010 Lameire Alexis
  *
  * This program is free software: you can redistribute it and/or modify it under
@@ -15,24 +15,20 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef FULLTIMETABLE_H
-#define FULLTIMETABLE_H
-#include "TimeTable.h"
-#include "SubjectData.h"
+#include "AdvencedItemDelegate.h"
 ///
-/// \file FullTimetable.h
-/// \brief provide the full timetable structure
+/// \file AdvencedItemDelegate.cpp
+/// \brief implementation of class AdvencedItemDelegate
 /// \author Lameire Alexis
 ///
 
-///
-/// \struct FullTimetable FullTimetable.h
-/// \brief associate a timetable with this subject is usefull to XmlPlanning and Drowtimetable
-///
-struct FullTimetable
+AdvencedItemDelegate::AdvencedItemDelegate(QObject *parent) : QItemDelegate(parent)
 {
-        Timetable timetable;
-        SubjectData subject_associated;
-};
+}
 
-#endif // FULLTIMETABLE_H
+void AdvencedItemDelegate::setModelData(QWidget* editor, QAbstractItemModel* model, const QModelIndex& index) const
+{
+        qDebug( Q_FUNC_INFO );
+        QItemDelegate::setModelData(editor, model, index);
+        emit const_cast<AdvencedItemDelegate*>(this)->editingFinished(index);
+}

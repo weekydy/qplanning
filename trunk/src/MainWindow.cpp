@@ -148,8 +148,8 @@ MainWindow::MainWindow() : m_need_to_close(false)
         m_del_2_1_1_1_1_2_2 = new QPushButton(tr("del"));
         m_add_2_1_1_1_2_2_1 = new QPushButton(tr("add"));
         m_del_2_1_1_1_2_2_2 = new QPushButton(tr("del"));
-        m_level_2_1_1_1_1_3 = new QListWidget;
-        m_subject_2_1_1_1_2_3 = new QListWidget;
+        m_level_2_1_1_1_1_3 = new AsyncListView;
+        m_subject_2_1_1_1_2_3 = new AsyncListView;
 
         //configure widgets
         m_level_2_1_1_1_1_3->setEditTriggers(QAbstractItemView::DoubleClicked);
@@ -176,6 +176,8 @@ MainWindow::MainWindow() : m_need_to_close(false)
         QObject::connect(m_add_lesson, SIGNAL(clicked()), this, SLOT(draw_add_pressed()));
         QObject::connect(m_delete_lesson, SIGNAL(clicked()), this, SLOT(draw_del_pressed()));
         QObject::connect(m_add_2_1_1_1_1_2_1, SIGNAL(clicked()), this, SLOT(add_level_pressed()));
+        QObject::connect(m_level_2_1_1_1_1_3, SIGNAL(editing_finished(const QModelIndex&)),
+                         this, SLOT(manage_update_level(const QModelIndex&)));
 }
 
 void MainWindow::set_scean(QGraphicsScene* scene)
@@ -325,4 +327,9 @@ void MainWindow::add_level_pressed()
         QListWidgetItem* item = m_level_2_1_1_1_1_3->item(m_level_2_1_1_1_1_3->currentRow());
         item->setFlags(item->flags() | Qt::ItemIsEditable);
         m_level_2_1_1_1_1_3->edit(m_level_2_1_1_1_1_3->currentIndex());
+}
+
+void MainWindow::manage_update_level(const QModelIndex& index)
+{
+        qDebug(Q_FUNC_INFO);
 }
