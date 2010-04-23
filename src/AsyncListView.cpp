@@ -1,5 +1,5 @@
 /*
- * ./FullTimetable.h
+ * ./AsyncListView.cpp
  * Copyright (C) 2010 Lameire Alexis
  *
  * This program is free software: you can redistribute it and/or modify it under
@@ -15,24 +15,19 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef FULLTIMETABLE_H
-#define FULLTIMETABLE_H
-#include "TimeTable.h"
-#include "SubjectData.h"
+
 ///
-/// \file FullTimetable.h
-/// \brief provide the full timetable structure
+/// \file AsyncListView.cpp
+/// \brief advenced QListWidget
 /// \author Lameire Alexis
 ///
 
-///
-/// \struct FullTimetable FullTimetable.h
-/// \brief associate a timetable with this subject is usefull to XmlPlanning and Drowtimetable
-///
-struct FullTimetable
-{
-        Timetable timetable;
-        SubjectData subject_associated;
-};
+#include "AsyncListView.h"
 
-#endif // FULLTIMETABLE_H
+AsyncListView::AsyncListView(QWidget* parent) : QListWidget(parent)
+{
+        qDebug( Q_FUNC_INFO );
+        setItemDelegate(&m_delegate);
+        QObject::connect(&m_delegate, SIGNAL(editingFinished(const QModelIndex&)),
+                         this, SIGNAL(editing_finished(const QModelIndex&)));
+}

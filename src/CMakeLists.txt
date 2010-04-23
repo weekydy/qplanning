@@ -27,6 +27,8 @@ set(
 	FullTimetable.h
 	QGraphicsItemBoundedText.h
         SqlModelGenerating.h
+        AdvencedItemDelegate.h
+        AsyncListView.h
 	${CMAKE_CURRENT_BINARY_DIR}/define_cmake.h
 	CACHE FILEPATH "header files" FORCE
 )
@@ -42,6 +44,8 @@ set(
 	DrawTimetable.cpp
 	QGraphicsItemBoundedText.cpp
         SqlModelGenerating.cpp
+        AdvencedItemDelegate.cpp
+        AsyncListView.cpp
 	CACHE FILEPATH "source files" FORCE
 )
 QT4_WRAP_UI(ui_h_FILES ${ui_FILES})
