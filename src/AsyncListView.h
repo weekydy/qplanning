@@ -23,7 +23,11 @@
 /// \author Lameire Alexis
 ///
 #include <QListWidget>
+#include <QListWidgetItem>
+#include <QVector>
 #include "AdvencedItemDelegate.h"
+#include "KeyValue.h"
+#include "define.h"
 
 ///
 /// \class AsyncListView AsyncListView.h
@@ -37,15 +41,31 @@ class AsyncListView : public QListWidget
                 /// \brief default constructor
                 ///
                 AsyncListView(QWidget* parent = 0);
+                ///
+                /// \brief add an item
+                /// \arg item item to store
+                /// \arg is_editable
+                void addItem(AdvencedKeyValue item, bool is_editable = true);
 
         private:
                 AdvencedItemDelegate m_delegate;
+                QVector<AdvencedKeyValue> m_async_data;
 
         signals:
                 ///
                 /// \brief signal emit when an tab is finis to edit
                 ///
                 void editing_finished(const QModelIndex& model);
+
+        public slots:
+                ///
+                /// \brief add an item
+                /// \arg id id in model
+                /// \arg value texte to show
+                /// \arg is_exist precise if item exist in view
+                /// \arg is_editable precise if item is editable
+                ///
+                void addItem(unsigned int id = 0, QString value = DEFAULT_ID_NAME, bool is_exist = false, bool is_editable = true);
 };
 
 #endif // ASYNCLISTVIEW_H

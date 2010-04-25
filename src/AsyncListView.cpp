@@ -31,3 +31,27 @@ AsyncListView::AsyncListView(QWidget* parent) : QListWidget(parent)
         QObject::connect(&m_delegate, SIGNAL(editingFinished(const QModelIndex&)),
                          this, SIGNAL(editing_finished(const QModelIndex&)));
 }
+
+void AsyncListView::addItem(unsigned int id, QString value, bool is_exist, bool is_editable)
+{
+        AdvencedKeyValue item;
+        item.key = id;
+        item.value = value;
+        item.is_exist = is_exist;
+        addItem(item, is_editable);
+}
+
+void AsyncListView::addItem(AdvencedKeyValue item, bool is_editable)
+{
+        m_async_data.push_back(item);
+
+        QListWidget::addItem(item.value);
+        setCurrentRow(count() - 1);
+
+        QListWidgetItem* item_to_edit = this->item(currentRow());
+        if (is_editable)
+        {
+                item_to_edit->setFlags(item_to_edit->flags() | Qt::ItemIsEditable);
+        }
+        edit(currentIndex());
+}
