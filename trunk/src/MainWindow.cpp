@@ -175,7 +175,7 @@ MainWindow::MainWindow() : m_need_to_close(false)
         QObject::connect(m_modify_lesson, SIGNAL(clicked()), this, SLOT(draw_modify_pressed()));
         QObject::connect(m_add_lesson, SIGNAL(clicked()), this, SLOT(draw_add_pressed()));
         QObject::connect(m_delete_lesson, SIGNAL(clicked()), this, SLOT(draw_del_pressed()));
-        QObject::connect(m_add_2_1_1_1_1_2_1, SIGNAL(clicked()), this, SLOT(add_level_pressed()));
+        QObject::connect(m_add_2_1_1_1_1_2_1, SIGNAL(clicked()), m_level_2_1_1_1_1_3, SLOT(addItem()));
         QObject::connect(m_level_2_1_1_1_1_3, SIGNAL(editing_finished(const QModelIndex&)),
                          this, SLOT(manage_update_level(const QModelIndex&)));
 }
@@ -313,6 +313,7 @@ void MainWindow::manage_quit_needed()
         emit quit_needed();
 }
 
+/*
 void MainWindow::add_level_pressed()
 {
         AdvencedKeyValue new_id;
@@ -328,6 +329,7 @@ void MainWindow::add_level_pressed()
         item->setFlags(item->flags() | Qt::ItemIsEditable);
         m_level_2_1_1_1_1_3->edit(m_level_2_1_1_1_1_3->currentIndex());
 }
+*/
 
 void MainWindow::manage_update_level(const QModelIndex& index)
 {

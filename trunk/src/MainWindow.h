@@ -166,7 +166,7 @@ class MainWindow : public QMainWindow
                 ///
                 /// \brief slot to add a level in veuw, launch his editing and add new row in database
                 ///
-                void add_level_pressed();
+                /// void add_level_pressed();
                 ///
                 /// \brief slot to emit the changement in level
                 ///
