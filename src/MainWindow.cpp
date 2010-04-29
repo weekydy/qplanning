@@ -313,25 +313,9 @@ void MainWindow::manage_quit_needed()
         emit quit_needed();
 }
 
-/*
-void MainWindow::add_level_pressed()
-{
-        AdvencedKeyValue new_id;
-        new_id.key = 0;
-        new_id.is_exist = false;
-        new_id.value = DEFAULT_ID_NAME;
-        m_level.push_back(new_id);
-
-
-        m_level_2_1_1_1_1_3->addItem(new_id.value);
-        m_level_2_1_1_1_1_3->setCurrentRow(m_level_2_1_1_1_1_3->count() - 1);
-        QListWidgetItem* item = m_level_2_1_1_1_1_3->item(m_level_2_1_1_1_1_3->currentRow());
-        item->setFlags(item->flags() | Qt::ItemIsEditable);
-        m_level_2_1_1_1_1_3->edit(m_level_2_1_1_1_1_3->currentIndex());
-}
-*/
-
 void MainWindow::manage_update_level(const QModelIndex& index)
 {
         qDebug(Q_FUNC_INFO);
+        int index_id = index.row();
+        emit update_level((*m_level_2_1_1_1_1_3)[index_id]);
 }

@@ -164,13 +164,10 @@ class MainWindow : public QMainWindow
                 ///
                 void manage_quit_needed();
                 ///
-                /// \brief slot to add a level in veuw, launch his editing and add new row in database
-                ///
-                /// void add_level_pressed();
-                ///
                 /// \brief slot to emit the changement in level
                 ///
                 void manage_update_level(const QModelIndex& index);
+
         signals:
                 ///
                 /// \brief signal emit when subject need to be edit
@@ -224,5 +221,9 @@ class MainWindow : public QMainWindow
                 /// \brief signal emit when timetable need to be printed
                 ///
                 void print_needed();
+                ///
+                /// \brief signal emit when update level needed
+                ///
+                void update_level(AdvencedKeyValue item);
 };
 #endif
