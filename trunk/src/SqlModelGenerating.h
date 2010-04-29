@@ -29,24 +29,32 @@
 #include <QTemporaryFile>
 #include <QSqlError>
 #include <QDir>
+#include <QVector>
+#include "KeyValue.h"
+#include "AbstractSqlTable.h"
 
 ///
 /// \class SqlModelGenerating SqlModelGenerating.h
 /// \brief manage communication with sql database
 ///
+
 class SqlModelGenerating : public QObject
 {
-        Q_OBJECT
         public:
                ///
                /// \brief default constructor
                ///
-               SqlModelGenerating(QObject *parent = 0);
+               SqlModelGenerating();
                ///
                /// \brief connect to the database
                /// \arg path path of the sqlite database
                ///
                void connect_db(QString path = QString());
+               ///
+               /// \brief add or update a lesson on the db
+               ///
+               void update_lesson(AdvencedKeyValue data);
+
         private:
                ///
                /// \brief create basic table content
@@ -58,5 +66,43 @@ class SqlModelGenerating : public QObject
                QString m_filepath;
                QTemporaryFile m_tmp_file;
 };
+
+template<class T>
+///
+/// \brief add data in databsae
+/// \arg data : one of implementation of AbstractSqlTable
+///
+T& add(T& data)
+{
+        QSqlQuery query;
+        query.prepare(data.add());
+
+        QVector<T> items = _exec_query(query, data);
+        Q_ASSERT(items.size() == 1);
+
+        return items[0];
+}
+
+///
+/// \brief execute and parse the result of a query
+/// \arg QSqlQuery querry to execute
+/// \arg data table used to parse data
+///
+template<class T>
+QVector<T> _exec_query(QSqlQuery query, T &data)
+{
+        QVector<T> items;
+        if (query.exec())
+        {
+                throw query.lastError().driverText();
+        }
+
+        while (query.next())
+        {
+                T item = data.parse_statment(query);
+                items.push_back(item);
+        }
+        return items;
+}
 
 #endif // SQLMODELGENERATING_H

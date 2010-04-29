@@ -45,7 +45,9 @@ class AsyncListView : public QListWidget
                 /// \brief add an item
                 /// \arg item item to store
                 /// \arg is_editable
+                ///
                 void addItem(AdvencedKeyValue item, bool is_editable = true);
+                AdvencedKeyValue operator[](unsigned int index);
 
         private:
                 AdvencedItemDelegate m_delegate;

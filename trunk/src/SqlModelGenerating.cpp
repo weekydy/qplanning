@@ -15,6 +15,7 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
+
 #include "SqlModelGenerating.h"
 ///
 /// \file SqlModelGenerating.cpp
@@ -23,8 +24,8 @@
 ///
 
 
-SqlModelGenerating::SqlModelGenerating(QObject *parent) :
-    QObject(parent), m_sql_db(QSqlDatabase::addDatabase("QSQLITE")),
+SqlModelGenerating::SqlModelGenerating() :
+    m_sql_db(QSqlDatabase::addDatabase("QSQLITE")),
     m_tmp_file(QDir::tempPath() + "/QPlanning_XXXXXX.db", this)
 {
         connect_db();
@@ -33,6 +34,7 @@ SqlModelGenerating::SqlModelGenerating(QObject *parent) :
                 _create_basic_shemas();
         }
 }
+
 
 void SqlModelGenerating::connect_db(QString path)
 {
@@ -56,6 +58,7 @@ void SqlModelGenerating::connect_db(QString path)
                 throw;
         }
 }
+
 
 void SqlModelGenerating::_create_basic_shemas()
 {

@@ -29,6 +29,8 @@ set(
         SqlModelGenerating.h
         AdvencedItemDelegate.h
         AsyncListView.h
+        AbstractSqlTable.h
+        LevelTable.h
 	${CMAKE_CURRENT_BINARY_DIR}/define_cmake.h
 	CACHE FILEPATH "header files" FORCE
 )
@@ -46,6 +48,8 @@ set(
         SqlModelGenerating.cpp
         AdvencedItemDelegate.cpp
         AsyncListView.cpp
+        AbstractSqlTable.cpp
+        LevelTable.cpp
 	CACHE FILEPATH "source files" FORCE
 )
 QT4_WRAP_UI(ui_h_FILES ${ui_FILES})

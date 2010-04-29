@@ -55,3 +55,8 @@ void AsyncListView::addItem(AdvencedKeyValue item, bool is_editable)
         }
         edit(currentIndex());
 }
+
+AdvencedKeyValue AsyncListView::operator[](unsigned int index)
+{
+        return m_async_data[index];
+}

@@ -39,6 +39,7 @@
 #include "FullTimetable.h"
 #include "SqlModelGenerating.h"
 #include "define.h"
+#include "LevelTable.h"
 
 ///
 /// \class Control Control.h
@@ -138,5 +139,9 @@ class Control : public QObject
                 /// \brief print timetable
                 ///
                 void print_timetable();
+                ///
+                /// \brief add data on model
+                ///
+                void update_level(AdvencedKeyValue data);
 };
 #endif

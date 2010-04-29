@@ -50,6 +50,7 @@ Control::Control() : m_windows(), m_config_subject(&m_windows), m_config_timetab
         QObject::connect(&m_windows, SIGNAL(del_subject(KeyValue)), this, SLOT(del_subject(KeyValue)));
         QObject::connect(&m_windows, SIGNAL(quit_needed()), this, SLOT(manage_quit()));
         QObject::connect(&m_windows, SIGNAL(print_needed()), this, SLOT(print_timetable()));
+        QObject::connect(&m_windows, SIGNAL(update_level(AdvencedKeyValue)), this, SLOT(update_level(AdvencedKeyValue)));
 
         manage_create_file();
         m_windows.show();
@@ -360,3 +361,11 @@ void Control::print_timetable()
                 m_timetable_veuw.render(&page);
         }
 }
+
+void Control::update_level(AdvencedKeyValue data)
+{
+        LevelTable table(data);
+        LevelTable& result = add(table);
+}
+
+
