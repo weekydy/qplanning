@@ -26,6 +26,7 @@
 #include <QString>
 #include <QSqlQuery>
 #include <QVariant>
+#include <QVector>
 
 ///
 /// \class AbstractSqlTable AbstractSqlTable.h
@@ -41,7 +42,7 @@ class AbstractSqlTable
                 ///
                 /// \brief generate sql request to add the element referenced
                 ///
-                virtual QString add() = 0;
+                virtual QVector<QSqlQuery*> add() = 0;
                 ///
                 /// \brief generate sql request to del the element referenced
                 ///

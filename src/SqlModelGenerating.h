@@ -24,6 +24,7 @@
 ///
 #include <QObject>
 #include <QString>
+#include <QStringList>
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QTemporaryFile>
@@ -74,10 +75,20 @@ template<class T>
 ///
 T& add(T& data)
 {
-        QSqlQuery query;
-        query.prepare(data.add());
+        qDebug(Q_FUNC_INFO);
+        QVector<QSqlQuery*> query = data.add();
+        for (int i = 0; i != query.size(); i++)
+        {
+                if (!query[i]->exec())
+                {
+                        qDebug(qPrintable(query[i]->lastError().driverText()));
+                        qDebug(qPrintable(query[i]->lastError().databaseText()));
+                        throw query[i]->lastError();
+                }
+        }
 
-        QVector<T> items = _exec_query(query, data);
+        QVector<T> items = _exec_query(*(query[query.size() - 1]), data);
+        qDebug("items.size() : %d", items.size());
         Q_ASSERT(items.size() == 1);
 
         return items[0];
@@ -91,14 +102,13 @@ T& add(T& data)
 template<class T>
 QVector<T> _exec_query(QSqlQuery query, T &data)
 {
+        qDebug( Q_FUNC_INFO );
         QVector<T> items;
-        if (query.exec())
-        {
-                throw query.lastError().driverText();
-        }
 
+        qDebug(qPrintable(query.lastQuery()));
         while (query.next())
         {
+                qDebug("iterating");
                 T item = data.parse_statment(query);
                 items.push_back(item);
         }
