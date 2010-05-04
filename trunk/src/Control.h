@@ -141,7 +141,9 @@ class Control : public QObject
                 void print_timetable();
                 ///
                 /// \brief add data on model
+                /// \arg data data to store
+                /// \arg index index to show
                 ///
-                void update_level(AdvencedKeyValue data);
+                void update_level(AdvencedKeyValue data, unsigned int index);
 };
 #endif

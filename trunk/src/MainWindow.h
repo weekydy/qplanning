@@ -64,6 +64,10 @@ class MainWindow : public QMainWindow
                 /// \arg scean sceane to set
                 ///
                 void set_scean(QGraphicsScene* scene);
+                ///
+                /// \brief update a intem on the level list
+                ///
+                void update_index_level(AdvencedKeyValue item, unsigned int index);
 
         protected:
                 ///
@@ -136,7 +140,7 @@ class MainWindow : public QMainWindow
                 int m_edit_timetable_id;
                 int m_generate_timetable_id;
 
-        public slots:
+        private slots:
                 ///
                 /// \brief update the list of lessons vewved
                 /// \param subjects list of lessons to show
@@ -163,10 +167,6 @@ class MainWindow : public QMainWindow
                 /// \brief slot to emit quit_needed and set the m_need_to_close
                 ///
                 void manage_quit_needed();
-                ///
-                /// \brief slot to emit the changement in level
-                ///
-                void manage_update_level(const QModelIndex& index);
 
         signals:
                 ///
@@ -224,6 +224,6 @@ class MainWindow : public QMainWindow
                 ///
                 /// \brief signal emit when update level needed
                 ///
-                void update_level(AdvencedKeyValue item);
+                void update_level(AdvencedKeyValue item, unsigned int index);
 };
 #endif

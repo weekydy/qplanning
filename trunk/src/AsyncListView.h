@@ -47,7 +47,15 @@ class AsyncListView : public QListWidget
                 /// \arg is_editable
                 ///
                 void addItem(AdvencedKeyValue item, bool is_editable = true);
+                ///
+                /// \brief get an item
+                /// \arg index index to collect
+                ///
                 AdvencedKeyValue operator[](unsigned int index);
+                ///
+                /// update an index
+                ///
+                void update_index(AdvencedKeyValue data, unsigned int index);
 
         private:
                 AdvencedItemDelegate m_delegate;
@@ -57,7 +65,7 @@ class AsyncListView : public QListWidget
                 ///
                 /// \brief signal emit when an tab is finis to edit
                 ///
-                void editing_finished(const QModelIndex& model);
+                void editing_finished(AdvencedKeyValue data, unsigned int index);
 
         public slots:
                 ///
@@ -68,6 +76,12 @@ class AsyncListView : public QListWidget
                 /// \arg is_editable precise if item is editable
                 ///
                 void addItem(unsigned int id = 0, QString value = DEFAULT_ID_NAME, bool is_exist = false, bool is_editable = true);
+
+        private slots:
+                ///
+                /// \brief manage updating the async data and emit the modified data to the aoutdor
+                ///
+                void update_data(const QModelIndex& model);
 };
 
 #endif // ASYNCLISTVIEW_H

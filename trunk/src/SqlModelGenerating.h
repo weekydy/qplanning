@@ -73,25 +73,49 @@ template<class T>
 /// \brief add data in databsae
 /// \arg data : one of implementation of AbstractSqlTable
 ///
-T& add(T& data)
+T* add(T& data)
 {
         qDebug(Q_FUNC_INFO);
         QVector<QSqlQuery*> query = data.add();
-        for (int i = 0; i != query.size(); i++)
-        {
-                if (!query[i]->exec())
-                {
-                        qDebug(qPrintable(query[i]->lastError().driverText()));
-                        qDebug(qPrintable(query[i]->lastError().databaseText()));
-                        throw query[i]->lastError();
-                }
-        }
 
-        QVector<T> items = _exec_query(*(query[query.size() - 1]), data);
+        QVector<T*> items = _exec_query(query, data);
+
         qDebug("items.size() : %d", items.size());
         Q_ASSERT(items.size() == 1);
 
+        for (int i = 0; i != query.size(); i++)
+        {
+                delete query[i];
+        }
+        for (int i = 1; i != items.size(); i++)
+        {
+                delete items[i];
+        }
         return items[0];
+}
+
+///
+/// \brief modify data on database
+/// \arg data one of the implementation of AbstractSqlTable
+///
+template<class T>
+void edit(T& data)
+{
+        qDebug(Q_FUNC_INFO);
+        QVector<QSqlQuery*> query = data.edit();
+
+        QVector<T*> items = _exec_query(query, data);
+        qDebug("items.size() : %d", items.size());
+        Q_ASSERT(items.size() == 0);
+
+        for (int i = 0; i != query.size(); i++)
+        {
+                delete query[i];
+        }
+        for (int i = 0; i != items.size(); i++)
+        {
+                delete items[i];
+        }
 }
 
 ///
@@ -100,17 +124,27 @@ T& add(T& data)
 /// \arg data table used to parse data
 ///
 template<class T>
-QVector<T> _exec_query(QSqlQuery query, T &data)
+QVector<T*> _exec_query(QVector<QSqlQuery*>& query, T &data)
 {
         qDebug( Q_FUNC_INFO );
-        QVector<T> items;
+        QVector<T*> items;
 
-        qDebug(qPrintable(query.lastQuery()));
-        while (query.next())
+        for (int i = 0; i != query.size(); i++)
         {
-                qDebug("iterating");
-                T item = data.parse_statment(query);
-                items.push_back(item);
+                if (!query[i]->exec())
+                {
+                        qDebug(qPrintable(query[i]->lastError().driverText()));
+                        qDebug(qPrintable(query[i]->lastError().databaseText()));
+                        throw query[i]->lastError();
+                }
+                qDebug(qPrintable(query[i]->lastQuery()));
+
+                while (query[i]->next())
+                {
+                        qDebug("iterating");
+                        T* item = data.parse_statment(*(query[i]));
+                        items.push_back(item);
+                }
         }
         return items;
 }

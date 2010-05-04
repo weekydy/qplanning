@@ -50,7 +50,7 @@ class AbstractSqlTable
                 ///
                 /// \brief generate sql requesto to edit the element referenced
                 ///
-                virtual QString edit() = 0;
+                virtual QVector<QSqlQuery*> edit() = 0;
                 ///
                 /// \brief verify if all data is been present to exectue all subcited method
                 ///
@@ -73,7 +73,7 @@ class AbstractSqlTable
                 /// \arg result sql result to parse
                 /// \return an implementation of this class
                 ///
-                virtual AbstractSqlTable& parse_statment(QSqlQuery& result) const = 0;
+                virtual AbstractSqlTable* parse_statment(QSqlQuery& result) const = 0;
 
         private:
                 bool m_is_exist;
