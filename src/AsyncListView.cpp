@@ -29,7 +29,7 @@ AsyncListView::AsyncListView(QWidget* parent) : QListWidget(parent)
         qDebug( Q_FUNC_INFO );
         setItemDelegate(&m_delegate);
         QObject::connect(&m_delegate, SIGNAL(editingFinished(const QModelIndex&)),
-                         this, SIGNAL(editing_finished(const QModelIndex&)));
+                         this, SLOT(update_data(const QModelIndex&)));
 }
 
 void AsyncListView::addItem(unsigned int id, QString value, bool is_exist, bool is_editable)
@@ -59,4 +59,15 @@ void AsyncListView::addItem(AdvencedKeyValue item, bool is_editable)
 AdvencedKeyValue AsyncListView::operator[](unsigned int index)
 {
         return m_async_data[index];
+}
+
+void AsyncListView::update_data(const QModelIndex& model)
+{
+        m_async_data[model.row()].value = model.data(Qt::EditRole).toString();
+        emit editing_finished(m_async_data[model.row()], model.row());
+}
+
+void AsyncListView::update_index(AdvencedKeyValue data, unsigned int index)
+{
+        m_async_data[index] = data;
 }

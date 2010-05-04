@@ -176,8 +176,8 @@ MainWindow::MainWindow() : m_need_to_close(false)
         QObject::connect(m_add_lesson, SIGNAL(clicked()), this, SLOT(draw_add_pressed()));
         QObject::connect(m_delete_lesson, SIGNAL(clicked()), this, SLOT(draw_del_pressed()));
         QObject::connect(m_add_2_1_1_1_1_2_1, SIGNAL(clicked()), m_level_2_1_1_1_1_3, SLOT(addItem()));
-        QObject::connect(m_level_2_1_1_1_1_3, SIGNAL(editing_finished(const QModelIndex&)),
-                         this, SLOT(manage_update_level(const QModelIndex&)));
+        QObject::connect(m_level_2_1_1_1_1_3, SIGNAL(editing_finished(AdvencedKeyValue, unsigned int)),
+                         this, SIGNAL(update_level(AdvencedKeyValue, unsigned int)));
 }
 
 void MainWindow::set_scean(QGraphicsScene* scene)
@@ -313,9 +313,7 @@ void MainWindow::manage_quit_needed()
         emit quit_needed();
 }
 
-void MainWindow::manage_update_level(const QModelIndex& index)
+void MainWindow::update_index_level(AdvencedKeyValue item, unsigned int index)
 {
-        qDebug(Q_FUNC_INFO);
-        int index_id = index.row();
-        emit update_level((*m_level_2_1_1_1_1_3)[index_id]);
+        m_level_2_1_1_1_1_3->update_index(item, index);
 }

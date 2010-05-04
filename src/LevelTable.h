@@ -53,7 +53,7 @@ class LevelTable : public AbstractSqlTable
                 ///
                 /// \reimp
                 ///
-                QString edit();
+                QVector<QSqlQuery*> edit();
                 ///
                 /// \reimp
                 ///
@@ -61,7 +61,15 @@ class LevelTable : public AbstractSqlTable
                 ///
                 ///  \reimp
                 ///
-                LevelTable& parse_statment(QSqlQuery& result) const;
+                LevelTable* parse_statment(QSqlQuery& result) const;
+                ///
+                /// \brief get id stored
+                ///
+                unsigned int get_id();
+                ///
+                /// \brief get the name
+                ///
+                QString get_name();
 
         private:
                 unsigned int m_id;

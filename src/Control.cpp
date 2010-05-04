@@ -50,7 +50,8 @@ Control::Control() : m_windows(), m_config_subject(&m_windows), m_config_timetab
         QObject::connect(&m_windows, SIGNAL(del_subject(KeyValue)), this, SLOT(del_subject(KeyValue)));
         QObject::connect(&m_windows, SIGNAL(quit_needed()), this, SLOT(manage_quit()));
         QObject::connect(&m_windows, SIGNAL(print_needed()), this, SLOT(print_timetable()));
-        QObject::connect(&m_windows, SIGNAL(update_level(AdvencedKeyValue)), this, SLOT(update_level(AdvencedKeyValue)));
+        QObject::connect(&m_windows, SIGNAL(update_level(AdvencedKeyValue, unsigned int)),
+                         this, SLOT(update_level(AdvencedKeyValue, unsigned int)));
 
         manage_create_file();
         m_windows.show();
@@ -362,10 +363,27 @@ void Control::print_timetable()
         }
 }
 
-void Control::update_level(AdvencedKeyValue data)
+void Control::update_level(AdvencedKeyValue data, unsigned int index)
 {
         LevelTable table(data);
-        LevelTable& result = add(table);
+        LevelTable* result;
+        if (table.is_exist())
+        {
+                edit(table);
+                qDebug("%u %s", data.key, qPrintable(data.value));
+        }
+        else
+        {
+                result = add(table);
+                AdvencedKeyValue result_for_view;
+                result_for_view.is_exist = true;
+                result_for_view.key = result->get_id();
+                result_for_view.value = result->get_name();
+
+                m_windows.update_index_level(result_for_view, index);
+                qDebug("%u %s", result->get_id(), qPrintable(result->get_name()));
+                delete result;
+        }
 }
 
 

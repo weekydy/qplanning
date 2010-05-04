@@ -70,21 +70,23 @@ QString LevelTable::del()
         throw;
 }
 
-QString LevelTable::edit()
+QVector<QSqlQuery*> LevelTable::edit()
 {
         if (!is_valid())
         {
                 throw;
         }
-        if (m_id == 0)
+        if (!is_exist())
         {
-   //           return add();
+                return add();
         }
         else
         {
-                QString query;
-                QTextStream query_stream(&query);
-                query_stream << "UPDATE level SET name='" << m_name << "' WHERE id='" << m_id << "'";
+                QVector<QSqlQuery*> query;
+                query.push_back(new QSqlQuery);
+                query[0]->prepare("UPDATE level SET name=:name WHERE id=:id");
+                query[0]->bindValue(":id", m_id);
+                query[0]->bindValue(":name", m_name);
                 return query;
         }
 }
@@ -94,19 +96,31 @@ bool LevelTable::is_valid()
         return !m_name.isNull();
 }
 
-LevelTable& LevelTable::parse_statment(QSqlQuery& result) const
+LevelTable* LevelTable::parse_statment(QSqlQuery& result) const
 {
+        qDebug( Q_FUNC_INFO );
         LevelTable* data = new LevelTable;
         if (is_exist())
         {
                 data->m_id = result.value(0).toUInt();
                 data->m_name = result.value(1).toString();
-                return *data;
+                return data;
         }
         else
         {
                 data->m_id = result.value(0).toUInt();
+                qDebug("%u", data->m_id);
                 data->m_name = m_name;
-                return *data;
+                return data;
         }
+}
+
+unsigned int LevelTable::get_id()
+{
+        return m_id;
+}
+
+QString LevelTable::get_name()
+{
+        return m_name;
 }
