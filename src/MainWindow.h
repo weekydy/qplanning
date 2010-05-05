@@ -167,6 +167,10 @@ class MainWindow : public QMainWindow
                 /// \brief slot to emit quit_needed and set the m_need_to_close
                 ///
                 void manage_quit_needed();
+                ///
+                /// \brief slot to emit the del_level signal and delet it in view
+                ///
+                void manage_del_level();
 
         signals:
                 ///
@@ -225,5 +229,9 @@ class MainWindow : public QMainWindow
                 /// \brief signal emit when update level needed
                 ///
                 void update_level(AdvencedKeyValue item, unsigned int index);
+                ///
+                /// \brief signal emit when level need to be delete
+                ///
+                void del_level(AdvencedKeyValue item);
 };
 #endif

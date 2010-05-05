@@ -57,14 +57,15 @@ QVector<QSqlQuery*> LevelTable::add()
         throw;
 }
 
-QString LevelTable::del()
+QVector<QSqlQuery*> LevelTable::del()
 {
         qDebug( Q_FUNC_INFO );
         if (is_valid() && m_id != 0)
         {
-                QString query;
-                QTextStream query_stream(&query);
-                query_stream << "DELETE FROM level WHERE id='" << m_id << "'";
+                QVector<QSqlQuery*> query;
+                query.push_back(new QSqlQuery);
+                query[0]->prepare("DELETE FROM level WHERE id=:id");
+                query[0]->bindValue(":id", m_id);
                 return query;
         }
         throw;

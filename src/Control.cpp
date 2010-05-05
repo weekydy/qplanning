@@ -52,6 +52,7 @@ Control::Control() : m_windows(), m_config_subject(&m_windows), m_config_timetab
         QObject::connect(&m_windows, SIGNAL(print_needed()), this, SLOT(print_timetable()));
         QObject::connect(&m_windows, SIGNAL(update_level(AdvencedKeyValue, unsigned int)),
                          this, SLOT(update_level(AdvencedKeyValue, unsigned int)));
+        QObject::connect(&m_windows, SIGNAL(del_level(AdvencedKeyValue)), this, SLOT(del_level(AdvencedKeyValue)));
 
         manage_create_file();
         m_windows.show();
@@ -384,6 +385,13 @@ void Control::update_level(AdvencedKeyValue data, unsigned int index)
                 qDebug("%u %s", result->get_id(), qPrintable(result->get_name()));
                 delete result;
         }
+}
+
+void Control::del_level(AdvencedKeyValue data)
+{
+        qDebug(Q_FUNC_INFO);
+        LevelTable table(data);
+        del(table);
 }
 
 

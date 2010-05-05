@@ -71,3 +71,9 @@ void AsyncListView::update_index(AdvencedKeyValue data, unsigned int index)
 {
         m_async_data[index] = data;
 }
+
+void AsyncListView::delete_index(unsigned int index)
+{
+        m_async_data.remove(index);
+        delete item(index);
+}
