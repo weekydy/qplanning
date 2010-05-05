@@ -29,6 +29,7 @@
 #include "ui_SubjectDataWindow.h"
 #include <QColorDialog>
 #include <QCloseEvent>
+#include "debug_printf.h"
 
 ///
 /// \class SubjectDataWindow SubjectDataWindow.h

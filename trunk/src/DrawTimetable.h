@@ -35,6 +35,7 @@
 #include "define.h"
 #include "FullTimetable.h"
 #include "QGraphicsItemBoundedText.h"
+#include "debug_printf.h"
 ///
 /// \struct RectData;
 /// \brief store rect and his coordonies

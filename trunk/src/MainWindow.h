@@ -45,6 +45,7 @@
 #include "KeyValue.h"
 #include "define.h"
 #include "AsyncListView.h"
+#include "debug_printf.h"
 
 ///
 /// \class MainWindow MainWindow.h

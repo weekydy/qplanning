@@ -40,6 +40,7 @@
 #include "SqlModelGenerating.h"
 #include "define.h"
 #include "LevelTable.h"
+#include "debug_printf.h"
 
 ///
 /// \class Control Control.h

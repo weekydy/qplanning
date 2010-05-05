@@ -28,7 +28,7 @@ QGraphicsItemBoundedText::QGraphicsItemBoundedText() : color(255,255,255)
 
 void QGraphicsItemBoundedText::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-        qDebug( Q_FUNC_INFO );
+        debug_printf( Q_FUNC_INFO );
         if (!m_text.isNull())
         {
                 int i;
@@ -36,10 +36,10 @@ void QGraphicsItemBoundedText::paint(QPainter *painter, const QStyleOptionGraphi
                 int font_size = bounding_rect.height();
                 if ((font_size * m_text.size()) >= bounding_rect.width())
                 {
-                        qDebug("size of string ; %d", m_text.size());
-                        qDebug("bounding_rect.width : %d", m_text.size());
+                        debug_printf("size of string ; %d", m_text.size());
+                        debug_printf("bounding_rect.width : %d", m_text.size());
                         font_size = bounding_rect.width() / m_text.size();
-                        qDebug("font size : %d", font_size);
+                        debug_printf("font size : %d", font_size);
                 }
                 font.setPixelSize(font_size);
                 painter->setPen(color);
@@ -50,29 +50,29 @@ void QGraphicsItemBoundedText::paint(QPainter *painter, const QStyleOptionGraphi
 
 void QGraphicsItemBoundedText::setText(QString text)
 {
-        qDebug( Q_FUNC_INFO );
+        debug_printf( Q_FUNC_INFO );
         if (text.isNull())
         {
-                qDebug("free ok");
+                debug_printf("free ok");
                 m_text.clear();
         }
         else
         {
-                qDebug("set ok");
+                debug_printf("set ok");
                 m_text = text;
         }
 }
 
 void QGraphicsItemBoundedText::setColor(int r, int g, int b)
 {
-        qDebug( Q_FUNC_INFO );
+        debug_printf( Q_FUNC_INFO );
         if (r <= 255 && r >= 0)
         {
                 if (g <= 255 && g >=0)
                 {
                         if (b <= 255 && b >=0)
                         {
-                                qDebug("ok");
+                                debug_printf("ok");
                                 color.setRgb(r, g, b);
                         }
                 }

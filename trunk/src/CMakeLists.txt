@@ -31,6 +31,7 @@ set(
         AsyncListView.h
         AbstractSqlTable.h
         LevelTable.h
+        debug_printf.h
 	${CMAKE_CURRENT_BINARY_DIR}/define_cmake.h
 	CACHE FILEPATH "header files" FORCE
 )
@@ -50,6 +51,7 @@ set(
         AsyncListView.cpp
         AbstractSqlTable.cpp
         LevelTable.cpp
+        debug_printf.cpp
 	CACHE FILEPATH "source files" FORCE
 )
 QT4_WRAP_UI(ui_h_FILES ${ui_FILES})

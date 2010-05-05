@@ -101,7 +101,7 @@ void SubjectDataWindow::set_contant(SubjectData* data)
 
 void SubjectDataWindow::update_text_prevew()
 {
-        qDebug( Q_FUNC_INFO );
+        debug_printf( Q_FUNC_INFO );
         QString color("background-color: rgb(");
         color += QString::number(red_text_color->value());
         color += ", ";
@@ -109,13 +109,13 @@ void SubjectDataWindow::update_text_prevew()
         color += ", ";
         color += QString::number(blue_text_color->value());
         color += ");";
-        qDebug(qPrintable(color));
+        debug_printf(qPrintable(color));
         text_color_prevew->setStyleSheet(color);
 }
 
 void SubjectDataWindow::update_background_prevew()
 {
-        qDebug( Q_FUNC_INFO );
+        debug_printf( Q_FUNC_INFO );
         QString color ("background-color: rgb(");
         color += QString::number(red_background_color->value());
         color += ", ";
@@ -123,7 +123,7 @@ void SubjectDataWindow::update_background_prevew()
         color += ", ";
         color += QString::number(blue_background_color->value());
         color += ");";
-        qDebug(qPrintable(color));
+        debug_printf(qPrintable(color));
         background_color_prevew->setStyleSheet(color);
 }
 

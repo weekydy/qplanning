@@ -33,6 +33,7 @@
 #include <QVector>
 #include "KeyValue.h"
 #include "AbstractSqlTable.h"
+#include "debug_printf.h"
 
 ///
 /// \class SqlModelGenerating SqlModelGenerating.h
@@ -75,12 +76,12 @@ template<class T>
 ///
 T* add(T& data)
 {
-        qDebug(Q_FUNC_INFO);
+        debug_printf(Q_FUNC_INFO);
         QVector<QSqlQuery*> query = data.add();
 
         QVector<T*> items = _exec_query(query, data);
 
-        qDebug("items.size() : %d", items.size());
+        debug_printf("items.size() : %d", items.size());
         Q_ASSERT(items.size() == 1);
 
         for (int i = 0; i != query.size(); i++)
@@ -101,11 +102,11 @@ T* add(T& data)
 template<class T>
 void edit(T& data)
 {
-        qDebug(Q_FUNC_INFO);
+        debug_printf(Q_FUNC_INFO);
         QVector<QSqlQuery*> query = data.edit();
 
         QVector<T*> items = _exec_query(query, data);
-        qDebug("items.size() : %d", items.size());
+        debug_printf("items.size() : %d", items.size());
         Q_ASSERT(items.size() == 0);
 
         for (int i = 0; i != query.size(); i++)
@@ -125,11 +126,11 @@ void edit(T& data)
 template<class T>
 void del(T& data)
 {
-        qDebug( Q_FUNC_INFO );
+        debug_printf( Q_FUNC_INFO );
         QVector<QSqlQuery*> query = data.del();
 
         QVector<T*> items = _exec_query(query, data);
-        qDebug("items.size() = %d", items.size());
+        debug_printf("items.size() = %d", items.size());
         Q_ASSERT(items.size() == 0);
 
         for (int i = 0; i != query.size(); i++)
@@ -150,22 +151,22 @@ void del(T& data)
 template<class T>
 QVector<T*> _exec_query(QVector<QSqlQuery*>& query, T &data)
 {
-        qDebug( Q_FUNC_INFO );
+        debug_printf( Q_FUNC_INFO );
         QVector<T*> items;
 
         for (int i = 0; i != query.size(); i++)
         {
                 if (!query[i]->exec())
                 {
-                        qDebug(qPrintable(query[i]->lastError().driverText()));
-                        qDebug(qPrintable(query[i]->lastError().databaseText()));
+                        debug_printf(qPrintable(query[i]->lastError().driverText()));
+                        debug_printf(qPrintable(query[i]->lastError().databaseText()));
                         throw query[i]->lastError();
                 }
-                qDebug(qPrintable(query[i]->lastQuery()));
+                debug_printf(qPrintable(query[i]->lastQuery()));
 
                 while (query[i]->next())
                 {
-                        qDebug("iterating");
+                        debug_printf("iterating");
                         T* item = data.parse_statment(*(query[i]));
                         items.push_back(item);
                 }

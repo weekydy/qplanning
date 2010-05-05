@@ -24,6 +24,7 @@
 ///
 #include <QItemDelegate>
 #include <QModelIndex>
+#include "debug_printf.h"
 ///
 /// \class AdvencedItemDegelate AdvencedItemDelegate
 /// \brief reimplementation of QT QItemdelegate to emit signal when the edition of item is finis

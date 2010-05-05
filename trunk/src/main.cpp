@@ -22,6 +22,7 @@
 #include "XmlPlanning.h"
 #include "Control.h"
 #include "define.h"
+#include "debug_printf.h"
 
 int main(int argc, char** argv)
 {
@@ -30,9 +31,9 @@ int main(int argc, char** argv)
 
         QString locale = QLocale::system().name().section('_', 0, 0);
         QTranslator translator;
-        qDebug() << qPrintable(locale);
+        debug_printf("locale = %s", qPrintable(locale));
         QString path = QM_FILES + QString("/QPlanning_") + locale;
-        qDebug(qPrintable(path));
+        debug_printf(qPrintable(path));
         bool result = translator.load("QPlanning_" + locale, QM_FILES);
         Q_ASSERT(result);
         app.installTranslator(&translator);

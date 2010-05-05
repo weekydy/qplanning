@@ -189,7 +189,7 @@ void MainWindow::set_scean(QGraphicsScene* scene)
 
 void MainWindow::update_all_lessons(QVector<KeyValue> subjects)
 {
-        qDebug( Q_FUNC_INFO );
+        debug_printf( Q_FUNC_INFO );
         m_subjects->clear();
         m_subject_items = subjects;
         for (int i = 0; i != subjects.size(); i++)
@@ -200,7 +200,7 @@ void MainWindow::update_all_lessons(QVector<KeyValue> subjects)
 
 void MainWindow::update_all_timetable(QVector<KeyValue> timetable)
 {
-        qDebug( Q_FUNC_INFO );
+        debug_printf( Q_FUNC_INFO );
         m_timetable->clear();
         m_timetable_items = timetable;
         for (int i = 0; i != timetable.size(); i++)
@@ -211,7 +211,7 @@ void MainWindow::update_all_timetable(QVector<KeyValue> timetable)
 
 void MainWindow::draw_modify_pressed()
 {
-        qDebug( Q_FUNC_INFO );
+        debug_printf( Q_FUNC_INFO );
         KeyValue value_to_return;
         if (m_layout_1_2_2->currentIndex() == m_subjects_id)
         {
@@ -249,7 +249,7 @@ void MainWindow::draw_add_pressed()
 
 void MainWindow::draw_del_pressed()
 {
-        qDebug( Q_FUNC_INFO );
+        debug_printf( Q_FUNC_INFO );
         KeyValue value_to_return;
         if (m_layout_1_2_2->currentIndex() == m_subjects_id)
         {

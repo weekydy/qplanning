@@ -26,7 +26,7 @@
 
 AsyncListView::AsyncListView(QWidget* parent) : QListWidget(parent)
 {
-        qDebug( Q_FUNC_INFO );
+        debug_printf( Q_FUNC_INFO );
         setItemDelegate(&m_delegate);
         QObject::connect(&m_delegate, SIGNAL(editingFinished(const QModelIndex&)),
                          this, SLOT(update_data(const QModelIndex&)));

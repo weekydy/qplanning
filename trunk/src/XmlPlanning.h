@@ -43,7 +43,7 @@
 #include "SubjectData.h"
 #include "TimeTable.h"
 #include "KeyValue.h"
-
+#include "debug_printf.h"
 
 ///
 /// \enum xmlerror

@@ -30,8 +30,8 @@ TimeTableWindow::TimeTableWindow(QWidget* parent) : QDialog(parent)
 
 void TimeTableWindow::set_content(Timetable& data, QVector<KeyValue> lessons_list)
 {
-        qDebug( Q_FUNC_INFO );
-        qDebug("%u", data.id_lesson);
+        debug_printf( Q_FUNC_INFO );
+        debug_printf("%u", data.id_lesson);
 
         class_edit->setText(data.classroom);
         week_edit->setCurrentIndex(data.week - 1);
@@ -55,7 +55,7 @@ void TimeTableWindow::set_content(Timetable& data, QVector<KeyValue> lessons_lis
                 subject_edit->addItem(lessons_list[i].value);
                 if (lessons_list[i].key == data.id_lesson)
                 {
-                        qDebug("id found");
+                        debug_printf("id found");
                         subject_edit->setCurrentIndex(i);
                 }
         }
