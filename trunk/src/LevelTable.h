@@ -49,7 +49,7 @@ class LevelTable : public AbstractSqlTable
                 ///
                 /// \reimp
                 ///
-                QString del();
+                QVector<QSqlQuery*> del();
                 ///
                 /// \reimp
                 ///

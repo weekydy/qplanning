@@ -178,6 +178,7 @@ MainWindow::MainWindow() : m_need_to_close(false)
         QObject::connect(m_add_2_1_1_1_1_2_1, SIGNAL(clicked()), m_level_2_1_1_1_1_3, SLOT(addItem()));
         QObject::connect(m_level_2_1_1_1_1_3, SIGNAL(editing_finished(AdvencedKeyValue, unsigned int)),
                          this, SIGNAL(update_level(AdvencedKeyValue, unsigned int)));
+        QObject::connect(m_del_2_1_1_1_1_2_2, SIGNAL(clicked()), this, SLOT(manage_del_level()));
 }
 
 void MainWindow::set_scean(QGraphicsScene* scene)
@@ -316,4 +317,12 @@ void MainWindow::manage_quit_needed()
 void MainWindow::update_index_level(AdvencedKeyValue item, unsigned int index)
 {
         m_level_2_1_1_1_1_3->update_index(item, index);
+}
+
+void MainWindow::manage_del_level()
+{
+        unsigned int index = m_level_2_1_1_1_1_3->currentRow();
+        AdvencedKeyValue data = (*m_level_2_1_1_1_1_3)[index];
+        emit del_level(data);
+        m_level_2_1_1_1_1_3->delete_index(index);
 }

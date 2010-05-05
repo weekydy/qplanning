@@ -145,5 +145,10 @@ class Control : public QObject
                 /// \arg index index to show
                 ///
                 void update_level(AdvencedKeyValue data, unsigned int index);
+                ///
+                /// \brief delete level on model
+                /// \arg data data to del
+                ///
+                void del_level(AdvencedKeyValue data);
 };
 #endif

@@ -119,6 +119,30 @@ void edit(T& data)
 }
 
 ///
+/// \brief delete data on database
+/// \arg data to del
+///
+template<class T>
+void del(T& data)
+{
+        qDebug( Q_FUNC_INFO );
+        QVector<QSqlQuery*> query = data.del();
+
+        QVector<T*> items = _exec_query(query, data);
+        qDebug("items.size() = %d", items.size());
+        Q_ASSERT(items.size() == 0);
+
+        for (int i = 0; i != query.size(); i++)
+        {
+                delete query[i];
+        }
+        for (int i = 0; i != items.size(); i++)
+        {
+                delete items[i];
+        }
+}
+
+///
 /// \brief execute and parse the result of a query
 /// \arg QSqlQuery querry to execute
 /// \arg data table used to parse data

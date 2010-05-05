@@ -53,9 +53,16 @@ class AsyncListView : public QListWidget
                 ///
                 AdvencedKeyValue operator[](unsigned int index);
                 ///
-                /// update an index
+                /// \brief update an index
+                /// \arg data data to update
+                /// \arg index index where stored the data
                 ///
                 void update_index(AdvencedKeyValue data, unsigned int index);
+                ///
+                /// \brief delete an index of the model
+                /// \arg index index to delete
+                ///
+                void delete_index(unsigned int index);
 
         private:
                 AdvencedItemDelegate m_delegate;

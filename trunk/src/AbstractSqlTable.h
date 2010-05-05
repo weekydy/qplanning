@@ -46,7 +46,7 @@ class AbstractSqlTable
                 ///
                 /// \brief generate sql request to del the element referenced
                 ///
-                virtual QString del() = 0;
+                virtual QVector<QSqlQuery*> del() = 0;
                 ///
                 /// \brief generate sql requesto to edit the element referenced
                 ///
