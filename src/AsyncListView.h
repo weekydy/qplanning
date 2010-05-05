@@ -28,6 +28,7 @@
 #include "AdvencedItemDelegate.h"
 #include "KeyValue.h"
 #include "define.h"
+#include "debug_printf.h"
 
 ///
 /// \class AsyncListView AsyncListView.h

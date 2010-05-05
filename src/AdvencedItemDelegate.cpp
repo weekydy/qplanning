@@ -28,7 +28,7 @@ AdvencedItemDelegate::AdvencedItemDelegate(QObject *parent) : QItemDelegate(pare
 
 void AdvencedItemDelegate::setModelData(QWidget* editor, QAbstractItemModel* model, const QModelIndex& index) const
 {
-        qDebug( Q_FUNC_INFO );
+        debug_printf( Q_FUNC_INFO );
         QItemDelegate::setModelData(editor, model, index);
         emit const_cast<AdvencedItemDelegate*>(this)->editingFinished(index);
 }

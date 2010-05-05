@@ -28,7 +28,7 @@ SqlModelGenerating::SqlModelGenerating() :
     m_sql_db(QSqlDatabase::addDatabase("QSQLITE")),
     m_tmp_file(QDir::tempPath() + "/QPlanning_XXXXXX.db", this)
 {
-        qDebug( Q_FUNC_INFO );
+        debug_printf( Q_FUNC_INFO );
         connect_db();
         if (m_filepath.isNull())
         {
@@ -39,13 +39,13 @@ SqlModelGenerating::SqlModelGenerating() :
 
 void SqlModelGenerating::connect_db(QString path)
 {
-        qDebug(Q_FUNC_INFO);
+        debug_printf(Q_FUNC_INFO);
         m_sql_db.setHostName("localhost");
         m_sql_db.setUserName("root");
         m_sql_db.setPassword("");
         m_filepath = path;
         m_tmp_file.open();
-        qDebug(qPrintable(m_tmp_file.fileName()));
+        debug_printf(qPrintable(m_tmp_file.fileName()));
         m_tmp_file.close();
 
         if (!m_filepath.isNull())
@@ -55,8 +55,8 @@ void SqlModelGenerating::connect_db(QString path)
         m_sql_db.setDatabaseName(m_tmp_file.fileName());
         if (!m_sql_db.open())
         {
-                qDebug("can't open database");
-                qDebug(qPrintable(m_sql_db.lastError().driverText()));
+                debug_printf("can't open database");
+                debug_printf(qPrintable(m_sql_db.lastError().driverText()));
                 throw;
         }
 }
@@ -64,7 +64,7 @@ void SqlModelGenerating::connect_db(QString path)
 
 void SqlModelGenerating::_create_basic_shemas()
 {
-        qDebug(Q_FUNC_INFO);
+        debug_printf(Q_FUNC_INFO);
         QSqlQuery query;
         QStringList query_str;
         query_str << "PRAGMA foreign_keys = ON;"
@@ -194,10 +194,10 @@ void SqlModelGenerating::_create_basic_shemas()
         {
                 if (!query.exec(query_str.at(i)))
                 {
-                        qDebug(qPrintable(query.lastError().driverText()));
+                        debug_printf(qPrintable(query.lastError().driverText()));
 
                         throw;
                 }
-                qDebug(qPrintable(query.lastQuery()));
+                debug_printf(qPrintable(query.lastQuery()));
         }
 }

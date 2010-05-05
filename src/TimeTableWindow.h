@@ -31,6 +31,7 @@
 #include "KeyValue.h"
 #include "ui_TimeTableWindow.h"
 #include "TimeTable.h"
+#include "debug_printf.h"
 
 ///
 /// \class TimeTableWindow TimeTableWindow.h

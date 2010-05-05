@@ -25,7 +25,7 @@
 
 Control::Control() : m_windows(), m_config_subject(&m_windows), m_config_timetable(&m_windows), m_timetable_veuw(&m_windows)
 {
-        qDebug( Q_FUNC_INFO );
+        debug_printf( Q_FUNC_INFO );
         m_is_modified = false;
         m_windows.set_scean(&m_timetable_veuw);
 
@@ -60,7 +60,7 @@ Control::Control() : m_windows(), m_config_subject(&m_windows), m_config_timetab
 
 void Control::save_before_changing()
 {
-        qDebug( Q_FUNC_INFO );
+        debug_printf( Q_FUNC_INFO );
         int reponse = QMessageBox::question(NULL,
                                             tr("would you like save"),
                                             tr("the file have been modified, would you like save it before"),
@@ -74,7 +74,7 @@ void Control::save_before_changing()
 
 void Control::manage_open_file()
 {
-        qDebug( Q_FUNC_INFO );
+        debug_printf( Q_FUNC_INFO );
         if (m_is_modified)
         {
                 save_before_changing();
@@ -92,7 +92,7 @@ void Control::manage_open_file()
 
 void Control::manage_create_file()
 {
-        qDebug( Q_FUNC_INFO );
+        debug_printf( Q_FUNC_INFO );
         if (m_is_modified)
         {
                 save_before_changing();
@@ -103,37 +103,37 @@ void Control::manage_create_file()
 
 void Control::show_subject(KeyValue subject)
 {
-        qDebug( Q_FUNC_INFO );
+        debug_printf( Q_FUNC_INFO );
         SubjectData info = m_xml_config.search_subject(subject);
-        qDebug() << "begin info list";
-        qDebug() << qPrintable(info.name);
-        qDebug() << qPrintable(info.teacher);
-        qDebug("%d.%d.%d", info.red_text, info.green_text, info.blue_text);
-        qDebug("%d.%d.%d", info.red_background, info.green_background, info.blue_background);
-        qDebug() << "end info list";
+        debug_printf("begin info list");
+        debug_printf(qPrintable(info.name));
+        debug_printf(qPrintable(info.teacher));
+        debug_printf("%d.%d.%d", info.red_text, info.green_text, info.blue_text);
+        debug_printf("%d.%d.%d", info.red_background, info.green_background, info.blue_background);
+        debug_printf("end info list");
         m_config_subject.set_contant(&info);
         m_config_subject.show();
 }
 
 void Control::show_timetable(KeyValue timetable)
 {
-        qDebug( Q_FUNC_INFO );
-        qDebug() << "timetable info list";
-        qDebug() << timetable.key;
-        qDebug() << qPrintable(timetable.value);
-        qDebug() << "end timetable info list";
+        debug_printf( Q_FUNC_INFO );
+        debug_printf("timetable info list");
+        debug_printf("timetable.key = %d", timetable.key);
+        debug_printf("timetable.value = %s", qPrintable(timetable.value));
+        debug_printf("end timetable info list");
 
         Timetable info = m_xml_config.search_timetable(timetable);
         QVector<KeyValue> lesson_list = m_xml_config.get_lessons();
 
-        qDebug() << "begin info list";
-        qDebug() << qPrintable(info.unparsed_date);
-        qDebug() << qPrintable(info.classroom);
-        qDebug() << info.ident;
-        qDebug() << info.id_lesson; //
-        qDebug("%f", info.begin_interval);
-        qDebug("%f", info.end_interval);
-        qDebug() << "end info list";
+        debug_printf("begin info list");
+        debug_printf("info.unparsed_data = %s", qPrintable(info.unparsed_date));
+        debug_printf("info.classroom = %s", qPrintable(info.classroom));
+        debug_printf("info.indent = %d", info.ident);
+        debug_printf("info.id_lesson = %d", info.id_lesson);
+        debug_printf("info.begin_interval = %f", info.begin_interval);
+        debug_printf("info.end_interval = %f", info.end_interval);
+        debug_printf("end info list");
 
         m_config_timetable.set_content(info, lesson_list);
         m_config_timetable.show();
@@ -149,7 +149,7 @@ void Control::update_subject()
 
 void Control::update_timetable()
 {
-        qDebug( Q_FUNC_INFO );
+        debug_printf( Q_FUNC_INFO );
         Timetable timetable = m_config_timetable.get_content();
         m_xml_config.update_timetable(timetable);
         _update_all_veuw();
@@ -170,7 +170,7 @@ void Control::add_subject()
 
 void Control::add_timetable()
 {
-        qDebug( Q_FUNC_INFO );
+        debug_printf( Q_FUNC_INFO );
         QVector<KeyValue> lesson_list = m_xml_config.get_lessons();
 
         if (lesson_list.isEmpty())
@@ -186,13 +186,13 @@ void Control::add_timetable()
                 id_to_edit.key = id;
                 Timetable data = m_xml_config.search_timetable(id_to_edit);
 
-                qDebug("begin info");
-                qDebug() << id;
-                qDebug() << data.unparsed_date;
-                qDebug() << data.group;
-                qDebug() << data.week;
-                qDebug() << data.id_lesson;
-                qDebug("end info");
+                debug_printf("begin info");
+                debug_printf("id = %d", id);
+                debug_printf("data.unparsed_data = %s", qPrintable(data.unparsed_date));
+                debug_printf("data.group = %d", data.group);
+                debug_printf("data.week = %d", data.week);
+                debug_printf("data.id_lesson = %d", data.id_lesson);
+                debug_printf("end info");
 
                 m_config_timetable.set_content(data, lesson_list);
                 m_config_timetable.show();
@@ -253,7 +253,7 @@ void Control::del_subject(KeyValue subject)
 
 void Control::del_timetable(KeyValue timetable)
 {
-        qDebug( Q_FUNC_INFO );
+        debug_printf( Q_FUNC_INFO );
         int confirm = QMessageBox::question(&m_windows,
                                             tr("confirm deleting"),
                                             tr("would you like delete this timetable"),
@@ -261,7 +261,7 @@ void Control::del_timetable(KeyValue timetable)
                                             QMessageBox::No);
         if (confirm == QMessageBox::Yes)
         {
-                qDebug( "okey : save" ),
+                debug_printf( "okey : save" ),
                 m_xml_config.del_timetable(timetable);
                 _update_all_veuw();
         }
@@ -269,7 +269,7 @@ void Control::del_timetable(KeyValue timetable)
 
 void Control::manage_save_file()
 {
-        qDebug( Q_FUNC_INFO );
+        debug_printf( Q_FUNC_INFO );
         if (m_xml_config.get_filename().isNull())
         {
                 manage_save_as_file();
@@ -296,7 +296,7 @@ void Control::manage_save_as_file()
 
 void Control::manage_quit()
 {
-        qDebug( Q_FUNC_INFO );
+        debug_printf( Q_FUNC_INFO );
         if (m_is_modified)
         {
                 save_before_changing();
@@ -309,7 +309,7 @@ void Control::manage_quit()
 
 QVector<FullTimetable> Control::create_full_timetable()
 {
-        qDebug( Q_FUNC_INFO );
+        debug_printf( Q_FUNC_INFO );
         QVector<Timetable> all_timetable = m_xml_config.get_full_timetables();
         QVector<SubjectData> all_subject = m_xml_config.get_full_subjects();
         QVector<FullTimetable> full_timetable;
@@ -321,16 +321,16 @@ QVector<FullTimetable> Control::create_full_timetable()
                 current_full_timetable.timetable = all_timetable[i];
                 for (int j = 0; j != all_subject.size(); j++)
                 {
-                        qDebug("current_full_timetable.timetable.id_lesson = %d",
+                        debug_printf("current_full_timetable.timetable.id_lesson = %d",
                                current_full_timetable.timetable.id_lesson);
-                        qDebug("all_subject[j].id = %d",
+                        debug_printf("all_subject[j].id = %d",
                                all_subject[j].id);
                         if (current_full_timetable.timetable.id_lesson == all_subject[j].id)
                         {
                                 current_full_timetable.subject_associated = all_subject[j];
                                 full_timetable.push_back(current_full_timetable);
                                 id_found = true;
-                                qDebug("ok");
+                                debug_printf("ok");
                                 break;
                         }
                 }
@@ -347,7 +347,7 @@ void Control::_update_all_veuw()
 
 void Control::print_timetable()
 {
-        qDebug( Q_FUNC_INFO );
+        debug_printf( Q_FUNC_INFO );
 
         QPrinter printer(QPrinter::HighResolution);
         printer.setPaperSize(QPrinter::A4);
@@ -371,7 +371,7 @@ void Control::update_level(AdvencedKeyValue data, unsigned int index)
         if (table.is_exist())
         {
                 edit(table);
-                qDebug("%u %s", data.key, qPrintable(data.value));
+                debug_printf("%u %s", data.key, qPrintable(data.value));
         }
         else
         {
@@ -382,14 +382,14 @@ void Control::update_level(AdvencedKeyValue data, unsigned int index)
                 result_for_view.value = result->get_name();
 
                 m_windows.update_index_level(result_for_view, index);
-                qDebug("%u %s", result->get_id(), qPrintable(result->get_name()));
+                debug_printf("%u %s", result->get_id(), qPrintable(result->get_name()));
                 delete result;
         }
 }
 
 void Control::del_level(AdvencedKeyValue data)
 {
-        qDebug(Q_FUNC_INFO);
+        debug_printf(Q_FUNC_INFO);
         LevelTable table(data);
         del(table);
 }

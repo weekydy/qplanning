@@ -29,22 +29,22 @@ XmlPlanning::XmlPlanning() : m_data_file(this)
 {
         m_isopen = false;
         m_isparsed = false;
-        qDebug("default constructor XmlPlaning");
+        debug_printf("default constructor XmlPlaning");
 }
 
 XmlPlanning::XmlPlanning(QString& filename) : m_data_file(this)
 {
         open(filename);
-        qDebug("constructor with filename XmlPlanning");
+        debug_printf("constructor with filename XmlPlanning");
 }
 
 void XmlPlanning::open(QString filename)
 {
-        qDebug("XmlPlanning : method open");
+        debug_printf("XmlPlanning : method open");
         m_data_file.setFileName(filename);
         if (!m_data_file.open(QIODevice::ReadOnly))
         {
-                qDebug("can't open file");
+                debug_printf("can't open file");
                 throw;
         }
 
@@ -52,24 +52,24 @@ void XmlPlanning::open(QString filename)
         int line;
         if (!m_xml_document.setContent(&m_data_file, &error_msg, &line))
         {
-                qDebug("bad contant");
-                qDebug(qPrintable(error_msg));
-                qDebug("line : %d", line);
+                debug_printf("bad contant");
+                debug_printf(qPrintable(error_msg));
+                debug_printf("line : %d", line);
                 m_data_file.close();
                 throw;
         }
-        qDebug("good XML parsed");
-        qDebug(qPrintable(error_msg));
-        qDebug("line : %d", line);
+        debug_printf("good XML parsed");
+        debug_printf(qPrintable(error_msg));
+        debug_printf("line : %d", line);
 
         m_isparsed = true;
-        qDebug("okey");
+        debug_printf("okey");
 
         //read done, verifying contraint
         xmlerror error = verify_xsd();
         if (error != NO_ERROR)
         {
-                qDebug("bad xsd");
+                debug_printf("bad xsd");
                 throw;
         }
 
@@ -79,11 +79,10 @@ void XmlPlanning::open(QString filename)
         error = verify_id();
         if (error != NO_ERROR)
         {
-                qDebug("bad id");
+                debug_printf("bad id");
                 throw;
         }
         m_data_file.close();
-        qDebug() << Q_FUNC_INFO << " done";
 }
 
 xmlerror XmlPlanning::verify_xsd()
@@ -93,14 +92,14 @@ xmlerror XmlPlanning::verify_xsd()
          * http://bugreports.qt.nokia.com/browse/QTBUG-6485
          *
 
-        qDebug(Q_FUNC_INFO);
+        debug_printf(Q_FUNC_INFO);
         QUrl xsd_file("file://" + XSD_FILENAME);
         QXmlSchema schema;
         schema.load(xsd_file);
 
         if (!schema.isValid())
         {
-                qDebug("BAD XSD FILE");
+                debug_printf("BAD XSD FILE");
                 return BAD_XSD_FILE;
         }
         else
@@ -109,12 +108,12 @@ xmlerror XmlPlanning::verify_xsd()
                 m_data_file.seek(0);
                 if (!validator.validate(&m_data_file, QUrl::fromLocalFile(m_data_file.fileName())))
                 {
-                        qDebug("BOD XSD PARSE");
+                        debug_printf("BOD XSD PARSE");
                         return BAD_XSD_PARSE;
                 }
                 else
                 {
-                        qDebug("NO ERROR");
+                        debug_printf("NO ERROR");
                         return NO_ERROR;
                 }
         }
@@ -126,8 +125,8 @@ xmlerror XmlPlanning::verify_id()
         QDomNodeList lesson_list = m_lesson_list.childNodes();
         QDomNodeList lesson_id_list = m_lesson_id_list.childNodes();
 
-        qDebug( Q_FUNC_INFO );
-        qDebug() << lesson_list.size();
+        debug_printf( Q_FUNC_INFO );
+        debug_printf("lesson_list.size() = %d", lesson_list.size());
 
         for (int i = 0; i != lesson_list.size(); i++)
         {
@@ -156,7 +155,7 @@ xmlerror XmlPlanning::verify_id()
 
 void XmlPlanning::new_file()
 {
-        qDebug( Q_FUNC_INFO );
+        debug_printf( Q_FUNC_INFO );
 
         m_isopen = false;
         m_isparsed = true;
@@ -174,12 +173,12 @@ void XmlPlanning::new_file()
         m_root.appendChild(m_lesson_list);
         m_root.appendChild(m_lesson_id_list);
 
-        qDebug() << qPrintable(m_xml_document.toString(4));
+        debug_printf(qPrintable(m_xml_document.toString(4)));
 }
 
 void XmlPlanning::refresh_all_view()
 {
-        qDebug( Q_FUNC_INFO );
+        debug_printf( Q_FUNC_INFO );
 
         emit new_lessons_avalables(get_lessons());
         emit new_timetable_avalable(get_timetables());
@@ -187,7 +186,7 @@ void XmlPlanning::refresh_all_view()
 
 SubjectData XmlPlanning::search_subject(KeyValue id)
 {
-        qDebug( Q_FUNC_INFO );
+        debug_printf( Q_FUNC_INFO );
         SubjectData return_value;
         QDomElement element = _search_subject(id.key);
 
@@ -209,23 +208,23 @@ SubjectData XmlPlanning::search_subject(KeyValue id)
                      return_value.green_background,
                      return_value.blue_background);
 
-        qDebug("begin debug");
-        qDebug() << qPrintable(color);
-        qDebug() << qPrintable(background);
-        qDebug() << return_value.id;
-        qDebug("end debug");
+        debug_printf("begin debug");
+        debug_printf(qPrintable(color));
+        debug_printf(qPrintable(background));
+        debug_printf("return_value.id %d", return_value.id);
+        debug_printf("end debug");
 
         return return_value;
 }
 
 Timetable XmlPlanning::search_timetable(KeyValue id)
 {
-        qDebug( Q_FUNC_INFO );
+        debug_printf( Q_FUNC_INFO );
         QDomElement element_found = _search_timetable(id.key);
         Timetable return_value;
         if (element_found.isNull())
         {
-                qDebug("error");
+                debug_printf("error");
         }
 
         return_value.ident = id.key;
@@ -307,8 +306,8 @@ QDomElement XmlPlanning::_search_timetable(unsigned int id)
         {
                 unsigned int id_tested = lesson_list.item(i).firstChildElement("ident").firstChild()
                                          .toText().data().toUInt();
-                qDebug("id_tested = %d", id_tested);
-                qDebug("id = %d", id);
+                debug_printf("id_tested = %d", id_tested);
+                debug_printf("id = %d", id);
                 if (id_tested == id)
                 {
                         Q_ASSERT(!lesson_list.item(i).isNull());
@@ -350,7 +349,7 @@ QString XmlPlanning::join_color(int red, int green, int blue)
 
 unsigned int XmlPlanning::_get_empty_id(QVector<unsigned int> ids)
 {
-        qDebug( Q_FUNC_INFO );
+        debug_printf( Q_FUNC_INFO );
         unsigned int selected_id = UINT_MAX;
         unsigned int i;
         for (i = 0; i != (unsigned int) ids.size(); i++)
@@ -365,14 +364,14 @@ unsigned int XmlPlanning::_get_empty_id(QVector<unsigned int> ids)
         {
                 selected_id = i + 1;
         }
-        qDebug("selected_id : %d", selected_id);
+        debug_printf("selected_id : %d", selected_id);
 
         return selected_id;
 }
 
 QVector<unsigned int> XmlPlanning::_all_ident_lesson()
 {
-        qDebug( Q_FUNC_INFO );
+        debug_printf( Q_FUNC_INFO );
         QDomNodeList idents = m_lesson_list.childNodes();
         QVector<unsigned int> ident_list;
 
@@ -389,7 +388,7 @@ QVector<unsigned int> XmlPlanning::_all_ident_lesson()
 
 QDomElement XmlPlanning::_add_empty_id()
 {
-        qDebug( Q_FUNC_INFO );
+        debug_printf( Q_FUNC_INFO );
 
         //creating tree
         QDomElement id = m_xml_document.createElement("id");
@@ -432,7 +431,7 @@ QDomElement XmlPlanning::_add_empty_id()
 
 QDomElement XmlPlanning::_add_empty_lesson()
 {
-        qDebug( Q_FUNC_INFO );
+        debug_printf( Q_FUNC_INFO );
 
         //first create basic tree
         QDomElement id = m_xml_document.createElement("lesson");
@@ -467,8 +466,8 @@ QDomElement XmlPlanning::_add_empty_lesson()
 
 void XmlPlanning::update_id_lesson(SubjectData data)
 {
-        qDebug( Q_FUNC_INFO );
-        qDebug("begin");
+        debug_printf( Q_FUNC_INFO );
+        debug_printf("begin");
 
         QDomElement node_to_edit;
         //select node
@@ -488,7 +487,7 @@ void XmlPlanning::update_id_lesson(SubjectData data)
                         {
                                 node_to_edit = list.item(i).toElement();
                                 is_found = true;
-                                qDebug("node found");
+                                debug_printf("node found");
                                 break;
                         }
                 }
@@ -505,12 +504,12 @@ void XmlPlanning::update_id_lesson(SubjectData data)
         node_to_edit.firstChildElement("color").firstChild().toText().setData(color);
         color = join_color(data.red_background, data.green_background, data.blue_background);
         node_to_edit.firstChildElement("background").firstChild().toText().setData(color);
-        qDebug("done");
+        debug_printf("done");
 }
 
 void XmlPlanning::update_timetable(Timetable id)
 {
-        qDebug( Q_FUNC_INFO );
+        debug_printf( Q_FUNC_INFO );
         QDomElement node_to_edit;
         QDomNodeList list = m_lesson_list.childNodes();
         bool is_found = false;
@@ -523,7 +522,7 @@ void XmlPlanning::update_timetable(Timetable id)
                 {
                         node_to_edit = list.item(i).toElement();
                         is_found = true;
-                        qDebug("node found");
+                        debug_printf("node found");
                         break;
                 }
         }
@@ -603,7 +602,7 @@ void XmlPlanning::del_subject(KeyValue subject)
 
 unsigned int XmlPlanning::add_empty_id(QString name)
 {
-        qDebug( Q_FUNC_INFO );
+        debug_printf( Q_FUNC_INFO );
         QDomElement element = _add_empty_id();
         element.firstChildElement("name").firstChild().toText().setData(name);
         return element.firstChildElement("ident").firstChild().toText().data().toUInt();
@@ -611,7 +610,7 @@ unsigned int XmlPlanning::add_empty_id(QString name)
 
 unsigned int XmlPlanning::add_empty_lesson()
 {
-        qDebug( Q_FUNC_INFO );
+        debug_printf( Q_FUNC_INFO );
         QDomElement element = _add_empty_lesson();
         return element.firstChildElement("ident").firstChild().toText().data().toUInt();
 }
@@ -624,10 +623,10 @@ void XmlPlanning::save(QString filename)
 
 void XmlPlanning::save()
 {
-        qDebug( Q_FUNC_INFO );
+        debug_printf( Q_FUNC_INFO );
         if (!m_data_file.open(QIODevice::WriteOnly))
         {
-                qDebug("can't open file to sae");
+                debug_printf("can't open file to sae");
                 throw;
         }
         QByteArray xml = m_xml_document.toByteArray(8);
@@ -635,7 +634,7 @@ void XmlPlanning::save()
 
         if (error == -1)
         {
-                qDebug("an error occure when wrtie file");
+                debug_printf("an error occure when wrtie file");
                 throw;
         }
         m_data_file.close();
@@ -654,10 +653,10 @@ QVector<KeyValue> XmlPlanning::get_lessons()
                 unsigned int id = lesson_id_list.item(i)
                                   .firstChildElement("ident")
                                   .firstChild().toText().data().toUInt();
-                qDebug() << "begin";
-                qDebug(qPrintable(lessen));
-                qDebug("%d", id);
-                qDebug() << "done";
+                debug_printf("begin");
+                debug_printf(qPrintable(lessen));
+                debug_printf("%d", id);
+                debug_printf("done");
 
                 KeyValue current_item;
                 current_item.key = id;
@@ -685,10 +684,10 @@ QVector<KeyValue> XmlPlanning::get_timetables()
                                   .firstChildElement("ident")
                                   .firstChild().toText().data().toUInt();
 
-                qDebug() << "begin 2";
-                qDebug(qPrintable(timetable));
-                qDebug("%d", id);
-                qDebug() << "end 2";
+                debug_printf("begin 2");
+                debug_printf(qPrintable(timetable));
+                debug_printf("%d", id);
+                debug_printf("end 2");
 
                 KeyValue current_item;
                 current_item.key = id;

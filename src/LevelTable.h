@@ -26,6 +26,7 @@
 #include "AbstractSqlTable.h"
 #include "KeyValue.h"
 #include <QTextStream>
+#include "debug_printf.h"
 
 ///
 /// \class LevelTable LevelTable.h

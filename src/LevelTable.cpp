@@ -34,7 +34,7 @@ LevelTable::LevelTable(AdvencedKeyValue data) : AbstractSqlTable(), m_id(data.ke
 
 QVector<QSqlQuery*> LevelTable::add()
 {
-        qDebug( Q_FUNC_INFO );
+        debug_printf( Q_FUNC_INFO );
         if (is_valid())
         {
                 QVector<QSqlQuery*> querys;
@@ -45,11 +45,11 @@ QVector<QSqlQuery*> LevelTable::add()
                 querys.push_back(new QSqlQuery());
                 error &= querys[1]->prepare("SELECT id FROM level WHERE id=LAST_INSERT_ROWID();");
 
-                qDebug(qPrintable(querys[0]->lastQuery()));
-                qDebug(qPrintable(querys[1]->lastQuery()));
+                debug_printf(qPrintable(querys[0]->lastQuery()));
+                debug_printf(qPrintable(querys[1]->lastQuery()));
                 if (!error)
                 {
-                        qDebug("error in querry");
+                        debug_printf("error in querry");
                         throw;
                 }
                 return querys;
@@ -59,7 +59,7 @@ QVector<QSqlQuery*> LevelTable::add()
 
 QVector<QSqlQuery*> LevelTable::del()
 {
-        qDebug( Q_FUNC_INFO );
+        debug_printf( Q_FUNC_INFO );
         if (is_valid() && m_id != 0)
         {
                 QVector<QSqlQuery*> query;
@@ -99,7 +99,7 @@ bool LevelTable::is_valid()
 
 LevelTable* LevelTable::parse_statment(QSqlQuery& result) const
 {
-        qDebug( Q_FUNC_INFO );
+        debug_printf( Q_FUNC_INFO );
         LevelTable* data = new LevelTable;
         if (is_exist())
         {
@@ -110,7 +110,7 @@ LevelTable* LevelTable::parse_statment(QSqlQuery& result) const
         else
         {
                 data->m_id = result.value(0).toUInt();
-                qDebug("%u", data->m_id);
+                debug_printf("data->m_id = %u", data->m_id);
                 data->m_name = m_name;
                 return data;
         }

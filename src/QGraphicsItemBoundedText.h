@@ -28,6 +28,7 @@
 #include <QColor>
 #include <QPainter>
 #include <QRect>
+#include "debug_printf.h"
 
 ///
 /// \class QGraphicsItemBoundedText QGraphicsItemBoundedText.h
