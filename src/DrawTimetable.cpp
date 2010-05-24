@@ -39,39 +39,35 @@ void DrawTimetable::_create_cases()
                      LENGTH - (LEFT_PER_MIL + RIGHT_PER_MIL),
                      HEIGHT - (BOTTOM_PER_MIL + TOP_PER_MIL)
                      );
-        QVector<QLine> lines;
-        QVector<QLine> collums;
 
         for (int i = 1; i != 10; i++)
         {
-                lines.push_back(QLine(LEFT_PER_MIL,
+                m_lines.push_back(QLine(LEFT_PER_MIL,
                                       TOP_PER_MIL + i * ROW_PREMITIVE_PER_MIL,
                                       LENGTH - RIGHT_PER_MIL,
                                       TOP_PER_MIL + i * ROW_PREMITIVE_PER_MIL));
-                addLine(lines[i-1]);
+                addLine(m_lines[i-1]);
         }
-        collums.push_back(QLine(LEFT_PER_MIL + COLLUM_PREMITIVE_PER_MIL,
+        m_collums.push_back(QLine(LEFT_PER_MIL + COLLUM_PREMITIVE_PER_MIL,
                                 TOP_PER_MIL,
                                 LEFT_PER_MIL + COLLUM_PREMITIVE_PER_MIL,
                                 HEIGHT - BOTTOM_PER_MIL
                                ));
-        addLine(collums[0]);
+        addLine(m_collums[0]);
         for (int i = 1; i != 7; i++)
         {
-                collums.push_back(QLine(LEFT_PER_MIL + COLLUM_PREMITIVE_PER_MIL * (2*i + 1),
+                m_collums.push_back(QLine(LEFT_PER_MIL + COLLUM_PREMITIVE_PER_MIL * (2*i + 1),
                                         TOP_PER_MIL,
                                         LEFT_PER_MIL + COLLUM_PREMITIVE_PER_MIL * (2*i + 1),
                                         HEIGHT - BOTTOM_PER_MIL
                                        ));
-                addLine(collums[i-1]);
+                addLine(m_collums[i-1]);
         }
         addRect(border);
 }
 
 void DrawTimetable::_create_labels()
 {
-        QVector<QGraphicsTextItem *> day_label;
-        QVector<QGraphicsTextItem *> hour_label;
         QLocale day;
         QFont font;
 
@@ -80,58 +76,58 @@ void DrawTimetable::_create_labels()
 
         for (int i = 1; i != 7; i++)
         {
-                day_label.push_back(addText(
+                m_day_label.push_back(addText(
                                             day.dayName(i),
                                             font
                                    )
                                    );
 
-                double x = day_label[i-1]->boundingRect().width();
-                double y = day_label[i-1]->boundingRect().height();
+                double x = m_day_label[i-1]->boundingRect().width();
+                double y = m_day_label[i-1]->boundingRect().height();
                 double center_x = ((double)COLLUM_PREMITIVE_PER_MIL * (double) 2 - x )/(double) 2;
                 double center_y = ((double)ROW_PREMITIVE_PER_MIL - y)/(double) 2;
 
-                day_label[i-1]->setX(LEFT_PER_MIL + (2*i-1) * COLLUM_PREMITIVE_PER_MIL + center_x);
-                day_label[i-1]->setY(TOP_PER_MIL + center_y);
+                m_day_label[i-1]->setX(LEFT_PER_MIL + (2*i-1) * COLLUM_PREMITIVE_PER_MIL + center_x);
+                m_day_label[i-1]->setY(TOP_PER_MIL + center_y);
 
-                day_label[i-1]->setDefaultTextColor(Qt::black);
+                m_day_label[i-1]->setDefaultTextColor(Qt::black);
         }
 
         for (int i = 1; i != 5; i++)
         {
-                hour_label.push_back(addText(
+                m_hour_label.push_back(addText(
                                                 tr("M", "Morning") + QString::number(i),
                                                 font
                                             )
                                      );
 
-                double x = hour_label[i-1]->boundingRect().width();
-                double y = hour_label[i-1]->boundingRect().height();
+                double x = m_hour_label[i-1]->boundingRect().width();
+                double y = m_hour_label[i-1]->boundingRect().height();
                 double center_x = ((double)COLLUM_PREMITIVE_PER_MIL - x)/(double) 2;
                 double center_y = ((double)ROW_PREMITIVE_PER_MIL - y)/(double) 2;
 
-                hour_label[i-1]->setX(LEFT_PER_MIL + center_x);
-                hour_label[i-1]->setY(TOP_PER_MIL + i*ROW_PREMITIVE_PER_MIL + center_y);
-                hour_label[i-1]->setDefaultTextColor(Qt::black);
+                m_hour_label[i-1]->setX(LEFT_PER_MIL + center_x);
+                m_hour_label[i-1]->setY(TOP_PER_MIL + i*ROW_PREMITIVE_PER_MIL + center_y);
+                m_hour_label[i-1]->setDefaultTextColor(Qt::black);
         }
 
         for (int i = 6; i != 10; i++)
         {
-                hour_label.push_back(addText(
+                m_hour_label.push_back(addText(
                                                 tr("A", "Afternoon") + QString::number(i-5),
                                                 font
                                             )
                                      );
 
-                double x = hour_label[i-2]->boundingRect().width();
-                double y = hour_label[i-2]->boundingRect().height();
+                double x = m_hour_label[i-2]->boundingRect().width();
+                double y = m_hour_label[i-2]->boundingRect().height();
                 double center_x = ((double)COLLUM_PREMITIVE_PER_MIL - x)/(double) 2;
                 double center_y = ((double)ROW_PREMITIVE_PER_MIL - y)/(double) 2;
 
-                hour_label[i-2]->setX(LEFT_PER_MIL + center_x);
-                hour_label[i-2]->setY(TOP_PER_MIL + i*ROW_PREMITIVE_PER_MIL + center_y);
+                m_hour_label[i-2]->setX(LEFT_PER_MIL + center_x);
+                m_hour_label[i-2]->setY(TOP_PER_MIL + i*ROW_PREMITIVE_PER_MIL + center_y);
 
-                hour_label[i-2]->setDefaultTextColor(Qt::black);
+                m_hour_label[i-2]->setDefaultTextColor(Qt::black);
         }
 }
 
@@ -288,5 +284,33 @@ void DrawTimetable::_draw_text(QVector<FullTimetable> cases)
                addItem(m_all_class[i]);
                addItem(m_all_teacher[i]);
                debug_printf("set items");
+        }
+}
+
+DrawTimetable::~DrawTimetable()
+{
+        for (int i = 0; i != m_timetable_rect.size(); i++)
+        {
+                delete m_timetable_rect[i].item;
+        }
+        for (int i = 0; i != m_all_lesson.size(); i++)
+        {
+                delete m_all_lesson[i];
+        }
+        for (int i = 0; i != m_all_class.size(); i++)
+        {
+                delete m_all_class[i];
+        }
+        for (int i = 0; i != m_all_teacher.size(); i++)
+        {
+                delete m_all_teacher[i];
+        }
+        for (int i = 0; i != m_day_label.size(); i++)
+        {
+                delete m_day_label[i];
+        }
+        for (int i = 0; i != m_hour_label.size(); i++)
+        {
+                delete m_hour_label[i];
         }
 }
