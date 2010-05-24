@@ -68,6 +68,11 @@ class DrawTimetable : public QGraphicsScene
                 /// \arg cases cases to draw
                 ///
                 void create_cases(QVector<FullTimetable> cases);
+
+                ///
+                /// \brief default destructor
+                ///
+                ~DrawTimetable();
         private:
                 ///
                 /// \brief create cases of the timetable
@@ -96,6 +101,10 @@ class DrawTimetable : public QGraphicsScene
                 QVector<QGraphicsItemBoundedText *> m_all_lesson;
                 QVector<QGraphicsItemBoundedText *> m_all_class;
                 QVector<QGraphicsItemBoundedText *> m_all_teacher;
+                QVector<QGraphicsTextItem *> m_day_label;
+                QVector<QGraphicsTextItem *> m_hour_label;
+                QVector<QLine> m_lines;
+                QVector<QLine> m_collums;
 };
 
 #endif // DRAWTIMETABLE_H
