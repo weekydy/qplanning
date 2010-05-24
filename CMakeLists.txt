@@ -13,6 +13,7 @@ set(TRANSLATION_DIR "/usr/share/qplanning/translations/" CACHE PATH "translation
 set(DOC_DIR "/usr/share/doc/qplanning/" CACHE PATH "doc dir")
 add_subdirectory(src)
 add_subdirectory(doc)
+add_subdirectory(ts)
 
 install(FILES ${CMAKE_SOURCE_DIR}/XmlSpec.xsd DESTINATION ${PREFIX}/${PROGRAM_DIR_PREFIX})
 #install(DIRECTORY ${CMAKE_BINARY_DIR}/doc/latex/ DESTINATION ${PREFIX}/${DOC_DIR})
