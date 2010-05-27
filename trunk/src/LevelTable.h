@@ -64,6 +64,10 @@ class LevelTable : public AbstractSqlTable
                 ///
                 LevelTable* parse_statment(QSqlQuery& result) const;
                 ///
+                /// \reimp
+                ///
+                QVariant at(unsigned int index) const;
+                ///
                 /// \brief get id stored
                 ///
                 unsigned int get_id();
@@ -71,6 +75,10 @@ class LevelTable : public AbstractSqlTable
                 /// \brief get the name
                 ///
                 QString get_name();
+                ///
+                /// \reimp
+                ///
+                const unsigned int number_of_row = 2;
 
         private:
                 unsigned int m_id;

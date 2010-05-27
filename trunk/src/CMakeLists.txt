@@ -32,6 +32,7 @@ set(
         AbstractSqlTable.h
         LevelTable.h
         debug_printf.h
+        SubjectTable.h
 	${CMAKE_CURRENT_BINARY_DIR}/define_cmake.h
 	CACHE FILEPATH "header files" FORCE
 )
@@ -52,6 +53,7 @@ set(
         AbstractSqlTable.cpp
         LevelTable.cpp
         debug_printf.cpp
+        SubjectTable.cpp
 	CACHE FILEPATH "source files" FORCE
 )
 QT4_WRAP_UI(ui_h_FILES ${ui_FILES})
