@@ -27,6 +27,7 @@
 #include <QSqlQuery>
 #include <QVariant>
 #include <QVector>
+#include <QVariant>
 
 ///
 /// \class AbstractSqlTable AbstractSqlTable.h
@@ -74,6 +75,15 @@ class AbstractSqlTable
                 /// \return an implementation of this class
                 ///
                 virtual AbstractSqlTable* parse_statment(QSqlQuery& result) const = 0;
+                ///
+                /// \brief get the contant kf specified row
+                /// \arg unsigned int inex
+                ///
+                virtual QVariant at(unsigned int index) const = 0;
+                ///
+                /// \brief give the number of at arguments
+                ///
+                const unsigned int number_of_row = 0;
 
         private:
                 bool m_is_exist;

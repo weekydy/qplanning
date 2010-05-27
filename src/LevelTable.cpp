@@ -105,6 +105,7 @@ LevelTable* LevelTable::parse_statment(QSqlQuery& result) const
         {
                 data->m_id = result.value(0).toUInt();
                 data->m_name = result.value(1).toString();
+                data->is_exist(true);
                 return data;
         }
         else
@@ -124,4 +125,20 @@ unsigned int LevelTable::get_id()
 QString LevelTable::get_name()
 {
         return m_name;
+}
+
+QVariant LevelTable::at(unsigned int index) const;
+{
+        switch (index)
+        {
+                case 0:
+                        return QVariant(m_id);
+                        break;
+                case 1:
+                        return QVariant(m_name);
+                        break;
+                default:
+                        throw;
+                        break;
+        }
 }
