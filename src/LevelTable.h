@@ -34,6 +34,7 @@
 ///
 class LevelTable : public AbstractSqlTable
 {
+        Q_OBJECT
         public:
                 ///
                 /// \brief default constructor
@@ -78,7 +79,12 @@ class LevelTable : public AbstractSqlTable
                 ///
                 /// \reimp
                 ///
-                const unsigned int number_of_row = 2;
+                unsigned int number_of_row() const
+                {return 2;}
+                ///
+                /// \reimp
+                ///
+                QStringList data_filds() const;
 
         private:
                 unsigned int m_id;

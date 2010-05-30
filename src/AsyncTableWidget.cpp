@@ -15,12 +15,36 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
+
 #include "AsyncTableWidget.h"
 
-AsyncTableWidget::AsyncTableWidget()
+AsyncTableWidget::AsyncTableWidget(Subtype type)
 {
         debug_printf( Q_FUNC_INFO );
         setItemDelegate(&m_delegate);
-        QObject::connect(&m_delegate, SIGNAL(editingFinished(const QModelIndex&)),
-                         this, SLOT(update_data(const QModelIndex&)));
+        //QObject::connect(&m_delegate, SIGNAL(editingFinished(const QModelIndex&)),
+        //                 this, SLOT(update_data(const QModelIndex&)));
+        m_constant =  AbstractSqlTable::create_element_from_type(type);
+        setColumnCount(m_constant->number_of_row() - 1);
+
+        QStringList collum_head = m_constant->data_filds();
+        QStringList collum_real_head;
+        for (int i = 1; i != m_constant->number_of_row(); i++)
+        {
+                collum_real_head << collum_head[i];
+        }
+        setHorizontalHeaderLabels(collum_real_head);
+}
+
+void AsyncTableWidget::addItem(AbstractSqlTable* item)
+{
+        m_async_data.push_back(item);
+        for (int i = 0; i != item->number_of_row(); i++)
+        {
+                QTableWidgetItem widget_item;
+                widget_item.setData(Qt::EditRole, item->at(i));
+                setItem(m_async_data.size() - 1,
+                        i,
+                        &widget_item);
+        }
 }

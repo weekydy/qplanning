@@ -33,6 +33,7 @@ set(
         LevelTable.h
         debug_printf.h
         SubjectTable.h
+        AsyncTableWidget.h
 	${CMAKE_CURRENT_BINARY_DIR}/define_cmake.h
 	CACHE FILEPATH "header files" FORCE
 )
@@ -54,6 +55,7 @@ set(
         LevelTable.cpp
         debug_printf.cpp
         SubjectTable.cpp
+        AsyncTableWidget.cpp
 	CACHE FILEPATH "source files" FORCE
 )
 QT4_WRAP_UI(ui_h_FILES ${ui_FILES})

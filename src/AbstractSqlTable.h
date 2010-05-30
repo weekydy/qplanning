@@ -28,13 +28,25 @@
 #include <QVariant>
 #include <QVector>
 #include <QVariant>
+#include <QStringList>
+#include <QObject>
 
+///
+/// \enum subtype
+/// \brief define the subtype of this structure
+///
+enum Subtype
+{
+        SubjectTable_class,
+        LevelTable_class
+};
 ///
 /// \class AbstractSqlTable AbstractSqlTable.h
 /// \brief interface to define each sql table
 ///
-class AbstractSqlTable
+class AbstractSqlTable : public QObject
 {
+        Q_OBJECT
         public:
                 ///
                 /// \brief default constructor that only set is_exist
@@ -83,7 +95,15 @@ class AbstractSqlTable
                 ///
                 /// \brief give the number of at arguments
                 ///
-                const unsigned int number_of_row = 0;
+                virtual unsigned int number_of_row() const = 0;
+                ///
+                /// \brief create an empty suboject from specified type
+                ///
+                static AbstractSqlTable* create_element_from_type(Subtype type);
+                ///
+                /// \brief return the data fild
+                ///
+                virtual QStringList data_filds() const = 0;
 
         private:
                 bool m_is_exist;
