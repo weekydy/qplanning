@@ -16,6 +16,8 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 #include "AbstractSqlTable.h"
+#include "LevelTable.h"
+#include "SubjectTable.h"
 ///
 /// \file AbstractSqlTable.cpp
 /// \brief implement acesser and constructor of AbstractSqlTable
@@ -36,3 +38,18 @@ void AbstractSqlTable::set_is_exist(bool is_exist)
         m_is_exist = is_exist;
 }
 
+AbstractSqlTable* AbstractSqlTable::create_element_from_type(Subtype type)
+{
+        switch (type)
+        {
+                case LevelTable_class:
+                        return new LevelTable;
+                        break;
+                case SubjectTable_class:
+                        return new SubjectTable;
+                        break;
+                default:
+                        throw;
+                        break;
+        }
+}

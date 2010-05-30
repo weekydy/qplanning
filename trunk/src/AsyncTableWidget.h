@@ -19,23 +19,30 @@
 #define ASYNCTABLEWIDGET_H
 
 #include <QTableWidget>
+#include <QTableWidgetItem>
 #include <QVector>
 #include "debug_printf.h"
 #include "AdvencedItemDelegate.h"
+#include "AbstractSqlTable.h"
 
-template<class T>
 class AsyncTableWidget : public QTableWidget
 {
-        Q_OBJECY
+        Q_OBJECT
         public:
                 ///
                 /// \brief default constructor
+                /// \arg sype subtype of AbstractSqlElement to use
                 ///
-                AsyncTableWidget();
+                AsyncTableWidget(Subtype type);
+                ///
+                /// \brief add items to model
+                ///
+                void addItem(AbstractSqlTable* item);
 
         private:
                 AdvencedItemDelegate m_delegate;
-                QVector<T> m_async_data;
+                QVector<AbstractSqlTable*> m_async_data;
+                AbstractSqlTable* m_constant;
 };
 
 #endif // ASYNCTABLEWIDGET_H

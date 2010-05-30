@@ -105,7 +105,7 @@ LevelTable* LevelTable::parse_statment(QSqlQuery& result) const
         {
                 data->m_id = result.value(0).toUInt();
                 data->m_name = result.value(1).toString();
-                data->is_exist(true);
+                data->set_is_exist(true);
                 return data;
         }
         else
@@ -127,7 +127,7 @@ QString LevelTable::get_name()
         return m_name;
 }
 
-QVariant LevelTable::at(unsigned int index) const;
+QVariant LevelTable::at(unsigned int index) const
 {
         switch (index)
         {
@@ -141,4 +141,11 @@ QVariant LevelTable::at(unsigned int index) const;
                         throw;
                         break;
         }
+}
+
+QStringList LevelTable::data_filds() const
+{
+        QStringList return_value;
+        return_value << tr("id")
+                     << tr("name");
 }
