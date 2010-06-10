@@ -24,6 +24,7 @@
 ///
 #include <QItemDelegate>
 #include <QModelIndex>
+#include <QCheckBox>
 #include "debug_printf.h"
 ///
 /// \class AdvencedItemDegelate AdvencedItemDelegate

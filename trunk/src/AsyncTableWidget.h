@@ -21,6 +21,8 @@
 #include <QTableWidget>
 #include <QTableWidgetItem>
 #include <QVector>
+#include <QHeaderView>
+#include <QItemEditorCreatorBase>
 #include "debug_printf.h"
 #include "AdvencedItemDelegate.h"
 #include "AbstractSqlTable.h"
@@ -39,10 +41,15 @@ class AsyncTableWidget : public QTableWidget
                 ///
                 void addItem(AbstractSqlTable* item);
 
+        public slots:
+                void addItem();
+
         private:
                 AdvencedItemDelegate m_delegate;
+
                 QVector<AbstractSqlTable*> m_async_data;
                 AbstractSqlTable* m_constant;
+                Subtype m_type;
 };
 
 #endif // ASYNCTABLEWIDGET_H

@@ -179,6 +179,7 @@ MainWindow::MainWindow() : m_need_to_close(false)
         QObject::connect(m_level_2_1_1_1_1_3, SIGNAL(editing_finished(AdvencedKeyValue, unsigned int)),
                          this, SIGNAL(update_level(AdvencedKeyValue, unsigned int)));
         QObject::connect(m_del_2_1_1_1_1_2_2, SIGNAL(clicked()), this, SLOT(manage_del_level()));
+        QObject::connect(m_add_2_1_1_1_2_2_1, SIGNAL(clicked()), m_subject_2_1_1_1_2_3, SLOT(addItem()));
 }
 
 void MainWindow::set_scean(QGraphicsScene* scene)
