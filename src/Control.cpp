@@ -29,6 +29,9 @@ Control::Control() : m_windows(), m_config_subject(&m_windows), m_config_timetab
         m_is_modified = false;
         m_windows.set_scean(&m_timetable_veuw);
 
+        m_factory.registerEditor(QVariant::Bool, &m_bool_editor);
+        QItemEditorFactory::setDefaultFactory(&m_factory);
+
 
         QObject::connect(&m_windows, SIGNAL(open_file()), this, SLOT(manage_open_file()));
         QObject::connect(&m_windows, SIGNAL(create_file()), this, SLOT(manage_create_file()));

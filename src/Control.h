@@ -30,6 +30,7 @@
 #include <QPrinter>
 #include <QPrintDialog>
 #include <QTransform>
+#include <QStandardItemEditorCreator>
 #include "MainWindow.h"
 #include "XmlPlanning.h"
 #include "SubjectDataWindow.h"
@@ -77,6 +78,8 @@ class Control : public QObject
                 XmlPlanning m_xml_config;
                 SqlModelGenerating m_sql_config;
                 DrawTimetable m_timetable_veuw;
+                QItemEditorFactory m_factory;
+                QStandardItemEditorCreator<QCheckBox> m_bool_editor;
 
         public slots:
                 ///
