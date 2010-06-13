@@ -42,6 +42,7 @@
 #include "define.h"
 #include "LevelTable.h"
 #include "debug_printf.h"
+#include "MyCheckBox.h"
 
 ///
 /// \class Control Control.h
@@ -79,7 +80,7 @@ class Control : public QObject
                 SqlModelGenerating m_sql_config;
                 DrawTimetable m_timetable_veuw;
                 QItemEditorFactory m_factory;
-                QStandardItemEditorCreator<QCheckBox> m_bool_editor;
+                QStandardItemEditorCreator<MyCheckBox> m_bool_editor;
 
         public slots:
                 ///
