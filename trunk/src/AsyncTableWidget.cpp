@@ -26,7 +26,7 @@ AsyncTableWidget::AsyncTableWidget(Subtype type)
         horizontalHeader()->setResizeMode(QHeaderView::Stretch);
         verticalHeader()->setVisible(false);
 
-        //setItemDelegate(&m_delegate);
+        setItemDelegate(&m_delegate);
         //QObject::connect(&m_delegate, SIGNAL(editingFinished(const QModelIndex&)),
         //                 this, SLOT(update_data(const QModelIndex&)));
         m_constant =  AbstractSqlTable::create_element_from_type(type);
@@ -48,12 +48,12 @@ void AsyncTableWidget::addItem(AbstractSqlTable* item)
         setRowCount(rowCount() + 1);
         for (int i = 1; i != item->number_of_row(); i++)
         {
-                QTableWidgetItem widget_item;
-                widget_item.setFlags(widget_item.flags() | Qt::ItemIsUserCheckable);
-                widget_item.setData(Qt::DisplayRole, item->at(i));
+                QTableWidgetItem* widget_item =  new QTableWidgetItem;
+                widget_item->setFlags(widget_item->flags() | Qt::ItemIsEditable);
+                widget_item->setData(Qt::DisplayRole, item->at(i));
                 setItem(m_async_data.size() - 1,
                         i,
-                        &widget_item);
+                        widget_item);
         }
 }
 

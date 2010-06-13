@@ -34,6 +34,7 @@ set(
         debug_printf.h
         SubjectTable.h
         AsyncTableWidget.h
+        MyCheckBox.h
 	${CMAKE_CURRENT_BINARY_DIR}/define_cmake.h
 	CACHE FILEPATH "header files" FORCE
 )
@@ -56,6 +57,7 @@ set(
         debug_printf.cpp
         SubjectTable.cpp
         AsyncTableWidget.cpp
+        MyCheckBox.cpp
 	CACHE FILEPATH "source files" FORCE
 )
 QT4_WRAP_UI(ui_h_FILES ${ui_FILES})
