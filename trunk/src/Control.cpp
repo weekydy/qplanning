@@ -89,7 +89,7 @@ void Control::manage_open_file()
         if (!filename.isNull())
         {
                 m_xml_config.open(filename);
-                _update_all_veuw();
+                _update_all_view();
         }
 }
 
@@ -146,7 +146,7 @@ void Control::update_subject()
 {
         SubjectData subject = m_config_subject.get_contant();
         m_xml_config.update_id_lesson(subject);
-        _update_all_veuw();
+        _update_all_view();
         m_is_modified = true;
 }
 
@@ -155,7 +155,7 @@ void Control::update_timetable()
         debug_printf( Q_FUNC_INFO );
         Timetable timetable = m_config_timetable.get_content();
         m_xml_config.update_timetable(timetable);
-        _update_all_veuw();
+        _update_all_view();
         m_is_modified = true;
 }
 
@@ -251,7 +251,7 @@ void Control::del_subject(KeyValue subject)
         {
                 m_xml_config.del_subject(subject);
         }
-        _update_all_veuw();
+        _update_all_view();
 }
 
 void Control::del_timetable(KeyValue timetable)
@@ -266,7 +266,7 @@ void Control::del_timetable(KeyValue timetable)
         {
                 debug_printf( "okey : save" ),
                 m_xml_config.del_timetable(timetable);
-                _update_all_veuw();
+                _update_all_view();
         }
 }
 
@@ -342,7 +342,7 @@ QVector<FullTimetable> Control::create_full_timetable()
         return full_timetable;
 }
 
-void Control::_update_all_veuw()
+void Control::_update_all_view()
 {
         m_xml_config.refresh_all_view();
         m_timetable_veuw.create_cases(create_full_timetable());
