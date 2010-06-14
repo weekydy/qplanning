@@ -70,7 +70,7 @@ class Control : public QObject
                 ///
                 /// \brief update veuw when needed;
                 ///
-                void _update_all_veuw();
+                void _update_all_view();
         private:
                 bool m_is_modified;
                 MainWindow m_windows;
