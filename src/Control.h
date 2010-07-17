@@ -40,7 +40,6 @@
 #include "FullTimetable.h"
 #include "SqlModelGenerating.h"
 #include "define.h"
-#include "LevelTable.h"
 #include "debug_printf.h"
 #include "MyCheckBox.h"
 
@@ -149,11 +148,5 @@ class Control : public QObject
                 /// \arg data data to store
                 /// \arg index index to show
                 ///
-                void update_level(AdvencedKeyValue data, unsigned int index);
-                ///
-                /// \brief delete level on model
-                /// \arg data data to del
-                ///
-                void del_level(AdvencedKeyValue data);
 };
 #endif

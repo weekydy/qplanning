@@ -32,7 +32,6 @@
 #include <QDir>
 #include <QVector>
 #include "KeyValue.h"
-#include "AbstractSqlTable.h"
 #include "debug_printf.h"
 
 ///

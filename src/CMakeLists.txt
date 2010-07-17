@@ -30,10 +30,7 @@ set(
         AdvencedItemDelegate.h
         AsyncListView.h
         SqlTable.h
-        LevelTable.h
         debug_printf.h
-        SubjectTable.h
-        AsyncTableWidget.h
         MyCheckBox.h
 	${CMAKE_CURRENT_BINARY_DIR}/define_cmake.h
 	CACHE FILEPATH "header files" FORCE
@@ -53,10 +50,7 @@ set(
         AdvencedItemDelegate.cpp
         AsyncListView.cpp
         SqlTable.cpp
-        LevelTable.cpp
         debug_printf.cpp
-        SubjectTable.cpp
-        AsyncTableWidget.cpp
         MyCheckBox.cpp
 	CACHE FILEPATH "source files" FORCE
 )

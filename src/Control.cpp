@@ -366,35 +366,3 @@ void Control::print_timetable()
                 m_timetable_veuw.render(&page);
         }
 }
-
-void Control::update_level(AdvencedKeyValue data, unsigned int index)
-{
-        LevelTable table(data);
-        LevelTable* result;
-        if (table.is_exist())
-        {
-                edit(table);
-                debug_printf("%u %s", data.key, qPrintable(data.value));
-        }
-        else
-        {
-                result = add(table);
-                AdvencedKeyValue result_for_view;
-                result_for_view.is_exist = true;
-                result_for_view.key = result->get_id();
-                result_for_view.value = result->get_name();
-
-                m_windows.update_index_level(result_for_view, index);
-                debug_printf("%u %s", result->get_id(), qPrintable(result->get_name()));
-                delete result;
-        }
-}
-
-void Control::del_level(AdvencedKeyValue data)
-{
-        debug_printf(Q_FUNC_INFO);
-        LevelTable table(data);
-        del(table);
-}
-
-

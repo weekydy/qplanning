@@ -149,7 +149,7 @@ MainWindow::MainWindow() : m_need_to_close(false)
         m_add_2_1_1_1_2_2_1 = new QPushButton(tr("add"));
         m_del_2_1_1_1_2_2_2 = new QPushButton(tr("del"));
         m_level_2_1_1_1_1_3 = new AsyncListView;
-        m_subject_2_1_1_1_2_3 = new AsyncTableWidget(SubjectTable_class);
+        m_subject_2_1_1_1_2_3 = new QTableView;
 
         //configure widgets
         m_level_2_1_1_1_1_3->setEditTriggers(QAbstractItemView::DoubleClicked);

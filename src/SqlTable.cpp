@@ -27,7 +27,7 @@ SqlTable::SqlTable()
 {
 }
 
-static QSqlRelationalTableModel& subject_table()
+QSqlRelationalTableModel& SqlTable::subject_table()
 {
         static QSqlRelationalTableModel subject_table;
         static bool is_edited = false;
@@ -45,7 +45,7 @@ static QSqlRelationalTableModel& subject_table()
         return subject_table;
 }
 
-static QSqlRelationalTableModel& level_table()
+QSqlRelationalTableModel& SqlTable::level_table()
 {
         static QSqlRelationalTableModel level_table;
         static bool is_edited = false;

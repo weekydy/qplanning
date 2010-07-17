@@ -42,12 +42,11 @@
 #include <QShowEvent>
 #include <QSizePolicy>
 #include <QLabel>
+#include <QTableView>
 #include "KeyValue.h"
 #include "define.h"
 #include "AsyncListView.h"
 #include "debug_printf.h"
-#include "AsyncTableWidget.h"
-#include "SubjectTable.h"
 
 ///
 /// \class MainWindow MainWindow.h
@@ -130,7 +129,7 @@ class MainWindow : public QMainWindow
                 QHBoxLayout* m_layout_2_1_1_1_2_2;
                 QPushButton* m_add_2_1_1_1_2_2_1;
                 QPushButton* m_del_2_1_1_1_2_2_2;
-                AsyncTableWidget* m_subject_2_1_1_1_2_3;
+                QTableView* m_subject_2_1_1_1_2_3;
                 QListWidget* m_subjects;
                 int m_subjects_id;
                 QListWidget* m_timetable;
