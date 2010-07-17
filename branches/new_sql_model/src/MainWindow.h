@@ -43,10 +43,12 @@
 #include <QSizePolicy>
 #include <QLabel>
 #include <QTableView>
+#include <QSqlRelationalDelegate>
 #include "KeyValue.h"
 #include "define.h"
 #include "AsyncListView.h"
 #include "debug_printf.h"
+#include "SqlTable.h"
 
 ///
 /// \class MainWindow MainWindow.h
@@ -54,7 +56,7 @@
 ///
 class MainWindow : public QMainWindow
 {
-                Q_OBJECT
+        Q_OBJECT
         public:
                 ///
                 /// \brief default constructor of MainWindow
@@ -173,6 +175,10 @@ class MainWindow : public QMainWindow
                 /// \brief slot to emit the del_level signal and delet it in view
                 ///
                 void manage_del_level();
+                ///
+                /// \brief slot to add a new row when needed
+                ///
+                void manage_add_subject();
 
         signals:
                 ///

@@ -153,7 +153,9 @@ MainWindow::MainWindow() : m_need_to_close(false)
 
         //configure widgets
         m_level_2_1_1_1_1_3->setEditTriggers(QAbstractItemView::DoubleClicked);
-        m_subject_2_1_1_1_2_3->setEditTriggers(QAbstractItemView::DoubleClicked);
+        //m_subject_2_1_1_1_2_3->setEditTriggers(QAbstractItemView::DoubleClicked);
+        m_subject_2_1_1_1_2_3->setModel(&(SqlTable::subject_table()));
+        m_subject_2_1_1_1_2_3->setItemDelegate(new QSqlRelationalDelegate(m_subject_2_1_1_1_2_3));
 
         //empack widget
         m_layout_2_1_1_1_1_2->addWidget(m_add_2_1_1_1_1_2_1);
@@ -179,7 +181,7 @@ MainWindow::MainWindow() : m_need_to_close(false)
         QObject::connect(m_level_2_1_1_1_1_3, SIGNAL(editing_finished(AdvencedKeyValue, unsigned int)),
                          this, SIGNAL(update_level(AdvencedKeyValue, unsigned int)));
         QObject::connect(m_del_2_1_1_1_1_2_2, SIGNAL(clicked()), this, SLOT(manage_del_level()));
-        QObject::connect(m_add_2_1_1_1_2_2_1, SIGNAL(clicked()), m_subject_2_1_1_1_2_3, SLOT(addItem()));
+        QObject::connect(m_add_2_1_1_1_2_2_1, SIGNAL(clicked()), this, SLOT(manage_add_subject()));
 }
 
 void MainWindow::set_scean(QGraphicsScene* scene)
@@ -326,4 +328,9 @@ void MainWindow::manage_del_level()
         AdvencedKeyValue data = (*m_level_2_1_1_1_1_3)[index];
         emit del_level(data);
         m_level_2_1_1_1_1_3->delete_index(index);
+}
+
+void MainWindow::manage_add_subject()
+{
+        SqlTable::subject_table().insertRow(0);
 }

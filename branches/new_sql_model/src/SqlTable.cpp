@@ -16,6 +16,7 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 #include "SqlTable.h"
+#include "debug_printf.h"
 
 ///
 /// \file SqlTable.cpp
@@ -29,17 +30,20 @@ SqlTable::SqlTable()
 
 QSqlRelationalTableModel& SqlTable::subject_table()
 {
-        static QSqlRelationalTableModel subject_table;
+        debug_printf( Q_FUNC_INFO );
+        static QSqlRelationalTableModel subject_table(0, QSqlDatabase::database());
         static bool is_edited = false;
 
         if (!is_edited)
         {
+                debug_printf("initializing struct");
                 subject_table.setTable("subject");
                 subject_table.setEditStrategy(QSqlTableModel::OnFieldChange);
-                subject_table.select();
-                subject_table.removeColumn(0);
-                subject_table.setHeaderData(0, Qt::Horizontal, tr("name"));
-                subject_table.setHeaderData(1, Qt::Horizontal, tr("with tp"));
+                //subject_table.removeColumn(0);
+                subject_table.setHeaderData(0, Qt::Horizontal, tr("ID"));
+                subject_table.setHeaderData(1, Qt::Horizontal, tr("name"));
+                subject_table.setHeaderData(2, Qt::Horizontal, tr("with tp"));
+                Q_ASSERT(subject_table.select());
                 is_edited = true;
         }
         return subject_table;
@@ -47,7 +51,7 @@ QSqlRelationalTableModel& SqlTable::subject_table()
 
 QSqlRelationalTableModel& SqlTable::level_table()
 {
-        static QSqlRelationalTableModel level_table;
+        static QSqlRelationalTableModel level_table(0, QSqlDatabase::database());
         static bool is_edited = false;
 
         if (!is_edited)
