@@ -72,11 +72,11 @@ class Control : public QObject
                 void _update_all_view();
         private:
                 bool m_is_modified;
+                SqlModelGenerating m_sql_config;
                 MainWindow m_windows;
                 SubjectDataWindow m_config_subject;
                 TimeTableWindow m_config_timetable;
                 XmlPlanning m_xml_config;
-                SqlModelGenerating m_sql_config;
                 DrawTimetable m_timetable_veuw;
                 QItemEditorFactory m_factory;
                 QStandardItemEditorCreator<MyCheckBox> m_bool_editor;

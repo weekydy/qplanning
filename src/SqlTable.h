@@ -23,6 +23,7 @@
 /// \brief singleton class to define each sql table
 /// \name Lameire Alexis
 ///
+#include <QSqlDatabase>
 #include <QSqlRelationalTableModel>
 #include <QObject>
 

@@ -35,7 +35,7 @@ int main(int argc, char** argv)
         QString path = QM_FILES + QString("/QPlanning_") + locale;
         debug_printf(qPrintable(path));
         bool result = translator.load("QPlanning_" + locale, QM_FILES);
-        Q_ASSERT(result);
+        //Q_ASSERT(result);
         app.installTranslator(&translator);
 
         Control controler;
