@@ -29,7 +29,7 @@ set(
         SqlModelGenerating.h
         AdvencedItemDelegate.h
         AsyncListView.h
-        AbstractSqlTable.h
+        SqlTable.h
         LevelTable.h
         debug_printf.h
         SubjectTable.h
@@ -52,7 +52,7 @@ set(
         SqlModelGenerating.cpp
         AdvencedItemDelegate.cpp
         AsyncListView.cpp
-        AbstractSqlTable.cpp
+        SqlTable.cpp
         LevelTable.cpp
         debug_printf.cpp
         SubjectTable.cpp
