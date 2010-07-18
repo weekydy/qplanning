@@ -157,6 +157,11 @@ MainWindow::MainWindow() : m_need_to_close(false)
         m_subject_2_1_1_1_2_3->setModel(&(SqlTable::subject_table()));
         m_subject_2_1_1_1_2_3->setItemDelegate(new QSqlRelationalDelegate(m_subject_2_1_1_1_2_3));
 
+        StreachedHeaderView* horizontal_header = new StreachedHeaderView(Qt::Horizontal);
+        horizontal_header->set_row_streach(0, 4);
+        m_subject_2_1_1_1_2_3->setHorizontalHeader(horizontal_header);
+        m_subject_2_1_1_1_2_3->horizontalHeader()->setStretchLastSection(true);
+
         //empack widget
         m_layout_2_1_1_1_1_2->addWidget(m_add_2_1_1_1_1_2_1);
         m_layout_2_1_1_1_1_2->addWidget(m_del_2_1_1_1_1_2_2);

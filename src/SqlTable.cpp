@@ -39,10 +39,9 @@ QSqlRelationalTableModel& SqlTable::subject_table()
                 debug_printf("initializing struct");
                 subject_table.setTable("subject");
                 subject_table.setEditStrategy(QSqlTableModel::OnFieldChange);
-                //subject_table.removeColumn(0);
-                subject_table.setHeaderData(0, Qt::Horizontal, tr("ID"));
-                subject_table.setHeaderData(1, Qt::Horizontal, tr("name"));
-                subject_table.setHeaderData(2, Qt::Horizontal, tr("with tp"));
+                subject_table.removeColumn(0);
+                subject_table.setHeaderData(0, Qt::Horizontal, tr("name"));
+                subject_table.setHeaderData(1, Qt::Horizontal, tr("with tp"));
                 Q_ASSERT(subject_table.select());
                 is_edited = true;
         }
