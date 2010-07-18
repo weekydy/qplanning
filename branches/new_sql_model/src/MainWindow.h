@@ -36,6 +36,7 @@
 #include <QString>
 #include <QStringList>
 #include <QGraphicsView>
+#include <QHeaderView>
 #include <QVector>
 #include <QResizeEvent>
 #include <QCloseEvent>
@@ -49,6 +50,7 @@
 #include "AsyncListView.h"
 #include "debug_printf.h"
 #include "SqlTable.h"
+#include "StreachedHeaderView.h"
 
 ///
 /// \class MainWindow MainWindow.h

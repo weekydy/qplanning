@@ -31,6 +31,7 @@
 #include <QPrintDialog>
 #include <QTransform>
 #include <QStandardItemEditorCreator>
+#include <QHeaderView>
 #include "MainWindow.h"
 #include "XmlPlanning.h"
 #include "SubjectDataWindow.h"
